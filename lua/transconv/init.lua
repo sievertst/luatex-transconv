@@ -8,6 +8,8 @@ end
 
 Raw = require(main_dir.."raw")
 
+default_schemes = {}
+
 local function path_of(path)
     --[[
         Returns the parent directory of a (dot-separated) path. E.g. "lib.foo"
@@ -16,7 +18,7 @@ local function path_of(path)
     return path:match("^(.-)%.[^%.]+$")
 end
 
-local function new_converter(first, second, third)
+local function new_converter(self, first, second, third)
     Converter = require(main_dir.."converter")
     Raw = require(main_dir.."raw")
 
@@ -42,10 +44,14 @@ local function new_converter(first, second, third)
 
     -- add main_directory information if invoked from outside
     if main_dir ~= "init" then
-        lang = main_dir..lang
+        lang_module = main_dir..lang
+    else
+        lang_module = lang
     end
 
-    local c = require(string.format("%s.%s", lang, scheme))
+    local c = require(string.format("%s.%s", lang_module, scheme))
+
+    self.default_schemes[lang] = self.default_schemes[lang] or c
 
     return c:new(options)
 end
@@ -69,6 +75,7 @@ transconv = {
     path_of = path_of,
     new_converter = new_converter,
     -- uselangs = uselangs,
+    default_schemes = default_schemes,
 }
 
 return transconv

@@ -36,9 +36,16 @@
   the language \prm{lang} by setting up the matching converter in Lua and
   defines the commands \sty{\textbackslash{}\prm{scheme}convert},
   \sty{\textbackslash{}\prm{scheme}font} and
-  \sty{\textbackslash{}to\prm{scheme}}. In order to do this, Lua has to be able
-  to find a file \prm{lang}/\prm{scheme}.lua which returns the converter. Can
-  be used more than once to import multiple schemes.
+  \sty{\textbackslash{}to\prm{scheme}}. It will also ensure that the
+  \sty{\textbackslash{}to\prm{lang}} and \sty{\textbackslash\prm{lang}font}
+  commands exist by defining them the first time you define a scheme for a new
+  language. Loading more schemes for the same language after that will not
+  change that default; if you want to change it, use the \sty{defaultscheme}
+  option or the \sty{\textbackslash{}TransconvMakeDefaultScheme} command.
+
+  In order to successfully load a scheme, Transconv has to be able to find
+  a file \prm{lang}/\prm{scheme}.lua in its lua folder which returns the
+  converter. The option can be used more than once to import multiple schemes.
 
   \optitem{scheme}{\{\prm{lang1}.\prm{scheme1},
   \prm{lang2}.\prm{scheme2},\dots\}}
@@ -69,16 +76,28 @@
 \section{Basic Interface}
 
 All commands in this section are robust and can therefore be used in
-expansion-only contexts (e.\,g.\ headings or footnotes). However at the moment
-you cannot use any commands within the argument of a conversion command. For
-example:
+expansion-only contexts (e.\,g.\ headings or footnotes) without danger. However
+the list of commands you can use within the conversion argument is unfortunately
+very limited. This is because such commands would be expanded before the string
+is sent to the converter, which can easily result in an error.
+
+As a rule of thumb, if your command is a simple macro which expand to nothing
+but text like in the following example, it should be fine:
 
 \begin{ltxcode}
-  \topinyin{\emph{Zhe3} bu4 xing2.}
+  \newcommand\mystring{Zhe4 mei2you3 wen4ti2.}
+  \topinyin{\mystring}
+\end{ltxcode}
+
+However commands which change some settings (e.\,g.\ the font) will likely
+cause an error. For example both of the following will not compile:
+
+\begin{ltxcode}
+  \topinyin{\emph{Zhe3} wu2fa3 bian1yi4.}
+  \topinyin{{\itshape Zhe3} ye3 bu4 xing2.}
 \end{ltxcode}
 
 \noindent
-would result in an error.
 
 \subsection{Formatted Conversion Commands}
 
@@ -86,22 +105,21 @@ would result in an error.
   \cmditem{tolang}{text}
 
   where \sty{lang} is a language declared via
-  \sty{\textbackslash{}TransconvUseScheme} or the option \opt{scheme}. This
-  command will convert \prm{text} to the default scheme for \sty{lang} (either
-  the one defined by \opt{defaultscheme} or else the last scheme defined for
-  \sty{lang}), using the formatting defined in \sty{\textbackslash{}langfont}.
+  \sty{\textbackslash{}TransconvUseScheme} or the package option \opt{scheme}.
+  This command will convert \prm{text} to the default scheme for \sty{lang}
+  (either the one defined by \opt{defaultscheme} or else the first scheme
+  defined for \sty{lang}), using the formatting defined in
+  \sty{\textbackslash{}langfont}.
 
   In most cases, this should be the go-to conversion command to use in your text
   as it abstracts both the scheme itself as well as its formatting away from the
   content.
 
-  TD
-
   \cmditem{toscheme}{text}
 
   where \sty{scheme} is a scheme declared via
-  \sty{\textbackslash{}TransconvUseScheme} or the option \opt{scheme}. This
-  command will convert \prm{text} to the \sty{scheme} using the formatting
+  \sty{\textbackslash{}TransconvUseScheme} or the package option \opt{scheme}.
+  This command will convert \prm{text} to the \sty{scheme} using the formatting
   defined in \sty{\textbackslash{}schemefont}.
 
   Use this command to access specific schemes if you need to import multiple
@@ -121,7 +139,7 @@ would result in an error.
   where \sty{lang} is a language declared via
   \sty{\textbackslash{}TransconvUseScheme} or the option \opt{scheme}. This
   command will convert \prm{text} to the default scheme for \sty{lang} (either
-  the one defined by \opt{defaultscheme} or else the last scheme defined for
+  the one defined by \opt{defaultscheme} or else the first scheme defined for
   \sty{lang}), but without any formatting. In other words,
   \sty{\textbackslash{}langconvert} abstracts away the transcription scheme but
   not the formatting.
@@ -130,8 +148,6 @@ would result in an error.
   provided by \sty{transconv} are insufficient for your purposes, and only to
   define a custom macro rather than in the actual text in order to maintain the
   separation of content and presentation.
-
-  TD
 
   \cmditem{schemeconvert}{text}
 
@@ -175,19 +191,26 @@ would result in an error.
 \begin{ltxsyntax}
   \cmditem{TransconvUseScheme}{schemes}
 
-  Blabla
+  Sets one or more new scheme(s) up for later usage. Equivalent to using the
+  \sty{scheme} package option. As with the option, each scheme should be specified as
+  \sty{\prm{lang}.\prm{scheme}} and multiple schemes can be set up at once by
+  stringing them together with commas.
+
 \end{ltxsyntax}
 
 \section{Custom Schemes and Languages}
 
 \subsection{Adding a New Transliteration Scheme for an Existing Language}
 
-To add a new transliteration scheme involves a little bit of Lua programming,
-though \sty{transconv} is designed with the goal of making it as painless as
-possible.
+Adding a new transliteration scheme involves a little bit of Lua programming,
+though \sty{transconv} tried to make it as painless as possible.
 
-As a first step, add a new file \prm{scheme}.lua in the folder \prm{lang}. The
-name of the file will be the scheme name which you have to use to load the
+As a first step, navigate to the directory where the Transconv lua files are
+found (the exact location depends on where you installed it, but it should be
+called transconv and contain a file named init.lua.
+
+Once in this directory add a new file \prm{scheme}.lua in the folder \prm{lang}.
+The name of the file will be the scheme name which you have to use to load the
 scheme later. Open the file in the text editor of your choice and define a new
 scheme:
 
@@ -200,8 +223,8 @@ local MyScheme = Converter:new{
 }
 \end{lstlisting}
 
-You use any name you want instead of MyScheme. This name is only used to refer
-to the scheme within the file itself; it has no consequence outside.
+You can use any name you want instead of MyScheme. This name is only used to
+refer to the scheme within the file itself; it has no consequence outside.
 
 At the end of the file, return the scheme:
 
@@ -257,7 +280,7 @@ rep_strings = {
 During conversion, your scheme will look at each of the pairs, find all
 instances of the first item in your input and replace it with the second item.
 For example, the above settings will cause it to replace every \enquote{c} with
-\enquote{k} and every \enquote{"ts"} with \enquote{"ch"} (note that by
+\enquote{k} and every \enquote{ts} with \enquote{ch} (note that by
 default, the search is case-insensitive, so \enquote{C}, \enquote{Ts},
 \enquote{TS} and \enquote{tS} will also be replaced).
 
@@ -282,12 +305,14 @@ have a special meaning in Lua, so in order for your scheme to use their literal
 values, you have to escape them. You can find the full list in
 \autoref{tab:luaescape}.
 
-\begin{table}
+\begin{table}[ht]
   \centering
   \begin{tabular}{>{\ttfamily}c >{\ttfamily}c}
     \multicolumn{1}{c}{\textbf{literal character}}
       & \multicolumn{1}{c}{\textbf{escape sequence}} \\
     \textbackslash    & \textbackslash\textbackslash \\
+    \textquotesingle  & \textbackslash\textquotesingle \\
+    "                 & \textbackslash" \\
     .                 & \%. \\
     -                 & \%- \\
     *                 & \%* \\

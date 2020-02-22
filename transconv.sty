@@ -20,35 +20,43 @@ package}
 % functions %
 %%%%%%%%%%%%%
 
-% Document command definitions depending on scheme name
-\cs_new:Npn \__transconv_define_convert_command:n #1
+% Document command definitions depending on lang name
+\cs_new:Npn \__transconv_define_lang_convert_command:n #1
 {
-  % e.g. "\pinyinconvert"
-  % use Npx version (expanding the argument at definition time) because
-  % otherwise multiple schemes would overwrite each other
+  % e.g. "\cmnconvert"
+  % use Npx version (expanding the argument as soon as the function is used)
+  % because otherwise multiple langs would overwrite each other
   % Use protected to ensure it behaves correctly in fragile environments
   \expandafter\cs_set_protected:Npx\cs:w #1convert\cs_end: ##1
   {%
-    \noexpand\directlua{tex.sprint(#1:convert("##1"))}%
+    \noexpand\directlua{tex.sprint(transconv.default_schemes["#1"]:convert([[##1]]))}%
   }
 }
 
-\cs_new:Npn \__transconv_define_font_switch:n #1
+% Document command definitions depending on scheme name
+\cs_new:Npn \__transconv_define_scheme_convert_command:n #1
 {
-  % e.g. "\pinyinfont"
-  \expandafter\DeclareDocumentCommand\cs:w #1font\cs_end:{}{}
+  % e.g. "\pinyinconvert"
+  \expandafter\cs_set_protected:Npx\cs:w #1convert\cs_end: ##1
+  {%
+    \noexpand\directlua{tex.sprint(#1:convert([[##1]]))}%
+  }
 }
 
 \cs_new:Npn \__transconv_define_document_command:n #1
 {
   % e.g. "\topinyin"
-  % use Npx version (expanding the argument at definition time) because
-  % otherwise multiple schemes would overwrite each other
-  % Use protected to ensure it behaves correctly in fragile environments
   \expandafter\cs_set_protected:Npx\cs:w to#1\cs_end: ##1
   {%
     \cs:w #1font\cs_end:\cs:w #1convert\cs_end:{##1}
   }
+}
+
+% font switch definition function
+\cs_new:Npn \__transconv_define_font_switch:nn #1#2
+{
+  % e.g. "\pinyinfont"
+  \expandafter\DeclareDocumentCommand\cs:w #1font\cs_end:{}{#2}
 }
 
 % TODO: define environment?
@@ -63,27 +71,33 @@ package}
 
     % set up the converter.
     % For example if you import the scheme "cmn.pinyin" would result in the lua
-    % command would be:
+    % command:
     % pinyin = transconv.new_converter("cmn", "pinyin")
     \directlua{%
-      \tl_use:N \l__transconv_scheme_tl = transconv.new_converter(%
+      \tl_use:N \l__transconv_scheme_tl = transconv:new_converter(%
         "\tl_use:N \l__transconv_lang_tl",
         "\tl_use:N \l__transconv_scheme_tl"%
       )%
     }
 
-    % define font switch, but only if if it doesn't exist already in case the
+    % define font switches, but only if if they don't exist already in case the
     % user is redefining an existing scheme but wants to keep font settings
     \if_cs_exist:w \tl_use:N \l__transconv_scheme_tl font\cs_end:
     \else:
-      \__transconv_define_font_switch:n {\tl_use:N \l__transconv_scheme_tl}
+      \__transconv_define_font_switch:nn {\tl_use:N \l__transconv_scheme_tl}{}
+    \fi:
+    \if_cs_exist:w \tl_use:N \l__transconv_lang_tl font\cs_end:
+    \else:
+      \__transconv_define_font_switch:nn {\tl_use:N \l__transconv_lang_tl} {\itshape}
     \fi:
 
-    % (re)define conversion command
-    \expandafter\__transconv_define_convert_command:n {\tl_use:N \l__transconv_scheme_tl}
+    % (re)define \langconvert and \schemeconvert commands
+    \__transconv_define_scheme_convert_command:n {\tl_use:N \l__transconv_scheme_tl}
+    \__transconv_define_lang_convert_command:n {\tl_use:N \l__transconv_lang_tl}
 
-    % (re)define document command
+    % (re)define \tolang and \toscheme commands
     \__transconv_define_document_command:n {\tl_use:N \l__transconv_scheme_tl}
+    \__transconv_define_document_command:n {\tl_use:N \l__transconv_lang_tl}
 
     % TODO: (re)define environment?
 }
@@ -98,13 +112,19 @@ package}
   \clist_map_function:nN {#1} \__transconv_usescheme:n
 }
 
+\NewDocumentCommand\TransconvMakeDefaultScheme{mm}
+{%
+  % TODO: add functionality for changing the default scheme
+}
+
 %%%%%%%%%%%%%%%%%%%
 % Package options %
 %%%%%%%%%%%%%%%%%%%
 % defines legal options and how to process them
 \keys_define:nn { transconv }
   {
-    scheme .code:n = \TransconvUseScheme{#1}
+    scheme .code:n          = \TransconvUseScheme{#1},
+    % defaultscheme .code:n   = (TODO: call same function as for \TransconvMakeDefaultScheme)
   }
 
 \ProcessKeysOptions{ transconv }
