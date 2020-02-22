@@ -1,0 +1,603 @@
+\documentclass{ltxdockit}
+
+%%%%%%%%
+% Meta %
+%%%%%%%%
+\title{The \sty{transconv} Package}
+\author{Sievert\ von\ St\"{u}lpnagel}
+\date{\today}
+
+%%%%%%%%%%%%
+% Settings %
+%%%%%%%%%%%%
+\input{./settings/packages}
+\input{./settings/macros}
+\input{./settings/layout}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\listoftables
+
+\section{Introduction}\label{int}
+
+\subsection[About]{About \sty{transconv}}
+
+\subsection{License}
+
+\section{Package Options}
+
+\begin{optionlist}
+  \optitem{scheme}{\prm{lang}.\prm{scheme}}
+
+  This option enables support for the transliteration scheme \prm{scheme} for
+  the language \prm{lang} by setting up the matching converter in Lua and
+  defines the commands \sty{\textbackslash{}\prm{scheme}convert},
+  \sty{\textbackslash{}\prm{scheme}font} and
+  \sty{\textbackslash{}to\prm{scheme}}. In order to do this, Lua has to be able
+  to find a file \prm{lang}/\prm{scheme}.lua which returns the converter. Can
+  be used more than once to import multiple schemes.
+
+  \optitem{scheme}{\{\prm{lang1}.\prm{scheme1},
+  \prm{lang2}.\prm{scheme2},\dots\}}
+
+  Imports multiple schemes at once. Equivalent to a repeated use of
+  \opt{scheme}.
+
+  \optitem{defaultscheme}{\prm{lang}.\prm{scheme}}
+
+  Defines the default scheme for the language \prm{lang} in case more than one
+  scheme is added for the same language. Can be used more than once to define
+  defaults for multiple languages. In case of repeated use for the same
+  language, later schemes override earlier ones.
+
+  TD
+
+  \optitem{defaultscheme}{\{\prm{lang1}.\prm{scheme1},
+  \prm{lang2}.\prm{scheme2},\dots\}}
+
+  Defines default schemes for multiple languages at once. Equivalent to a
+  repeated use of \opt{defaultscheme}. If the same language appears more than
+  once, later schemes override earlier ones.
+
+  TD
+
+\end{optionlist}
+
+\section{Basic Interface}
+
+All commands in this section are robust and can therefore be used in
+expansion-only contexts (e.\,g.\ headings or footnotes). However at the moment
+you cannot use any commands within the argument of a conversion command. For
+example:
+
+\begin{ltxcode}
+  \topinyin{\emph{Zhe3} bu4 xing2.}
+\end{ltxcode}
+
+\noindent
+would result in an error.
+
+\subsection{Formatted Conversion Commands}
+
+\begin{ltxsyntax}
+  \cmditem{tolang}{text}
+
+  where \sty{lang} is a language declared via
+  \sty{\textbackslash{}TransconvUseScheme} or the option \opt{scheme}. This
+  command will convert \prm{text} to the default scheme for \sty{lang} (either
+  the one defined by \opt{defaultscheme} or else the last scheme defined for
+  \sty{lang}), using the formatting defined in \sty{\textbackslash{}langfont}.
+
+  In most cases, this should be the go-to conversion command to use in your text
+  as it abstracts both the scheme itself as well as its formatting away from the
+  content.
+
+  TD
+
+  \cmditem{toscheme}{text}
+
+  where \sty{scheme} is a scheme declared via
+  \sty{\textbackslash{}TransconvUseScheme} or the option \opt{scheme}. This
+  command will convert \prm{text} to the \sty{scheme} using the formatting
+  defined in \sty{\textbackslash{}schemefont}.
+
+  Use this command to access specific schemes if you need to import multiple
+  ones for a single language (for example if the schemes themselves are a topic
+  of discussion). Note that \sty{\textbackslash{}toscheme} is provided for all
+  imported languages, including the default one. If you only intend to use a
+  single theme for a given language, use \sty{\textbackslash{}tolang} instead to
+  avoid hardcoding the scheme into your text.
+
+\end{ltxsyntax}
+
+\subsection{Unformatted Conversion Commands}
+
+\begin{ltxsyntax}
+  \cmditem{langconvert}{text}
+
+  where \sty{lang} is a language declared via
+  \sty{\textbackslash{}TransconvUseScheme} or the option \opt{scheme}. This
+  command will convert \prm{text} to the default scheme for \sty{lang} (either
+  the one defined by \opt{defaultscheme} or else the last scheme defined for
+  \sty{lang}), but without any formatting. In other words,
+  \sty{\textbackslash{}langconvert} abstracts away the transcription scheme but
+  not the formatting.
+
+  It is recommended that you use this command only if the formatting hooks
+  provided by \sty{transconv} are insufficient for your purposes, and only to
+  define a custom macro rather than in the actual text in order to maintain the
+  separation of content and presentation.
+
+  TD
+
+  \cmditem{schemeconvert}{text}
+
+  where \sty{scheme} is again a scheme declared via
+  \sty{\textbackslash{}TransconvUseScheme} or the option \opt{scheme}.
+
+  This command merely constitutes a wrapper around the Lua converter without any
+  \TeX{} formatting. Therefore, using this command means you hard-code both the
+  transcription scheme and the way it is formatted.  For this reason, it is
+  highly recommended that you use this command only if the formatting hooks
+  provided by \sty{transconv} are insufficient for your purposes, and even then
+  only to define a custom macro rather than in the actual text in order to
+  maintain the separation of content and presentation.
+
+\end{ltxsyntax}
+
+\subsection{Output Formatting}
+
+\begin{ltxsyntax}
+  \cmditem{langfont}
+
+  where \sty{lang} is a language declared via
+  \sty{\textbackslash{}TransconvUseScheme} or the option \opt{scheme}.
+
+  This command sets the font formatting for the output of
+  \sty{\textbackslash{}tolang}. By default it expands to
+  \sty{\textbackslash{}itshape}.
+
+  \cmditem{schemefont}
+
+  where \sty{scheme} is a transcription scheme declared via
+  \sty{\textbackslash{}TransconvUseScheme} or the option \opt{scheme}.
+
+  This command sets the font formatting for the output of
+  \sty{\textbackslash{}tolang}. By default it expands to nothing.
+
+\end{ltxsyntax}
+
+\section{Configuration}
+
+\begin{ltxsyntax}
+  \cmditem{TransconvUseScheme}{schemes}
+
+  Blabla
+\end{ltxsyntax}
+
+\section{Custom Schemes and Languages}
+
+\subsection{Adding a New Transliteration Scheme for an Existing Language}
+
+To add a new transliteration scheme involves a little bit of Lua programming,
+though \sty{transconv} is designed with the goal of making it as painless as
+possible.
+
+As a first step, add a new file \prm{scheme}.lua in the folder \prm{lang}. The
+name of the file will be the scheme name which you have to use to load the
+scheme later. Open the file in the text editor of your choice and define a new
+scheme:
+
+\begin{lstlisting}
+local MyScheme = Converter:new{
+  -- load raw scheme settings for your language
+  raw = require(transconv.path_of(...)..".raw"),
+
+  -- settings variables are going to go here
+}
+\end{lstlisting}
+
+You use any name you want instead of MyScheme. This name is only used to refer
+to the scheme within the file itself; it has no consequence outside.
+
+At the end of the file, return the scheme:
+
+\begin{lstlisting}
+return MyScheme
+\end{lstlisting}
+
+Technically speaking you are now set; you have successfully defined a new scheme
+and should be able to load it by passing \sty{\prm{lang}.\prm{scheme}} to
+\sty{transconv}'s \sty{schemes} option or the
+\sty{\textbackslash{}TransconvUseScheme} macro (make sure to use the
+folder and file name, \emph{not} the name you used inside the Lua file).
+
+However since you didn't specify any settings, \sty{transconv} will use the
+default ones -- which result in no changes to the input at all. To get your
+scheme to do something useful, you have to override these settings. This can be
+done by adding member variables and/or functions to your scheme.
+
+\subsubsection{Default Member Variables of Schemes}
+
+Member variable settings don't change the conversion process itself but merely
+provide resources which the scheme uses during this process. For minor changes,
+you usually only need to set a member variable and can leave the algorithm
+itself alone. The following variables are available to you by default (do not
+forget to add a comma after each member or Lua will get confused!):
+
+\paragraph{\sty{raw}}
+
+This variable tells your scheme which raw (input) scheme to use. This should
+pretty much always be set to the following:
+
+\begin{lstlisting}
+raw = require(transconv.path_of(...)..".raw"),
+\end{lstlisting}
+
+This will cause Lua to load the scheme from the \sty{raw.lua} file in the same
+folder.
+
+\paragraph{\sty{rep\textunderscore{}strings}}
+
+This variable is probably going to be your best friend because it is what tells
+your scheme to replace certain letter sequences with others. It contains a
+comma-separated list of string pairs surrounded by curly braces. Each string
+(letter sequence) should be surrounded with (double or single) quotes and the
+two items of each pair should be separated with a comma also like so:
+
+\begin{lstlisting}
+rep_strings = {
+  {"c", "k"}, {"ts", "ch"},
+},
+\end{lstlisting}
+
+During conversion, your scheme will look at each of the pairs, find all
+instances of the first item in your input and replace it with the second item.
+For example, the above settings will cause it to replace every \enquote{c} with
+\enquote{k} and every \enquote{"ts"} with \enquote{"ch"} (note that by
+default, the search is case-insensitive, so \enquote{C}, \enquote{Ts},
+\enquote{TS} and \enquote{tS} will also be replaced).
+
+Be aware that the replacements are executed in the order in which you defined
+them, which means earlier rules can feed into later ones if you're not careful.
+For example, if we swap the pairs above around:
+
+\begin{lstlisting}
+rep_strings = {
+ {"ts", "ch"}, {"c", "k"},
+},
+\end{lstlisting}
+
+Then the first rule will first replace every \enquote{ts} with \enquote{ch}, but
+then the second rule will replace the \enquote{c} with \enquote{k} and you end
+up with the possibly unexpected \enquote{kh}. So if you get surprising
+replacements, have a look at the order of rules and check if any might be
+feeding into later ones.
+
+The second thing you have to pay attention to is that certain characters
+have a special meaning in Lua, so in order for your scheme to use their literal
+values, you have to escape them. You can find the full list in
+\autoref{tab:luaescape}.
+
+\begin{table}
+  \centering
+  \begin{tabular}{>{\ttfamily}c >{\ttfamily}c}
+    \multicolumn{1}{c}{\textbf{literal character}}
+      & \multicolumn{1}{c}{\textbf{escape sequence}} \\
+    \textbackslash    & \textbackslash\textbackslash \\
+    .                 & \%. \\
+    -                 & \%- \\
+    *                 & \%* \\
+    \%                & \%\% \\
+    (                 & \%( \\
+    )                 & \%) \\
+    +                 & \%+ \\
+    ?                 & \%? \\
+    \textasciicircum  & \%\textasciicircum \\
+    \lbrack           & \%\lbrack \\
+    \$                & \%\$ \\
+  \end{tabular}
+  \caption{Lua string escape sequences}
+  \label{tab:luaescape}
+\end{table}
+
+So if, for example, you want to replace all instances of \enquote{aa} with
+\enquote{\^{a}}, the correct rule would be:
+
+\begin{lstlisting}
+{"aa", "\\%^{a}"}
+\end{lstlisting}
+
+\paragraph{sb\textunderscore{}sep}
+
+Use this variable to define a separator if your output scheme requires one to be
+inserted between different syllables (for example the Wade-Giles scheme for
+Mandarin Chinese has syllables separated with a hyphen). The separator is not
+inserted before a space or special characters. The default setting is an empty
+string.
+
+\paragraph{tone\textunderscore{}markers}
+
+For tonal languages which mark the tones with diacritics, list all tones as
+integer keys with the macro name for the marker as a value (without the
+leading backslash). Tones which do not have such a marker should be marked as
+\sty{false}. For example the correct setting for Hanyu Pinyin would
+be:\footnote{The elements 0 and 5 are both set false so the user can use either
+integer to mark the neutral tone. The single quote for the second tone macro
+name has to be escaped because Lua would otherwise take it as a special
+character (cf. \autoref{tab:luaescape}).}
+
+\begin{lstlisting}
+tone_markers = {
+  [0] = false, [1] = "=", [2] = "\'", [3] = "v", [4] = "`", [5] = false,
+},
+\end{lstlisting}
+
+The converter will then end up replacing the input \sty{a1} with
+\sty{\textbackslash=\{a\}}, \sty{a2} with \sty{\textbackslash'\{a\}} etc.
+
+In case your tone numbers are consecutive integers starting with 1, you can also
+simply list the marker strings without explicitly stating the index. So if we
+disallow using \sty{0} for the neutral tone, the above could also be simplified
+to:
+
+\begin{lstlisting}
+tone_markers = { "=", "\'", "v", "`", false},
+\end{lstlisting}
+
+\paragraph{second\textunderscore{}rep\textunderscore{}strings}
+
+For tonal languages it may occasionally be necessary to do a second round of
+string replacement after it is already decided where the tone marker should go.
+Use this variable for this purpose. It works the same way as
+\sty{rep\textunderscore{}strings}.
+
+\paragraph{no\textunderscore{}tones}
+
+For tonal languages, this variable can be set to either \sty{true} or
+\sty{false}. If \sty{true}, your scheme will simply delete all tones from your
+output. This allows you to first write your document with tones but then turn
+them off if your publisher wants tones to be omitted.
+
+\subsubsection{Adding and Overriding Methods}
+
+If the variable settings are not sufficient to produce the intended result, you
+can override the default functions of your scheme or add your own ones to
+supplement them. You may also choose to remove unneeded default functions to get
+a slight boost in performance if you find conversion is too slow. However, this
+requires at least a basic understanding of Lua to write the new functions. I
+will therefore assume for this section that you know how to define a function
+and add it to a table.
+
+\subsubsubsection{Overriding Default Methods}
+
+Any new transcription scheme will provide you with the following default methods
+which you can override by simply defining your own custom version and adding it
+to your scheme table.
+
+\paragraph{convert(self, input)}
+
+This is the central function of your scheme. It must always be present because
+this is the function which \sty{transconv} will call when you use
+\sty{\textbackslash{}tolang} or a similar command in your document.
+
+By default it will:
+
+\begin{enumerate}
+  \item split the input into syllables by calling the associated \sty{raw}
+    scheme's \sty{split\textunderscore{}sbs} method,
+  \item check each syllable if it is a valid syllable in the associated
+    \sty{raw} scheme by calling its
+    \sty{is\textunderscore{}valid\textunderscore{}sb} method. If not, the
+    syllable is funneled directly into the output without any further
+    processing.\footnote{This allows you to use foreign words in the input.}
+  \item For valid syllables, it checks if there is already a cached conversion
+    result. If not, it will call the
+    \sty{to\textunderscore{}target\textunderscore{}scheme} function which
+    handles the actual conversion, store the result in the cache and then funnel
+    it to the output.
+  \item After all syllables have been processed, they are joined back together
+    using the \sty{join\textunderscore{}sbs} method and the result is returned.
+\end{enumerate}
+
+\paragraph{to\textunderscore{}target\textunderscore{}scheme(self, syllable)}
+
+The most basic conversion function. It will:
+
+\begin{enumerate}
+  \item call the associated \sty{raw} scheme's
+    \sty{get\textunderscore{}sb\textunderscore{}and\textunderscore{}tone} method
+    to separate potential tone digits at the end and store them separately,
+  \item call the \sty{do\textunderscore{}str\textunderscore{}rep} method using
+    the \sty{rep\textunderscore{}strings} member variable to execute string
+    replacements,
+  \item call the \sty{place\textunderscore{}tone\textunderscore{}digit} method
+    to identify the correct letter which should carry the marker and insert the
+    tone digit after it,
+  \item call the \sty{do\textunderscore{}str\textunderscore{}rep} method
+    again, but this time using the
+    \sty{second\textunderscore{}rep\textunderscore{}strings} member variable for
+    secondary replacements,
+  \item check if the \sty{no\textunderscore{}tones} variable is set to
+    \sty{true}. If so, it simply deletes any digits from the string. Otherwise,
+    it calls \sty{add\textunderscore{}tone\textunderscore{}markers} to replace
+    the digits with the correct tone markers,
+  \item return the end result.
+\end{enumerate}
+
+\paragraph{do\textunderscore{}str\textunderscore{}rep(self, syllable,
+list\textunderscore{}of\textunderscore{}replacements)}
+
+This function will perform the actual string replacements according to the
+provided list. It assumes that the list is of the same form as
+\sty{rep\textunderscore{}strings} above, i.\,e.\ a table of tables, where each
+of the inner tables contains exactly two strings (original and replacement). It
+will then loop over the outer table and for each member table:
+
+\begin{enumerate}
+  \item convert both the input syllable and the search string to lower so case
+    is ignored,
+  \item search the lower-case syllable for instances of the search string. If it
+    finds any, it then:
+    \begin{enumerate}
+      \item checks the case of the first letter in the match for case. If the
+        former is lowercase, it will assume all lower case.  If it is upper and
+        the following one is lower, it will assume title case. If both are
+        upper, it will assume all upper case.
+      \item performs the string replacement in the appropriate casing,
+    \end{enumerate}
+\end{enumerate}
+
+After it has finished the loop it returns the end result.
+
+\paragraph{place\textunderscore{}tone\textunderscore{}digit(self, syllable,
+tone)}
+
+For tonal languages, this method is responsible for placing the tone digit back
+into the syllable at the correct position. If some other letter will carry the
+tonal information (typically using a diacritic, but possibly with other means,
+e.\,g.\ reduplication, replacement with another letter etc), this method should
+identify that letter and place the raw digit behind it. Note that this function
+only handles placement; the conversion into the correct output form will be
+handled later by the \sty{add\textunderscore{}tone\textunderscore{}marker}
+function.
+
+By default, this function simply adds the tone digit back to the end of the
+string, so if your scheme requires a different behaviour, you will have to
+override this method.
+
+\paragraph{add\textunderscore{}tone\textunderscore{}marker(self, syllable)}
+
+This function looks for digits in the input syllable. If it finds one, it looks
+up in the \sty{tone\textunderscore{}markers} variable to find the name of the
+replacement macro. It then wraps the preceding letter in that macro and deletes
+the digit. For example, if the \sty{tone\textunderscore{}markers} variable
+contains the value \sty{"="} at index \sty{1} and your input string is
+\sty{a1ng}, then this function will return \sty{\textbackslash=\{a\}ng}.
+
+Note that this function should only be used for tones marked with diacritics. If
+the tone is marked in another way (e.\,g.\ reduplication of a letter), add
+corresponding replacement rules in the
+\sty{second\textunderscore{}rep\textunderscore{}strings} instead.
+
+\subsubsubsection{Adding Your Own Methods}
+
+To add your own method to the conversion process, you have to take two steps:
+
+\begin{enumerate}
+  \item Implement your Method and add it to your scheme table. If it needs
+    access to any other member variables or methods, make sure to pass a
+    reference to your table as the first argument (either by using Lua's colon
+    syntax or as an explicit argument).
+  \item Override one of the default methods and have it call your custom method
+    at the appropriate step with the appropriate arguments.
+\end{enumerate}
+
+\subsection{Adding a New Language}
+
+To add a new language for which transcription schemes can be implemented, first
+add a new folder where \sty{transconv} can find it. The folder name will be the
+language name you will have to use when loading schemes from your document
+later, so make sure you choose something unique and easy to memorise. The
+default languages use the ISO 693-3 abbreviations and it is strongly suggested you
+stick to the same convention. If you need to specify a certain subgrouping
+within a bigger language variety for which no ISO abbreviation has been coined,
+specify the location after a dash, for example \sty{jpn-kyoto} for
+Ky\={o}t\={o} Japanese.
+
+As a second step, you will have to choose a raw input scheme. This scheme should
+fulfil the following criteria:
+
+\begin{itemize}
+  \item It must contain enough information to convert to any intended target
+    scheme. More specifically, if any feature is reflected even in just one
+    possible target scheme, it must be reflected in the raw scheme also,
+    otherwise conversion to that target scheme will be incorrect. For example,
+    the Japanese Hiragana characters じ and ぢ are pronounced exactly the same
+    (ji) and most transcription schemes spell them the same as well. However
+    a select few -- most notable the Nihon-shiki scheme -- do reflect the
+    difference in Kana spelling. Therefore, the raw scheme has to make the
+    distinction as well to allow for accurate conversion to those
+    schemes.\footnote{In this case, I decided to follow Nihon-shiki and spell
+    them according to their original phonetic series: \sty{zi} for じ and
+    \sty{di} for ぢ.}
+  \item It is strongly suggested that the raw scheme should not make use of
+    non-ascii characters. The reason for this is that Lua makes use of your
+    computer's locale for certain aspects of string handling. As a result, if you
+    use non-ascii characters, the code may or may not work as you expect it on
+    your machine. But even if it does work for you, it might not do so on
+    a machine in a different locale.
+\end{itemize}
+
+Once you have decided on your raw scheme, add a file called \sty{raw.lua} to
+your language folder.\footnote{You don't have to use this name but I suggest
+you follow the convention. If you don't, any authors of new target schemes
+will have to use your different name when importing the raw scheme to their
+file, which could confuse especially unexperienced Lua users.} Document your raw
+scheme in a comment section at the top.\footnote{If you are using an existing
+scheme or a slightly modified version of it, you can make this very brief by
+referencing it, e.\,g.: \enquote{Pinyin, just with tone numbers at the end of
+each syllable instead of diacritics}.}
+
+Below that, add a table for the raw scheme and return it:
+
+\begin{lstlisting}
+local raw = Raw:new{
+}
+
+return raw
+\end{lstlisting}
+
+Then populate your table with settings and methods. The following are provided
+by default:
+
+\subsection{Default Raw Scheme Member Variables}
+
+\paragraph{cutting\textunderscore{}markers}
+
+A list of strings which can be used to define borders between syllables when
+splitting up an input strings using the \sty{split\textunderscore{}sbs} method.
+If not empty, your raw scheme will scan the input string and make a cut whenever
+it finds one of the strings in this list. By default, the list is empty.
+
+\subsection{Default Raw Scheme Methods}
+
+\paragraph{get\textunderscore{}sb\textunderscore{}and\textunderscore{}tone(self, input)}
+
+Expects a single syllable with information on the tone in it. Returns the raw
+syllable (without tone information) and an integer representing the tone. By
+default it will always simply return the input string and 0. If your language is
+non-tonal, simply ignore this method.
+
+\paragraph{is\textunderscore{}valid\textunderscore{}sb(self, input)}
+
+Use this method to test if the passed string is a valid syllable in your input
+string. If it returns \sty{false} for a given string, \sty{transconv} will
+simply not make any changes to it. By default it always returns \sty{true}.
+
+\paragraph{split\textunderscore{}sbs(self, input)}
+
+Used to split the input into syllables. If your language does not require this
+(like Japanese for instance), you can override this method to simply return a
+list with the input string as its only member.
+
+By default it will:
+
+\begin{enumerate}
+  \item Check if the \sty{cutting\textunderscore{}markers} variable is empty. If
+    it is, it will simply make a cut before each non-word character (special
+    characters or whitespace). Otherwise it will search the input for any
+    strings in the list and make a cut before any matches.
+  \item Either way, it puts all syllables in a list and returns it.
+\end{enumerate}
+
+\section{Package Code}
+
+\subsection{The \sty{transconv.sty} file}
+
+\subsection{The Lua code}
+
+\end{document}

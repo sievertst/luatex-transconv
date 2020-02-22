@@ -1,0 +1,35 @@
+\contentsline {section}{\nonumberline List of Tables}{1}{section*.2}% 
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}% 
+\contentsline {subsection}{\numberline {1.1}About}{1}{subsection.1.1}% 
+\contentsline {subsection}{\numberline {1.2}License}{1}{subsection.1.2}% 
+\contentsline {section}{\numberline {2}Package Options}{1}{section.2}% 
+\contentsline {section}{\numberline {3}Basic Interface}{2}{section.3}% 
+\contentsline {subsection}{\numberline {3.1}Formatted Conversion Commands}{2}{subsection.3.1}% 
+\contentsline {subsection}{\numberline {3.2}Unformatted Conversion Commands}{3}{subsection.3.2}% 
+\contentsline {subsection}{\numberline {3.3}Output Formatting}{3}{subsection.3.3}% 
+\contentsline {section}{\numberline {4}Configuration}{4}{section.4}% 
+\contentsline {section}{\numberline {5}Custom Schemes and Languages}{4}{section.5}% 
+\contentsline {subsection}{\numberline {5.1}Adding a New Transliteration Scheme for an Existing Language}{4}{subsection.5.1}% 
+\contentsline {subsubsection}{\numberline {5.1.1}Default Member Variables of Schemes}{5}{subsubsection.5.1.1}% 
+\contentsline {paragraph}{\nonumberline \sty {raw}}{5}{section*.3}% 
+\contentsline {paragraph}{\nonumberline \sty {rep\textunderscore {}strings}}{5}{section*.4}% 
+\contentsline {paragraph}{\nonumberline sb\textunderscore {}sep}{6}{section*.5}% 
+\contentsline {paragraph}{\nonumberline tone\textunderscore {}markers}{6}{section*.6}% 
+\contentsline {paragraph}{\nonumberline second\textunderscore {}rep\textunderscore {}strings}{7}{section*.7}% 
+\contentsline {paragraph}{\nonumberline no\textunderscore {}tones}{7}{section*.8}% 
+\contentsline {subsubsection}{\numberline {5.1.2}Adding and Overriding Methods}{7}{subsubsection.5.1.2}% 
+\contentsline {paragraph}{\nonumberline convert(self, input)}{7}{section*.9}% 
+\contentsline {paragraph}{\nonumberline to\textunderscore {}target\textunderscore {}scheme(self, syllable)}{8}{section*.10}% 
+\contentsline {paragraph}{\nonumberline do\textunderscore {}str\textunderscore {}rep(self, syllable, list\textunderscore {}of\textunderscore {}replacements)}{8}{section*.11}% 
+\contentsline {paragraph}{\nonumberline place\textunderscore {}tone\textunderscore {}digit(self, syllable, tone)}{9}{section*.12}% 
+\contentsline {paragraph}{\nonumberline add\textunderscore {}tone\textunderscore {}marker(self, syllable)}{9}{section*.13}% 
+\contentsline {subsection}{\numberline {5.2}Adding a New Language}{9}{subsection.5.2}% 
+\contentsline {subsection}{\numberline {5.3}Default Raw Scheme Member Variables}{11}{subsection.5.3}% 
+\contentsline {paragraph}{\nonumberline cutting\textunderscore {}markers}{11}{section*.14}% 
+\contentsline {subsection}{\numberline {5.4}Default Raw Scheme Methods}{11}{subsection.5.4}% 
+\contentsline {paragraph}{\nonumberline get\textunderscore {}sb\textunderscore {}and\textunderscore {}tone(self, input)}{11}{section*.15}% 
+\contentsline {paragraph}{\nonumberline is\textunderscore {}valid\textunderscore {}sb(self, input)}{11}{section*.16}% 
+\contentsline {paragraph}{\nonumberline split\textunderscore {}sbs(self, input)}{11}{section*.17}% 
+\contentsline {section}{\numberline {6}Package Code}{11}{section.6}% 
+\contentsline {subsection}{\numberline {6.1}The \sty {transconv.sty} file}{11}{subsection.6.1}% 
+\contentsline {subsection}{\numberline {6.2}The Lua code}{11}{subsection.6.2}% 

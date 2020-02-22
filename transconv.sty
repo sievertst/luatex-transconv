@@ -1,0 +1,112 @@
+\NeedsTeXFormat{LaTeX2e}
+
+%%%%%%%%%%%%%%%%%%%%%
+% required packages %
+%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{l3keys2e,xparse}
+\ProvidesExplPackage{transconv}{2019/02/21}{1.0}{Transcription conversion
+package}
+
+\ExplSyntaxOn
+
+%%%%%%%%%%%%%%%%%%%%%%
+% set up environment %
+%%%%%%%%%%%%%%%%%%%%%%
+% Requires the package transconv to be in LuaTeX's search path for packages.
+% TODO: is it possible to make loading the module independent from the lua path?
+\directlua{transconv = require "transconv"}
+
+%%%%%%%%%%%%%
+% functions %
+%%%%%%%%%%%%%
+
+% Document command definitions depending on scheme name
+\cs_new:Npn \__transconv_define_convert_command:n #1
+{
+  % e.g. "\pinyinconvert"
+  % use Npx version (expanding the argument at definition time) because
+  % otherwise multiple schemes would overwrite each other
+  % Use protected to ensure it behaves correctly in fragile environments
+  \expandafter\cs_set_protected:Npx\cs:w #1convert\cs_end: ##1
+  {%
+    \noexpand\directlua{tex.sprint(#1:convert("##1"))}%
+  }
+}
+
+\cs_new:Npn \__transconv_define_font_switch:n #1
+{
+  % e.g. "\pinyinfont"
+  \expandafter\DeclareDocumentCommand\cs:w #1font\cs_end:{}{}
+}
+
+\cs_new:Npn \__transconv_define_document_command:n #1
+{
+  % e.g. "\topinyin"
+  % use Npx version (expanding the argument at definition time) because
+  % otherwise multiple schemes would overwrite each other
+  % Use protected to ensure it behaves correctly in fragile environments
+  \expandafter\cs_set_protected:Npx\cs:w to#1\cs_end: ##1
+  {%
+    \cs:w #1font\cs_end:\cs:w #1convert\cs_end:{##1}
+  }
+}
+
+% TODO: define environment?
+
+% defining a new scheme for a language
+\cs_new:Npn \__transconv_usescheme:n #1
+{
+    % retrieve language and scheme names
+    \regex_extract_all:nnN {[\w-]+} {#1} \l__transconv_langscheme_seq
+    \seq_pop_left:NN \l__transconv_langscheme_seq \l__transconv_lang_tl
+    \seq_pop_left:NN \l__transconv_langscheme_seq \l__transconv_scheme_tl
+
+    % set up the converter.
+    % For example if you import the scheme "cmn.pinyin" would result in the lua
+    % command would be:
+    % pinyin = transconv.new_converter("cmn", "pinyin")
+    \directlua{%
+      \tl_use:N \l__transconv_scheme_tl = transconv.new_converter(%
+        "\tl_use:N \l__transconv_lang_tl",
+        "\tl_use:N \l__transconv_scheme_tl"%
+      )%
+    }
+
+    % define font switch, but only if if it doesn't exist already in case the
+    % user is redefining an existing scheme but wants to keep font settings
+    \if_cs_exist:w \tl_use:N \l__transconv_scheme_tl font\cs_end:
+    \else:
+      \__transconv_define_font_switch:n {\tl_use:N \l__transconv_scheme_tl}
+    \fi:
+
+    % (re)define conversion command
+    \expandafter\__transconv_define_convert_command:n {\tl_use:N \l__transconv_scheme_tl}
+
+    % (re)define document command
+    \__transconv_define_document_command:n {\tl_use:N \l__transconv_scheme_tl}
+
+    % TODO: (re)define environment?
+}
+
+%%%%%%%%%%%%%%%%%%%%%
+% Settings commands %
+%%%%%%%%%%%%%%%%%%%%%
+
+\NewDocumentCommand\TransconvUseScheme{m}
+{%
+  % call usescheme for every item
+  \clist_map_function:nN {#1} \__transconv_usescheme:n
+}
+
+%%%%%%%%%%%%%%%%%%%
+% Package options %
+%%%%%%%%%%%%%%%%%%%
+% defines legal options and how to process them
+\keys_define:nn { transconv }
+  {
+    scheme .code:n = \TransconvUseScheme{#1}
+  }
+
+\ProcessKeysOptions{ transconv }
+
+\ExplSyntaxOff

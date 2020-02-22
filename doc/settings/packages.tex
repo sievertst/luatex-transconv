@@ -1,0 +1,53 @@
+\usepackage{luapackageloader} % for using custom search paths
+  \newcommand{\LuaDir}{/home/uni/Scripts/Lua}
+  \directlua{package.path = "\LuaDir/?.lua;\LuaDir/?/init.lua;" .. package.path}
+
+\usepackage{luatexja-fontspec}
+% \usepackage{polyglossia}
+%   \setmainlanguage[variant=uk]{english}
+
+\usepackage{listings}
+\usepackage{color}
+
+\usepackage[%
+    scheme={nan.poj},
+    scheme={jpn.hepburn},
+  ]{transconv}
+
+\usepackage{array}
+
+\usepackage{csquotes}
+
+\hypersetup{
+    unicode         = true,
+    breaklinks      = true,
+    hidelinks       = true,
+    colorlinks      = true,
+    citecolor       = blue,
+    urlcolor        = blue,
+    linkcolor       = blue,
+    % pdf meta data
+    pdfauthor       = {Sievert von Stülpnagel},
+    pdftitle        = {The transconv Package},
+    pdfsubject      = {transconv},
+    pdflang         = english,
+    % pdf reader settings
+    pdffitwindow    = true,
+    pdfstartview    = FitH,
+    pdfnewwindow    = true,
+  }
+
+\usepackage[%
+    xindy,
+    record,
+    abbreviations,
+    style = super,
+  ]{glossaries-extra}
+
+\usepackage{silence}
+  % \WarningFilter[fontfilter]{latexfont}{Font shape}
+  % \WarningFilter[fontfilter]{latexfont}{Some font shapes}
+  \WarningFilter{todonotes}{The length marginparwidth is less than}
+  \WarningFilter{glossaries-extra}{No entries defined}
+  \WarningFilter{forest}{Baseline node}
+  \ActivateWarningFilters[fontfilter]
