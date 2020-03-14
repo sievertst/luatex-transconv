@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.0 (TeX Live 2019)  (format=lualatex 2019.11.14)  14 MAR 2020 13:19
+This is LuaTeX, Version 1.10.0 (TeX Live 2019)  (format=lualatex 2019.11.14)  14 MAR 2020 15:16
  restricted system commands enabled.
 **master.tex
 (./master.tex
@@ -59,7 +59,7 @@ Lua module: luaotfload-tounicode 2019-11-10 3.11 luaotfload submodule / tounicod
 e
 Inserting `luaotfload.rewrite_fontname' at position 6 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.118 seconds
+luaotfload | main : initialization completed in 0.133 seconds
 (/usr/local/texlive/2019/texmf-dist/tex/latex/ltxdockit/ltxdockit.cls
 Document Class: ltxdockit 2011/03/25 v1.2d LaTeX documentation kit
 (/usr/local/texlive/2019/texmf-dist/tex/latex/ltxdockit/ltxdockit.def
@@ -1844,12 +1844,12 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 631.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 632.
 [12]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 631.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 632.
  (./master.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 631.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 631.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 632.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 632.
 Package rerunfilecheck Info: File `master.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
