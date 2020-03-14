@@ -8,6 +8,7 @@ end
 
 Raw = require(main_dir.."raw")
 
+schemes = {}
 default_schemes = {}
 
 local function path_of(path)
@@ -75,6 +76,7 @@ transconv = {
     path_of = path_of,
     new_converter = new_converter,
     -- uselangs = uselangs,
+    schemes = schemes,
     default_schemes = default_schemes,
 }
 

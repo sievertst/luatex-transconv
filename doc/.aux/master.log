@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.0 (TeX Live 2019)  (format=lualatex 2019.11.14)  24 FEB 2020 13:22
+This is LuaTeX, Version 1.10.0 (TeX Live 2019)  (format=lualatex 2019.11.14)  14 MAR 2020 13:19
  restricted system commands enabled.
 **master.tex
 (./master.tex
@@ -59,7 +59,7 @@ Lua module: luaotfload-tounicode 2019-11-10 3.11 luaotfload submodule / tounicod
 e
 Inserting `luaotfload.rewrite_fontname' at position 6 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.132 seconds
+luaotfload | main : initialization completed in 0.118 seconds
 (/usr/local/texlive/2019/texmf-dist/tex/latex/ltxdockit/ltxdockit.cls
 Document Class: ltxdockit 2011/03/25 v1.2d LaTeX documentation kit
 (/usr/local/texlive/2019/texmf-dist/tex/latex/ltxdockit/ltxdockit.def
@@ -1464,21 +1464,7 @@ LaTeX Info: Redefining \GenericWarning on input line 433.
 \sl@BankOfErrors=\toks52
 LaTeX Info: Redefining \GenericError on input line 601.
 ))
-(./settings/macros.tex
-
-! LaTeX Error: Command \subsubsubsection undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1 \renewcommand*\subsubsubsection
-                                 [1]{\vspace{1em}\noindent\textsf{\textbf{#1}}}
-
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-) (./settings/layout.tex
+(./settings/macros.tex) (./settings/layout.tex
 
 Package fontspec Info: Could not resolve font "TH-Tshyn-P0/BI" (it probably
 (fontspec)             doesn't exist).
@@ -1847,12 +1833,23 @@ Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'. [
 10]
 Removing  `ltj.listings_unicode' from `process_input_buffer'. [11]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 628.
- [12]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 628.
+! Undefined control sequence.
+l.1 p\textvbaraccent
+                  {e}h-\={o}e-j\={\i}
+l.630 \topoj{peh8-ue7-ji7}
+                        
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 631.
+[12]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 631.
  (./master.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 628.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 628.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 631.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 631.
 Package rerunfilecheck Info: File `master.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
@@ -1862,14 +1859,14 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 )
 
 Here is how much of LuaTeX's memory you used:
- 35309 strings out of 493861
+ 35308 strings out of 493861
  244167,1373583 words of node,token memory allocated
- 18544 words of node memory still in use:
-   11 hlist, 2 vlist, 5 rule, 7 glue, 196 kern, 1 glyph, 5151 attribute, 1267 gl
+ 18559 words of node memory still in use:
+   11 hlist, 2 vlist, 5 rule, 7 glue, 196 kern, 1 glyph, 5151 attribute, 1270 gl
 ue_spec, 285 attribute_list, 1 write, 16 user_defined, 1 pdf_action nodes
-   avail lists: 1:18,2:68871,3:274,4:729,5:336,6:49,7:5780,8:35,9:778,10:12,11:3
+   avail lists: 1:20,2:68871,3:274,4:729,5:333,6:48,7:5780,8:35,9:778,10:12,11:3
 34
- 38642 multiletter control sequences out of 65536+600000
+ 38641 multiletter control sequences out of 65536+600000
  90 fonts using 143196727 bytes
  75i,9n,137p,10087b,1000s stack positions out of 5000i,500n,10000p,200000b,100000s
 </usr/local/texlive/2019/texmf-dist/fonts/opentype/public/lm/lmmono9-regular.otf
@@ -1887,7 +1884,7 @@ t/fonts/opentype/public/lm/lmsans10-bold.otf></usr/local/texlive/2019/texmf-dist
 ist/fonts/opentype/public/lm/lmmonolt10-bold.otf></usr/local/texlive/2019/texmf-
 dist/fonts/opentype/public/lm/lmromandemi10-regular.otf></usr/local/texlive/2019
 /texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on master.pdf (12 pages, 99022 bytes).
+Output written on master.pdf (12 pages, 99644 bytes).
 
 PDF statistics: 430 PDF objects out of 1000 (max. 8388607)
  372 compressed objects within 4 object streams

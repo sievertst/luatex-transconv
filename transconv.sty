@@ -29,7 +29,9 @@ package}
   % Use protected to ensure it behaves correctly in fragile environments
   \expandafter\cs_set_protected:Npx\cs:w #1convert\cs_end: ##1
   {%
-    \noexpand\directlua{tex.sprint(transconv.default_schemes["#1"]:convert([[##1]]))}%
+    % use the first entry in default schemes list for the specified language
+    % (lua indexes start at 1)
+    \noexpand\directlua{tex.sprint(transconv.default_schemes["#1"][1]:convert([[##1]]))}%
   }
 }
 
@@ -39,7 +41,7 @@ package}
   % e.g. "\pinyinconvert"
   \expandafter\cs_set_protected:Npx\cs:w #1convert\cs_end: ##1
   {%
-    \noexpand\directlua{tex.sprint(#1:convert([[##1]]))}%
+    \noexpand\directlua{tex.sprint(transconv.schemes["#1"]:convert([[##1]]))}%
   }
 }
 
@@ -70,13 +72,22 @@ package}
     \seq_pop_left:NN \l__transconv_langscheme_seq \l__transconv_scheme_tl
 
     % set up the converter.
-    % For example if you import the scheme "cmn.pinyin" would result in the lua
-    % command:
-    % pinyin = transconv.new_converter("cmn", "pinyin")
+    % For example importing "cmn.pinyin" would result in the following Lua command:
+    % transconv.schemes["pinyin"] = transconv.new_converter("cmn", "pinyin")
     \directlua{%
-      \tl_use:N \l__transconv_scheme_tl = transconv:new_converter(%
-        "\tl_use:N \l__transconv_lang_tl",
+      transconv.schemes["\tl_use:N \l__transconv_scheme_tl"] = transconv:new_converter(%
+        "\tl_use:N \l__transconv_lang_tl",%
         "\tl_use:N \l__transconv_scheme_tl"%
+      )%
+    }
+    % Insert reference scheme at the end of default_schemes priority
+    % queue for lang.
+    % For example importing "cmn.pinyin" would result in the following Lua
+    % command:
+    % table.insert(transconv.default_schemes["cmn"], transconv.schemes["pinyin"])
+    \directlua{%
+      table.insert(transconv.default_schemes["\tl_use:N \l__transconv_lang_tl"],%
+        transconv.schemes["\tl_use:N \l__transconv_scheme_tl"]%
       )%
     }
 
