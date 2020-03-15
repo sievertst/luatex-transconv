@@ -10,9 +10,11 @@
 \usepackage{color}
 
 \usepackage[%
-    scheme={nan.poj},
-    scheme={jpn.hepburn},
+    % scheme={nan.poj},
+    % scheme={nan.tailo},
   ]{transconv}
+  \providecommand{\textvbaraccent}[1]{#1\symbol{"030D}}
+  \setmainfont{Libertinus Serif}
 
 \usepackage{array}
 

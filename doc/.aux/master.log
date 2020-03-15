@@ -1,5 +1,6 @@
-This is LuaTeX, Version 1.10.0 (TeX Live 2019)  (format=lualatex 2019.11.14)  14 MAR 2020 15:16
+This is LuaTeX, Version 1.10.0 (TeX Live 2019)  (format=lualatex 2019.11.14)  15 MAR 2020 14:18
  restricted system commands enabled.
+ file:line:error style messages enabled.
 **master.tex
 (./master.tex
 LaTeX2e <2019-10-01> patch level 3
@@ -59,7 +60,7 @@ Lua module: luaotfload-tounicode 2019-11-10 3.11 luaotfload submodule / tounicod
 e
 Inserting `luaotfload.rewrite_fontname' at position 6 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.133 seconds
+luaotfload | main : initialization completed in 0.116 seconds
 (/usr/local/texlive/2019/texmf-dist/tex/latex/ltxdockit/ltxdockit.cls
 Document Class: ltxdockit 2011/03/25 v1.2d LaTeX documentation kit
 (/usr/local/texlive/2019/texmf-dist/tex/latex/ltxdockit/ltxdockit.def
@@ -1171,6 +1172,40 @@ Package: luatexja-fontspec-27c 2019/05/14 fontspec support of LuaTeX-ja
 )) (/home/sievert/texmf/tex/latex/local/transconv.sty
 Package: transconv 2019/02/21 v1.0 Transcription conversion package
 )
+
+Package fontspec Info: Font family 'LibertinusSerif(0)' created for font
+(fontspec)             'Libertinus Serif' with options [Ligatures=TeX].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->"LibertinusSerif:mode=node;script=latn;language=DFLT;+
+tlig;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
+(fontspec)             <->"LibertinusSerif:mode=node;script=latn;language=DFLT;+
+tlig;+smcp;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->"LibertinusSerif/B:mode=node;script=latn;language=DFLT
+;+tlig;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
+(fontspec)             <->"LibertinusSerif/B:mode=node;script=latn;language=DFLT
+;+tlig;+smcp;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.:
+(fontspec)             <->"LibertinusSerif/I:mode=node;script=latn;language=DFLT
+;+tlig;"
+(fontspec)             - 'italic small caps'  (m/itsc) with NFSS spec.:
+(fontspec)             <->"LibertinusSerif/I:mode=node;script=latn;language=DFLT
+;+tlig;+smcp;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
+(fontspec)             <->"LibertinusSerif/BI:mode=node;script=latn;language=DFL
+T;+tlig;"
+(fontspec)             - 'bold italic small caps'  (b/itsc) with NFSS spec.:
+(fontspec)             <->"LibertinusSerif/BI:mode=node;script=latn;language=DFL
+T;+tlig;+smcp;"
+
+LaTeX Info: Redefining \rmfamily on input line 18.
+
 (/usr/local/texlive/2019/texmf-dist/tex/latex/tools/array.sty
 Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
 \col@sep=\dimen175
@@ -1200,16 +1235,16 @@ Package csquotes Info: ... configuration file loaded successfully.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/csquotes/csquotes.cfg
 File: csquotes.cfg 
 ))
-Package hyperref Info: Option `unicode' set `true' on input line 38.
-Package hyperref Info: Option `breaklinks' set `true' on input line 38.
+Package hyperref Info: Option `unicode' set `true' on input line 40.
+Package hyperref Info: Option `breaklinks' set `true' on input line 40.
 
 
 Package hyperref Warning: Unexpected value for option `hidelinks'
-(hyperref)                is ignored on input line 38.
+(hyperref)                is ignored on input line 40.
 
-Package hyperref Info: Option `colorlinks' set `true' on input line 38.
-Package hyperref Info: Option `pdffitwindow' set `true' on input line 38.
-Package hyperref Info: Option `pdfnewwindow' set `true' on input line 38.
+Package hyperref Info: Option `colorlinks' set `true' on input line 40.
+Package hyperref Info: Option `pdffitwindow' set `true' on input line 40.
+Package hyperref Info: Option `pdfnewwindow' set `true' on input line 40.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/glossaries-extra/glossaries-extra
 .sty
@@ -1735,6 +1770,30 @@ LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/it' will be
 (Font)              scaled to size 10.53629pt on input line 34.
 LaTeX Font Info:    Font shape `JY3/TH-Tshyn-P0(0)/m/it' will be
 (Font)              scaled to size 10.53629pt on input line 34.
+
+Overfull \hbox (0.82776pt too wide) in paragraph at lines 35--45
+[]\TU/LibertinusSerif(0)/m/n/10.95 This op-tion en-ables sup-port for the trans
+lit-er-a-tion scheme [] for the lan-guage []
+ []
+
+
+Overfull \hbox (0.51262pt too wide) in paragraph at lines 35--45
+\TU/LibertinusSerif(0)/m/n/10.95 by set-ting up the match-ing con-verter in Lua
+ and de-fines the com-mands [],
+ []
+
+
+Overfull \hbox (4.47165pt too wide) in paragraph at lines 35--45
+\TU/LibertinusSerif(0)/m/n/10.95 want to change it, use the [] op-tion or the [
+]
+ []
+
+
+Overfull \hbox (19.86247pt too wide) in paragraph at lines 46--49
+[]\TU/LibertinusSerif(0)/m/n/10.95 In or-der to suc-cess-fully load a scheme, T
+ransconv has to be able to find a file []/[].lua
+ []
+
 [1
 
 
@@ -1753,12 +1812,13 @@ Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
 Removing  `ltj.listings_unicode' from `process_input_buffer'. [2
 warning  (pdf backend): ignoring duplicate destination with the name '020000:def
 aultscheme.2'
-] [3]
-Overfull \hbox (11.57191pt too wide) in paragraph at lines 194--198
-\TU/lmr/m/n/10.95 pack-age op-tion. As with the op-tion, each scheme should be 
-spec-i-fied as []
+]
+Overfull \hbox (5.86955pt too wide) in paragraph at lines 154--156
+[]\TU/LibertinusSerif(0)/m/n/10.95 where [] is again a scheme de-clared via [] 
+or the op-tion []. 
  []
 
+[3]
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
@@ -1766,8 +1826,7 @@ LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/it' will be
 (Font)              scaled to size 9.6222pt on input line 219.
 LaTeX Font Info:    Font shape `JY3/TH-Tshyn-P0(0)/m/it' will be
 (Font)              scaled to size 9.6222pt on input line 219.
-[4]
-Removing  `ltj.listings_unicode' from `process_input_buffer'.
+Removing  `ltj.listings_unicode' from `process_input_buffer'. [4]
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
@@ -1800,7 +1859,7 @@ Removing  `ltj.listings_unicode' from `process_input_buffer'.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
-Removing  `ltj.listings_unicode' from `process_input_buffer'. [6]
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
 LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/n' will be
 (Font)              scaled to size 7.69775pt on input line 353.
 LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/n' will be
@@ -1815,6 +1874,7 @@ LaTeX Font Info:    Font shape `JY3/TH-Tshyn-P0(0)/m/n' will be
 (Font)              scaled to size 4.8111pt on input line 356.
 LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/n' will be
 (Font)              scaled to size 5.77332pt on input line 356.
+ [6]
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
@@ -1822,34 +1882,17 @@ Removing  `ltj.listings_unicode' from `process_input_buffer'.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
-Removing  `ltj.listings_unicode' from `process_input_buffer'. [7]
-Overfull \hbox (6.63826pt too wide) in paragraph at lines 445--449
-[]\TU/lmr/m/n/10.95 call the [] method again, but this time us-ing the []
- []
-
-[8] [9]
+Removing  `ltj.listings_unicode' from `process_input_buffer'. [7] [8] [9]
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
-Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'. [
-10]
-Removing  `ltj.listings_unicode' from `process_input_buffer'. [11]
-! Undefined control sequence.
-l.1 p\textvbaraccent
-                  {e}h-\={o}e-j\={\i}
-l.630 \topoj{peh8-ue7-ji7}
-                        
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 632.
-[12]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 632.
+Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
+Removing  `ltj.listings_unicode' from `process_input_buffer'. [10]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 637.
+ [11]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 637.
  (./master.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 632.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 632.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 637.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 637.
 Package rerunfilecheck Info: File `master.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
@@ -1859,35 +1902,32 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 )
 
 Here is how much of LuaTeX's memory you used:
- 35308 strings out of 493861
- 244167,1373583 words of node,token memory allocated
- 18559 words of node memory still in use:
-   11 hlist, 2 vlist, 5 rule, 7 glue, 196 kern, 1 glyph, 5151 attribute, 1270 gl
+ 35372 strings out of 493861
+ 244169,1373583 words of node,token memory allocated
+ 18369 words of node memory still in use:
+   11 hlist, 2 vlist, 5 rule, 7 glue, 196 kern, 1 glyph, 5151 attribute, 1232 gl
 ue_spec, 285 attribute_list, 1 write, 16 user_defined, 1 pdf_action nodes
-   avail lists: 1:20,2:68871,3:274,4:729,5:333,6:48,7:5780,8:35,9:778,10:12,11:3
-34
- 38641 multiletter control sequences out of 65536+600000
- 90 fonts using 143196727 bytes
- 75i,9n,137p,10087b,1000s stack positions out of 5000i,500n,10000p,200000b,100000s
+   avail lists: 1:20,2:67857,3:272,4:663,5:363,6:48,7:6266,8:34,9:657,10:9,11:35
+8
+ 38662 multiletter control sequences out of 65536+600000
+ 103 fonts using 149644255 bytes
+ 75i,9n,137p,10087b,844s stack positions out of 5000i,500n,10000p,200000b,100000s
 </usr/local/texlive/2019/texmf-dist/fonts/opentype/public/lm/lmmono9-regular.otf
 ></usr/local/share/fonts/t/TH_Tshyn_P0.ttf></usr/local/texlive/2019/texmf-dist/f
-onts/opentype/public/lm/lmroman9-regular.otf></usr/local/texlive/2019/texmf-dist
-/fonts/opentype/public/lm/lmroman6-regular.otf></usr/local/texlive/2019/texmf-di
-st/fonts/opentype/public/lm/lmroman8-regular.otf></usr/local/texlive/2019/texmf-
-dist/fonts/opentype/public/lm/lmmono10-italic.otf></usr/local/texlive/2019/texmf
--dist/fonts/opentype/public/lm/lmroman10-italic.otf>{/usr/local/texlive/2019/tex
-mf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/local/texlive/2019/texmf-dist/fon
-ts/opentype/public/lm/lmmono10-regular.otf></usr/local/texlive/2019/texmf-dist/f
-onts/opentype/public/lm/lmroman10-regular.otf></usr/local/texlive/2019/texmf-dis
-t/fonts/opentype/public/lm/lmsans10-bold.otf></usr/local/texlive/2019/texmf-dist
-/fonts/opentype/public/lm/lmroman12-regular.otf></usr/local/texlive/2019/texmf-d
-ist/fonts/opentype/public/lm/lmmonolt10-bold.otf></usr/local/texlive/2019/texmf-
-dist/fonts/opentype/public/lm/lmromandemi10-regular.otf></usr/local/texlive/2019
-/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on master.pdf (12 pages, 99644 bytes).
+onts/opentype/public/lm/lmmono10-italic.otf></usr/local/texlive/2019/texmf-dist/
+fonts/opentype/public/libertinus-fonts/LibertinusSerif-Italic.otf>{/usr/local/te
+xlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/local/texlive/2019/
+texmf-dist/fonts/opentype/public/lm/lmmono10-regular.otf></usr/local/texlive/201
+9/texmf-dist/fonts/opentype/public/lm/lmsans10-bold.otf></usr/local/texlive/2019
+/texmf-dist/fonts/opentype/public/libertinus-fonts/LibertinusSerif-Regular.otf><
+/usr/local/texlive/2019/texmf-dist/fonts/opentype/public/lm/lmmonolt10-bold.otf>
+</usr/local/texlive/2019/texmf-dist/fonts/opentype/public/libertinus-fonts/Liber
+tinusSerif-Bold.otf></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lm
+sy10.pfb>
+Output written on master.pdf (11 pages, 88101 bytes).
 
-PDF statistics: 430 PDF objects out of 1000 (max. 8388607)
- 372 compressed objects within 4 object streams
- 120 named destinations out of 1000 (max. 131072)
+PDF statistics: 397 PDF objects out of 1000 (max. 8388607)
+ 352 compressed objects within 4 object streams
+ 119 named destinations out of 1000 (max. 131072)
  369 words of extra memory for PDF output out of 10000 (max. 100000000)
 

@@ -75,7 +75,7 @@ package}
     % For example importing "cmn.pinyin" would result in the following Lua command:
     % transconv.schemes["pinyin"] = transconv.new_converter("cmn", "pinyin")
     \directlua{%
-      transconv.schemes["\tl_use:N \l__transconv_scheme_tl"] = transconv:new_converter(%
+      transconv:new_converter(%
         "\tl_use:N \l__transconv_lang_tl",%
         "\tl_use:N \l__transconv_scheme_tl"%
       )%
@@ -85,11 +85,6 @@ package}
     % For example importing "cmn.pinyin" would result in the following Lua
     % command:
     % table.insert(transconv.default_schemes["cmn"], transconv.schemes["pinyin"])
-    \directlua{%
-      table.insert(transconv.default_schemes["\tl_use:N \l__transconv_lang_tl"],%
-        transconv.schemes["\tl_use:N \l__transconv_scheme_tl"]%
-      )%
-    }
 
     % define font switches, but only if if they don't exist already in case the
     % user is redefining an existing scheme but wants to keep font settings
@@ -113,6 +108,23 @@ package}
     % TODO: (re)define environment?
 }
 
+\cs_new:Npn \__transconv_make_default:n #1
+{
+    % retrieve language and scheme names
+    \regex_extract_all:nnN {[\w-]+} {#1} \l__transconv_langscheme_seq
+    \seq_pop_left:NN \l__transconv_langscheme_seq \l__transconv_lang_tl
+    \seq_pop_left:NN \l__transconv_langscheme_seq \l__transconv_scheme_tl
+
+    \directlua{%
+      tex.sprint(
+      transconv:make_default_scheme(%
+        "\tl_use:N \l__transconv_lang_tl",
+        "\tl_use:N \l__transconv_scheme_tl"%
+      )%
+      )
+    }
+}
+
 %%%%%%%%%%%%%%%%%%%%%
 % Settings commands %
 %%%%%%%%%%%%%%%%%%%%%
@@ -123,9 +135,10 @@ package}
   \clist_map_function:nN {#1} \__transconv_usescheme:n
 }
 
-\NewDocumentCommand\TransconvMakeDefaultScheme{mm}
+\NewDocumentCommand\TransconvMakeDefaultScheme{m}
 {%
-  % TODO: add functionality for changing the default scheme
+  % call make_default for every item
+  \clist_map_function:nN {#1} \__transconv_make_default:n
 }
 
 %%%%%%%%%%%%%%%%%%%
@@ -135,7 +148,7 @@ package}
 \keys_define:nn { transconv }
   {
     scheme .code:n          = \TransconvUseScheme{#1},
-    % defaultscheme .code:n   = (TODO: call same function as for \TransconvMakeDefaultScheme)
+    defaultscheme .code:n   = \TransconvMakeDefaultScheme{#1}
   }
 
 \ProcessKeysOptions{ transconv }

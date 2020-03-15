@@ -11,7 +11,7 @@ Adding a New Language	doc/master.tex	/^\\end{enumerate}$/;"	u
 BIB	doc/makefile	/^BIB := biber$/;"	m
 CC	doc/makefile	/^CC := latexmk -pdf -pdflatex="$(TEX) $(FLAGS)" -use-make #-output-directory=$(AUX)$/;"	m
 CHAPTERS	doc/makefile	/^CHAPTERS := $(shell find $(ROOT)\/tex -name '*.tex')$/;"	m
-FLAGS	doc/makefile	/^FLAGS := -synctex=1 -src-specials -interaction=nonstopmode$/;"	m
+FLAGS	doc/makefile	/^FLAGS := -synctex=1 -src-specials -interaction=nonstopmode -file-line-error -halt-on-error$/;"	m
 LUAMOD	makefile	/^LUAMOD := $(TEXDIR)\/scripts\/transconv$/;"	m
 MASTER	doc/makefile	/^MASTER := master$/;"	m
 PROJ	doc/makefile	/^PROJ := transconv$/;"	m
@@ -37,6 +37,8 @@ local join_sbs 	lua/transconv/converter.lua	/^local join_sbs = function(self, sb
 local new 	lua/transconv/converter.lua	/^local new = function(self, conv)$/;"	f
 local place_tone_digit 	lua/transconv/converter.lua	/^local place_tone_digit = function(self, sb, tone)$/;"	f
 local to_target_scheme 	lua/transconv/converter.lua	/^local to_target_scheme = function(self, sb)$/;"	f
+make_default_scheme	lua/transconv/init.lua	/^local function make_default_scheme(self, lang, scheme)$/;"	f
+move_element_to_front	lua/transconv/init.lua	/^    local function move_element_to_front(list, old_i)$/;"	f
 new	lua/transconv/raw.lua	/^local function new(self, conv)$/;"	f
 new_converter	lua/transconv/init.lua	/^local function new_converter(self, first, second, third)$/;"	f
 path_of	lua/transconv/init.lua	/^local function path_of(path)$/;"	f

@@ -1,7 +1,7 @@
 PROJ := transconv
 MASTER := master
 TEX := lualatex
-FLAGS := -synctex=1 -src-specials -interaction=nonstopmode
+FLAGS := -synctex=1 -src-specials -interaction=nonstopmode -file-line-error -halt-on-error
 BIB := biber
 CC := latexmk -pdf -pdflatex="$(TEX) $(FLAGS)" -use-make #-output-directory=$(AUX)
 
