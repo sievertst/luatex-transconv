@@ -18,7 +18,7 @@
 local function is_valid_sb(self, sb)
     --[[
         Take a string as input (by default a single syllable) and checks
-        whether it is valid in the raw scheme.  Returns true if it is and false
+        whether it is valid in the raw scheme. Returns true if it is and false
         otherwise.
     --]]
     return true

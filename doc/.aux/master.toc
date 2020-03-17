@@ -13,7 +13,7 @@
 \contentsline {subsubsection}{\numberline {5.1.1}Default Member Variables of Schemes}{5}{subsubsection.5.1.1}%
 \contentsline {paragraph}{\nonumberline \sty {raw}}{5}{section*.3}%
 \contentsline {paragraph}{\nonumberline \sty {rep\textunderscore {}strings}}{5}{section*.4}%
-\contentsline {paragraph}{\nonumberline sb\textunderscore {}sep}{6}{section*.5}%
+\contentsline {paragraph}{\nonumberline sb\textunderscore {}sep}{7}{section*.5}%
 \contentsline {paragraph}{\nonumberline tone\textunderscore {}markers}{7}{section*.6}%
 \contentsline {paragraph}{\nonumberline second\textunderscore {}rep\textunderscore {}strings}{7}{section*.7}%
 \contentsline {paragraph}{\nonumberline no\textunderscore {}tones}{7}{section*.8}%
@@ -30,6 +30,6 @@
 \contentsline {paragraph}{\nonumberline get\textunderscore {}sb\textunderscore {}and\textunderscore {}tone(self, input)}{11}{section*.15}%
 \contentsline {paragraph}{\nonumberline is\textunderscore {}valid\textunderscore {}sb(self, input)}{11}{section*.16}%
 \contentsline {paragraph}{\nonumberline split\textunderscore {}sbs(self, input)}{11}{section*.17}%
-\contentsline {section}{\numberline {6}Package Code}{11}{section.6}%
-\contentsline {subsection}{\numberline {6.1}The \sty {transconv.sty} file}{11}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}The Lua code}{11}{subsection.6.2}%
+\contentsline {section}{\numberline {6}Package Code}{12}{section.6}%
+\contentsline {subsection}{\numberline {6.1}The \sty {transconv.sty} file}{12}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}The Lua code}{12}{subsection.6.2}%

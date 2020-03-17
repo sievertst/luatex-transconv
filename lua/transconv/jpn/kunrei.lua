@@ -6,6 +6,7 @@ local function to_target_scheme(self, instring)
 end
 
 local KunreiShiki = Converter:new{
+    name = "jpn.kunrei",
     raw = require(transconv.path_of(...)..".raw"),
 
     rep_strings = {

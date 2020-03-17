@@ -6,6 +6,7 @@ local function to_target_scheme(self, instring)
 end
 
 local NihonShiki = Converter:new{
+    name = "jpn.nihon",
     raw = require(transconv.path_of(...)..".raw"),
 
     rep_strings = {

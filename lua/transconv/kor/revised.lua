@@ -5,6 +5,7 @@ local function to_target_scheme(self, instring)
 end
 
 local Revised = Converter:new{
+    name = "kor.revised",
     raw = require(transconv.path_of(...)..".raw"),
 
     rep_strings = {

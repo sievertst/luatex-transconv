@@ -5,6 +5,7 @@ local new = function(self, conv)
     -- TODO: ensure proper encapsulation
     conv = conv or {} -- create converter object if not specified
     setmetatable(conv, self)
+    conv.cache = {} -- necessary to prevent converters from trying to share their cache
     self.__index = self -- make this the prototype for new converters
     return conv
 end
@@ -201,8 +202,13 @@ local convert = function(self, instring)
     return self.join_sbs(self, outsbs)
 end
 
+local __tostring = function(self)
+    return self.name
+end
+
 local Converter = {
-   -- converter prototype object
+    -- converter prototype object
+    name = "",
     raw = Raw, -- associate prototype raw scheme as default
     cache = {}, -- cache conversion results for better performance
     no_tones = false, -- set true to omit tone markers from output
@@ -222,6 +228,7 @@ local Converter = {
     join_sbs = join_sbs,
     place_tone_digit = place_tone_digit,
     to_target_scheme = to_target_scheme,
+    __tostring = __tostring,
 }
 
 return Converter

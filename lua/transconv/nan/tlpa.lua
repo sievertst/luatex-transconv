@@ -1,6 +1,7 @@
 #!/usr/bin/env lua5.3
 
 local TLPA = Converter:new{
+    name = "nan.tlpa",
     raw = require(transconv.path_of(...)..".raw"),
     sb_sep = "-",
 

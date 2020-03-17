@@ -30,6 +30,7 @@ local function place_tone_digit(self, sb, tone)
 end
 
 local Tailo = Converter:new{
+    name = "nan.tailo",
     raw = require(transconv.path_of(...)..".raw"),
     sb_sep = "-",
 

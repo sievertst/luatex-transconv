@@ -28,6 +28,7 @@ local function place_tone_digit(self, sb, tone)
 end
 
 local POJ = Converter:new{
+    name = "nan.poj",
     raw = require(transconv.path_of(...)..".raw"),
     sb_sep = "-",
     tone_markers = {

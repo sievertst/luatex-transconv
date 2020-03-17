@@ -116,12 +116,10 @@ package}
     \seq_pop_left:NN \l__transconv_langscheme_seq \l__transconv_scheme_tl
 
     \directlua{%
-      tex.sprint(
       transconv:make_default_scheme(%
         "\tl_use:N \l__transconv_lang_tl",
         "\tl_use:N \l__transconv_scheme_tl"%
       )%
-      )
     }
 }
 

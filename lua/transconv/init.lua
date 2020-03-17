@@ -22,27 +22,23 @@ end
 local function make_default_scheme(self, lang, scheme)
     --[[
         Moves scheme to the front of lang's list in default_languages. Returns
-        integer code to reflect what was done:
-            1: scheme moved to front
+        integer code to reflect the result:
+            1: scheme found and made default for lang
             0: scheme already default for lang (no changes done)
            -1: scheme currently does not exist for lang (error)
            -2: there is no scheme set up for lang at all (error)
     --]]
 
     local function move_element_to_front(list, old_i)
-        if old_i <= 1 then
-            return table
-        end
+        local new_first = list[old_i]
 
-        local l = {[1] = list[old_i]}
+        -- take all elements from the beginning (1) up to the one before old_i
+        -- and move them to the range starting at index 2 (and thus ending on
+        -- old_i)
+        table.move(list, 1, old_i-1, 2)
 
-        for k,v in pairs(list) do
-            if k ~= old_i then
-                table.insert(l, v)
-            end
-        end
-
-        return l
+        list[1] = new_first
+        return list
     end
 
     -- return error code if no scheme is set up for lang
@@ -52,9 +48,9 @@ local function make_default_scheme(self, lang, scheme)
 
     -- find scheme in default_schemes list for lang and get its index
     local index = 0
-    for k,v in pairs(self.default_schemes[lang]) do
-        if v == scheme then
-            index = k
+    for i,v in ipairs(self.default_schemes[lang]) do
+        if v.name == lang.."."..scheme then
+            index = i
             break
         end
     end
@@ -101,13 +97,23 @@ local function new_converter(self, first, second, third)
         lang_module = lang
     end
 
-    tex.sprint(string.format("Setting up converter: %s.%s", lang,scheme))
-
     local c = require(string.format("%s.%s", lang_module, scheme)):new(options)
 
     self.schemes[scheme] = c
+
+    -- ensure that default_schemes has an entry for lang
     self.default_schemes[lang] = self.default_schemes[lang] or {}
-    table.insert(self.default_schemes[lang], c)
+    -- check if scheme is already in default schemes and replace entry if it is
+    local found = false
+    for i,v in ipairs(self.default_schemes[lang]) do
+        if v.name == scheme then
+            self.default_schemes[lang][i] = c
+            found = true
+            break
+        end
+    end
+    -- make new entry if it isn't
+    if not found then table.insert(self.default_schemes[lang], c) end
 
     return c
 end

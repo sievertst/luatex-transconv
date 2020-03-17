@@ -98,6 +98,10 @@
 
 -- the following defines the converter object
 local Example = Converter:new{
+    -- scheme name -- should be identical to the language folder name + the file
+    -- name without the extension, separated with a dot (e.g. "cmn.pinyin" for
+    -- Hanyu Pinyin)
+    name = "example.example",
     -- import the raw scheme -- should normally not be changed
     raw = require(transconv.path_of(...)..".raw"),
 
