@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.0 (TeX Live 2019)  (format=lualatex 2019.11.14)  17 MAR 2020 15:07
+This is LuaTeX, Version 1.10.0 (TeX Live 2019)  (format=lualatex 2019.11.14)  20 MAR 2020 17:34
  restricted system commands enabled.
  file:line:error style messages enabled.
 **master.tex
@@ -60,7 +60,7 @@ Lua module: luaotfload-tounicode 2019-11-10 3.11 luaotfload submodule / tounicod
 e
 Inserting `luaotfload.rewrite_fontname' at position 6 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.120 seconds
+luaotfload | main : initialization completed in 0.131 seconds
 (/usr/local/texlive/2019/texmf-dist/tex/latex/ltxdockit/ltxdockit.cls
 Document Class: ltxdockit 2011/03/25 v1.2d LaTeX documentation kit
 (/usr/local/texlive/2019/texmf-dist/tex/latex/ltxdockit/ltxdockit.def
@@ -1201,16 +1201,16 @@ Package csquotes Info: ... configuration file loaded successfully.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/csquotes/csquotes.cfg
 File: csquotes.cfg 
 ))
-Package hyperref Info: Option `unicode' set `true' on input line 37.
-Package hyperref Info: Option `breaklinks' set `true' on input line 37.
+Package hyperref Info: Option `unicode' set `true' on input line 40.
+Package hyperref Info: Option `breaklinks' set `true' on input line 40.
 
 
 Package hyperref Warning: Unexpected value for option `hidelinks'
-(hyperref)                is ignored on input line 37.
+(hyperref)                is ignored on input line 40.
 
-Package hyperref Info: Option `colorlinks' set `true' on input line 37.
-Package hyperref Info: Option `pdffitwindow' set `true' on input line 37.
-Package hyperref Info: Option `pdfnewwindow' set `true' on input line 37.
+Package hyperref Info: Option `colorlinks' set `true' on input line 40.
+Package hyperref Info: Option `pdffitwindow' set `true' on input line 40.
+Package hyperref Info: Option `pdfnewwindow' set `true' on input line 40.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/glossaries-extra/glossaries-extra
 .sty
@@ -1721,75 +1721,72 @@ LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/b/n' will be
 (Font)              scaled to size 11.54663pt on input line 26.
 LaTeX Font Info:    Font shape `JY3/TH-Tshyn-P0(0)/b/n' will be
 (Font)              scaled to size 11.54663pt on input line 26.
-
-
-LaTeX Font Warning: Font shape `JT3/TH-Tshyn-P0(0)/m/it' undefined
-(Font)              using `JT3/TH-Tshyn-P0(0)/m/n' instead on input line 34.
-
-LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/n' will be
-(Font)              scaled to size 10.53629pt on input line 34.
-
-LaTeX Font Warning: Font shape `JY3/TH-Tshyn-P0(0)/m/it' undefined
-(Font)              using `JY3/TH-Tshyn-P0(0)/m/n' instead on input line 34.
-
-LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/it' will be
-(Font)              scaled to size 10.53629pt on input line 34.
-LaTeX Font Info:    Font shape `JY3/TH-Tshyn-P0(0)/m/it' will be
-(Font)              scaled to size 10.53629pt on input line 34.
-[1
+ [1
 
 
 {/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-warning  (pdf backend): ignoring duplicate destination with the name '020000:sch
-eme.2'
+
+LaTeX Font Warning: Font shape `JT3/TH-Tshyn-P0(0)/m/it' undefined
+(Font)              using `JT3/TH-Tshyn-P0(0)/m/n' instead on input line 50.
+
 LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/n' will be
-(Font)              scaled to size 9.6222pt on input line 87.
+(Font)              scaled to size 10.53629pt on input line 50.
+
+LaTeX Font Warning: Font shape `JY3/TH-Tshyn-P0(0)/m/it' undefined
+(Font)              using `JY3/TH-Tshyn-P0(0)/m/n' instead on input line 50.
+
+LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/it' will be
+(Font)              scaled to size 10.53629pt on input line 50.
+LaTeX Font Info:    Font shape `JY3/TH-Tshyn-P0(0)/m/it' will be
+(Font)              scaled to size 10.53629pt on input line 50.
+LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/n' will be
+(Font)              scaled to size 9.6222pt on input line 100.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
-Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
+Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'. [
+2
+warning  (pdf backend): ignoring duplicate destination with the name '030000:sch
+eme.2'
+
+warning  (pdf backend): ignoring duplicate destination with the name '030000:def
+aultscheme.2'
+]
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
-Removing  `ltj.listings_unicode' from `process_input_buffer'. [2
-warning  (pdf backend): ignoring duplicate destination with the name '020000:def
-aultscheme.2'
-] [3]
-Overfull \hbox (11.57191pt too wide) in paragraph at lines 194--198
+Removing  `ltj.listings_unicode' from `process_input_buffer'. [3]
+Overfull \hbox (11.57191pt too wide) in paragraph at lines 209--213
 \TU/lmr/m/n/10.95 pack-age op-tion. As with the op-tion, each scheme should be 
 spec-i-fied as []
  []
 
+[4]
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
 LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/it' will be
-(Font)              scaled to size 9.6222pt on input line 219.
+(Font)              scaled to size 9.6222pt on input line 244.
 LaTeX Font Info:    Font shape `JY3/TH-Tshyn-P0(0)/m/it' will be
-(Font)              scaled to size 9.6222pt on input line 219.
-[4]
+(Font)              scaled to size 9.6222pt on input line 244.
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 10.53629pt on input line 239.
+(Font)              scaled to size 10.53629pt on input line 264.
 
 
 LaTeX Font Warning: Font shape `JT3/gt/m/it' undefined
-(Font)              using `JT3/gt/m/n' instead on input line 239.
+(Font)              using `JT3/gt/m/n' instead on input line 264.
 
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 10.53629pt on input line 239.
+(Font)              scaled to size 10.53629pt on input line 264.
 
 LaTeX Font Warning: Font shape `JY3/gt/m/it' undefined
-(Font)              using `JY3/gt/m/n' instead on input line 239.
+(Font)              using `JY3/gt/m/n' instead on input line 264.
 
-Removing  `ltj.process_input_buffer' from `process_input_buffer'.
-Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
-Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
-Removing  `ltj.listings_unicode' from `process_input_buffer'.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
@@ -1801,21 +1798,26 @@ Removing  `ltj.listings_unicode' from `process_input_buffer'.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
-Removing  `ltj.listings_unicode' from `process_input_buffer'. [6]
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
+Removing  `ltj.process_input_buffer' from `process_input_buffer'.
+Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
+Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
 LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/n' will be
-(Font)              scaled to size 7.69775pt on input line 353.
+(Font)              scaled to size 7.69775pt on input line 378.
 LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/n' will be
-(Font)              scaled to size 8.65997pt on input line 356.
+(Font)              scaled to size 8.65997pt on input line 381.
 LaTeX Font Info:    Font shape `JY3/TH-Tshyn-P0(0)/m/n' will be
-(Font)              scaled to size 8.65997pt on input line 356.
+(Font)              scaled to size 8.65997pt on input line 381.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 356.
+(Font)              <9> on input line 381.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 356.
+(Font)              <5> on input line 381.
 LaTeX Font Info:    Font shape `JY3/TH-Tshyn-P0(0)/m/n' will be
-(Font)              scaled to size 4.8111pt on input line 356.
+(Font)              scaled to size 4.8111pt on input line 381.
 LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/n' will be
-(Font)              scaled to size 5.77332pt on input line 356.
+(Font)              scaled to size 5.77332pt on input line 381.
+ [6]
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
@@ -1823,23 +1825,22 @@ Removing  `ltj.listings_unicode' from `process_input_buffer'.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
-Removing  `ltj.listings_unicode' from `process_input_buffer'. [7]
-Overfull \hbox (6.63826pt too wide) in paragraph at lines 445--449
+Removing  `ltj.listings_unicode' from `process_input_buffer'. [7] [8]
+Overfull \hbox (6.63826pt too wide) in paragraph at lines 470--474
 []\TU/lmr/m/n/10.95 call the [] method again, but this time us-ing the []
  []
 
-[8] [9]
+[9] [10]
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
-Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'. [
-10]
+Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
 Removing  `ltj.listings_unicode' from `process_input_buffer'. [11]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 628.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 653.
  [12]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 628.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 653.
  (./master.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 628.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 628.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 653.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 653.
 Package rerunfilecheck Info: File `master.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
@@ -1849,16 +1850,16 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 )
 
 Here is how much of LuaTeX's memory you used:
- 35284 strings out of 493861
- 244167,1373583 words of node,token memory allocated
- 18544 words of node memory still in use:
-   11 hlist, 2 vlist, 5 rule, 7 glue, 196 kern, 1 glyph, 5151 attribute, 1267 gl
-ue_spec, 285 attribute_list, 1 write, 16 user_defined, 1 pdf_action nodes
-   avail lists: 1:20,2:68871,3:274,4:729,5:336,6:48,7:5780,8:35,9:778,10:12,11:3
-34
- 38617 multiletter control sequences out of 65536+600000
+ 35288 strings out of 493861
+ 305222,1373583 words of node,token memory allocated
+ 18304 words of node memory still in use:
+   11 hlist, 2 vlist, 5 rule, 7 glue, 196 kern, 1 glyph, 4923 attribute, 1315 gl
+ue_spec, 273 attribute_list, 1 write, 16 user_defined, 1 pdf_action nodes
+   avail lists: 1:19,2:83649,3:279,4:780,5:317,6:51,7:6142,8:38,9:849,10:12,11:3
+60
+ 38619 multiletter control sequences out of 65536+600000
  90 fonts using 143196727 bytes
- 75i,9n,137p,10087b,1000s stack positions out of 5000i,500n,10000p,200000b,100000s
+ 75i,9n,137p,10087b,1248s stack positions out of 5000i,500n,10000p,200000b,100000s
 </usr/local/texlive/2019/texmf-dist/fonts/opentype/public/lm/lmmono9-regular.otf
 ></usr/local/share/fonts/t/TH_Tshyn_P0.ttf></usr/local/texlive/2019/texmf-dist/f
 onts/opentype/public/lm/lmroman9-regular.otf></usr/local/texlive/2019/texmf-dist
@@ -1874,10 +1875,10 @@ t/fonts/opentype/public/lm/lmsans10-bold.otf></usr/local/texlive/2019/texmf-dist
 ist/fonts/opentype/public/lm/lmmonolt10-bold.otf></usr/local/texlive/2019/texmf-
 dist/fonts/opentype/public/lm/lmromandemi10-regular.otf></usr/local/texlive/2019
 /texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on master.pdf (12 pages, 98980 bytes).
+Output written on master.pdf (12 pages, 100884 bytes).
 
-PDF statistics: 430 PDF objects out of 1000 (max. 8388607)
- 372 compressed objects within 4 object streams
- 120 named destinations out of 1000 (max. 131072)
- 369 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 440 PDF objects out of 1000 (max. 8388607)
+ 382 compressed objects within 4 object streams
+ 122 named destinations out of 1000 (max. 131072)
+ 385 words of extra memory for PDF output out of 10000 (max. 100000000)
 

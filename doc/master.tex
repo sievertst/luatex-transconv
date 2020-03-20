@@ -27,6 +27,22 @@
 
 \subsection{License}
 
+\section{Installation}
+
+In order to be able to use \sty{transconv}, you need to copy the
+\sty{transconv.sty} file as well as the \sty{transconv} directory (found inside
+the \sty{lua} folder) to a place where Lua\TeX{} can find them. The suggested
+location for the \sty{sty} file is within \sty{tex/latex/local/} in your local
+\sty{texmf/} directory (probably found within your \sty{home} directory).
+
+The \sty{transconv} folder can be placed in any directory in your kpathsea path.
+You can check that path with the console command \sty{kpsewhich
+--show-path=lua}. The suggested location is within \sty{scripts/} inside your
+local \sty{texmf/} directory. If for some reason, you cannot get Lua\TeX{} to
+find the module, you can consider using the
+\href{https://www.ctan.org/pkg/luapackageloader}{luapackageloader} package to
+manually modify the path.
+
 \section{Package Options}
 
 \begin{optionlist}
@@ -58,28 +74,25 @@
   Defines the default scheme for the language \prm{lang} in case more than one
   scheme is added for the same language. Can be used more than once to define
   defaults for multiple languages. In case of repeated use for the same
-  language, later schemes override earlier ones.
-
-  TD
+  language, later default scheme assignments override earlier ones.
 
   \optitem{defaultscheme}{\{\prm{lang1}.\prm{scheme1},
   \prm{lang2}.\prm{scheme2},\dots\}}
 
   Defines default schemes for multiple languages at once. Equivalent to a
   repeated use of \opt{defaultscheme}. If the same language appears more than
-  once, later schemes override earlier ones.
-
-  TD
+  once, later default scheme assignments override earlier ones.
 
 \end{optionlist}
 
 \section{Basic Interface}
 
 All commands in this section are robust and can therefore be used in
-expansion-only contexts (e.\,g.\ headings or footnotes) without danger. However
-the list of commands you can use within the conversion argument is unfortunately
-very limited. This is because such commands would be expanded before the string
-is sent to the converter, which can easily result in an error.
+expansion-only contexts (e.\,g.\ headings or footnotes) without danger.
+
+However, the list of commands you can use within the conversion argument is
+unfortunately very limited. This is because such commands would be expanded
+before the string is sent to the converter, which can easily result in an error.
 
 As a rule of thumb, if your command is a simple macro which expand to nothing
 but text like in the following example, it should be fine:
@@ -89,7 +102,7 @@ but text like in the following example, it should be fine:
   \topinyin{\mystring}
 \end{ltxcode}
 
-However commands which change some settings (e.\,g.\ the font) will likely
+But commands which change some settings (e.\,g.\ the font) will likely
 cause an error. For example both of the following will not compile:
 
 \begin{ltxcode}
@@ -123,11 +136,12 @@ cause an error. For example both of the following will not compile:
   defined in \sty{\textbackslash{}schemefont}.
 
   Use this command to access specific schemes if you need to import multiple
-  ones for a single language (for example if the schemes themselves are a topic
-  of discussion). Note that \sty{\textbackslash{}toscheme} is provided for all
-  imported languages, including the default one. If you only intend to use a
-  single theme for a given language, use \sty{\textbackslash{}tolang} instead to
-  avoid hardcoding the scheme into your text.
+  ones for a single language (for example if you are discussing differences
+  between different schemes). Note that \sty{\textbackslash{}toscheme} is
+  provided for all imported languages, including the default one. If you only
+  intend to use a single theme for a given language, use
+  \sty{\textbackslash{}tolang} instead to avoid hardcoding the scheme into your
+  text.
 
 \end{ltxsyntax}
 
@@ -186,6 +200,7 @@ cause an error. For example both of the following will not compile:
 
 \end{ltxsyntax}
 
+
 \section{Configuration}
 
 \begin{ltxsyntax}
@@ -196,6 +211,16 @@ cause an error. For example both of the following will not compile:
   \sty{\prm{lang}.\prm{scheme}} and multiple schemes can be set up at once by
   stringing them together with commas.
 
+  \cmditem{TransconvMakeDefaultScheme}{schemes}
+
+  Sets up an existing scheme as the default scheme for a language used in
+  \sty{\textbackslash{}tolang} or \sty{\textbackslash{}langconvert}. Equivalent
+  to using the \sty{defaultscheme} package option. As with the option, each
+  scheme shoult be specified as \sty{\prm{lang}.\prm{scheme}} and multiple
+  default schemes can be set up at once by stringing them together with commas.
+  The scheme(s) has (have) to already be initialised with either the
+  \sty{scheme} option or the \sty{\textbackslash{}TransconvUseScheme} command,
+  otherwise this command will have no effect.
 \end{ltxsyntax}
 
 \section{Custom Schemes and Languages}
@@ -203,7 +228,7 @@ cause an error. For example both of the following will not compile:
 \subsection{Adding a New Transliteration Scheme for an Existing Language}
 
 Adding a new transliteration scheme involves a little bit of Lua programming,
-though \sty{transconv} tried to make it as painless as possible.
+though I tried to make it as painless as possible.
 
 As a first step, navigate to the directory where the Transconv lua files are
 found (the exact location depends on where you installed it, but it should be
@@ -223,14 +248,14 @@ local MyScheme = Converter:new{
 }
 \end{lstlisting}
 
-You can use any name you want instead of MyScheme. This name is only used to
-refer to the scheme within the file itself; it has no consequence outside.
-
 At the end of the file, return the scheme:
 
 \begin{lstlisting}
 return MyScheme
 \end{lstlisting}
+
+You can use any name you want instead of \sty{MyScheme}. This name is only used
+to refer to the scheme within the file itself; it has no consequence outside.
 
 Technically speaking you are now set; you have successfully defined a new scheme
 and should be able to load it by passing \sty{\prm{lang}.\prm{scheme}} to
