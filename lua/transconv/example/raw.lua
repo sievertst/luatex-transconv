@@ -33,7 +33,6 @@ local function split_sbs(self, instring)
     --]]
     local sbs = {}
 
-    -- TODO: how accurate is this pattern?
     for sb in instring:gmatch("%W*%w*") do
 
         -- Test if a) this raw scheme has a (sensible) syllable separator
@@ -50,7 +49,7 @@ local function split_sbs(self, instring)
     return sbs
 end
 
-local jpnraw = Raw:new{
+local exraw = Raw:new{
     cutting_markers = {}, -- list of characters which mark a syllable border
 
     -- functions
@@ -61,4 +60,4 @@ local jpnraw = Raw:new{
     split_sbs = split_sbs,
 }
 
-return jpnraw
+return exraw

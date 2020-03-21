@@ -95,7 +95,6 @@
 -- object like this:
 --   my_function = my_function,
 
-
 -- the following defines the converter object
 local Example = Converter:new{
     -- scheme name -- should be identical to the language folder name + the file

@@ -1,4 +1,5 @@
 #!/usr/bin/env lua5.3
+
 local cutting_markers = {}
 
 local function new(self, conv)

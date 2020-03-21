@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.0 (TeX Live 2019)  (format=lualatex 2019.11.14)  20 MAR 2020 17:34
+This is LuaTeX, Version 1.10.0 (TeX Live 2019)  (format=lualatex 2019.11.14)  21 MAR 2020 17:27
  restricted system commands enabled.
  file:line:error style messages enabled.
 **master.tex
@@ -60,7 +60,7 @@ Lua module: luaotfload-tounicode 2019-11-10 3.11 luaotfload submodule / tounicod
 e
 Inserting `luaotfload.rewrite_fontname' at position 6 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.131 seconds
+luaotfload | main : initialization completed in 0.120 seconds
 (/usr/local/texlive/2019/texmf-dist/tex/latex/ltxdockit/ltxdockit.cls
 Document Class: ltxdockit 2011/03/25 v1.2d LaTeX documentation kit
 (/usr/local/texlive/2019/texmf-dist/tex/latex/ltxdockit/ltxdockit.def
@@ -1172,25 +1172,34 @@ Package: luatexja-fontspec-27c 2019/05/14 fontspec support of LuaTeX-ja
 )) (/home/sievert/texmf/tex/latex/local/transconv.sty
 Package: transconv 2019/02/21 v1.0 Transcription conversion package
 )
+(/usr/local/texlive/2019/texmf-dist/tex/latex/enumitem/enumitem.sty
+Package: enumitem 2019/06/20 v3.9 Customized lists
+\labelindent=\skip70
+\enit@outerparindent=\dimen175
+\enit@toks=\toks27
+\enit@inbox=\box93
+\enit@count@id=\count295
+\enitdp@description=\count296
+)
 (/usr/local/texlive/2019/texmf-dist/tex/latex/tools/array.sty
 Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
-\col@sep=\dimen175
-\ar@mcellbox=\box93
-\extrarowheight=\dimen176
-\NC@list=\toks27
-\extratabsurround=\skip70
-\backup@length=\skip71
-\ar@cellbox=\box94
+\col@sep=\dimen176
+\ar@mcellbox=\box94
+\extrarowheight=\dimen177
+\NC@list=\toks28
+\extratabsurround=\skip71
+\backup@length=\skip72
+\ar@cellbox=\box95
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/csquotes/csquotes.sty
 Package: csquotes 2019-11-11 v2.5f context-sensitive quotations (JAW)
-\csq@reset=\count295
-\csq@gtype=\count296
-\csq@glevel=\count297
-\csq@qlevel=\count298
-\csq@maxlvl=\count299
-\csq@tshold=\count300
-\csq@ltx@everypar=\toks28
+\csq@reset=\count297
+\csq@gtype=\count298
+\csq@glevel=\count299
+\csq@qlevel=\count300
+\csq@maxlvl=\count301
+\csq@tshold=\count302
+\csq@ltx@everypar=\toks29
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/csquotes/csquotes.def
 File: csquotes.def 2019-11-11 v2.5f csquotes generic definitions (JAW)
@@ -1201,16 +1210,16 @@ Package csquotes Info: ... configuration file loaded successfully.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/csquotes/csquotes.cfg
 File: csquotes.cfg 
 ))
-Package hyperref Info: Option `unicode' set `true' on input line 40.
-Package hyperref Info: Option `breaklinks' set `true' on input line 40.
+Package hyperref Info: Option `unicode' set `true' on input line 46.
+Package hyperref Info: Option `breaklinks' set `true' on input line 46.
 
 
 Package hyperref Warning: Unexpected value for option `hidelinks'
-(hyperref)                is ignored on input line 40.
+(hyperref)                is ignored on input line 46.
 
-Package hyperref Info: Option `colorlinks' set `true' on input line 40.
-Package hyperref Info: Option `pdffitwindow' set `true' on input line 40.
-Package hyperref Info: Option `pdfnewwindow' set `true' on input line 40.
+Package hyperref Info: Option `colorlinks' set `true' on input line 46.
+Package hyperref Info: Option `pdffitwindow' set `true' on input line 46.
+Package hyperref Info: Option `pdfnewwindow' set `true' on input line 46.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/glossaries-extra/glossaries-extra
 .sty
@@ -1224,8 +1233,8 @@ Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/mfirstuc/mfirstuc.sty
 Package: mfirstuc 2017/11/14 v2.06 (NLCT)
-\@glsmfirst=\toks29
-\@glsmrest=\toks30
+\@glsmfirst=\toks30
+\@glsmrest=\toks31
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/textcase/textcase.sty
 Package: textcase 2019/09/14 v1.00 Text only upper/lower case changing (DPC)
@@ -1238,7 +1247,7 @@ Package: datatool-base 2019/09/27 v2.32 (NLCT)
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2019/04/01 v2.17c AMS math features
-\@mathmargin=\skip72
+\@mathmargin=\skip73
 
 For additional information on amsmath, use the `?' option.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amstext.sty
@@ -1246,57 +1255,57 @@ Package: amstext 2000/06/29 v2.01 AMS text
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks31
-\ex@=\dimen177
+\@emptytoks=\toks32
+\ex@=\dimen178
 ))
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen178
+\pmbraise@=\dimen179
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count301
+\inf@bad=\count303
 LaTeX Info: Redefining \frac on input line 227.
-\uproot@=\count302
-\leftroot@=\count303
+\uproot@=\count304
+\leftroot@=\count305
 LaTeX Info: Redefining \overline on input line 389.
-\classnum@=\count304
-\DOTSCASE@=\count305
+\classnum@=\count306
+\DOTSCASE@=\count307
 LaTeX Info: Redefining \ldots on input line 486.
 LaTeX Info: Redefining \dots on input line 489.
 LaTeX Info: Redefining \cdots on input line 610.
-\Mathstrutbox@=\box95
-\strutbox@=\box96
-\big@size=\dimen179
+\Mathstrutbox@=\box96
+\strutbox@=\box97
+\big@size=\dimen180
 LaTeX Font Info:    Redeclaring font encoding OML on input line 733.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
-\macc@depth=\count306
-\c@MaxMatrixCols=\count307
+\macc@depth=\count308
+\c@MaxMatrixCols=\count309
 \dotsspace@=\muskip17
-\c@parentequation=\count308
-\dspbrk@lvl=\count309
-\tag@help=\toks32
-\row@=\count310
-\column@=\count311
-\maxfields@=\count312
-\andhelp@=\toks33
-\eqnshift@=\dimen180
-\alignsep@=\dimen181
-\tagshift@=\dimen182
-\tagwidth@=\dimen183
-\totwidth@=\dimen184
-\lineht@=\dimen185
-\@envbody=\toks34
-\multlinegap=\skip73
-\multlinetaggap=\skip74
-\mathdisplay@stack=\toks35
+\c@parentequation=\count310
+\dspbrk@lvl=\count311
+\tag@help=\toks33
+\row@=\count312
+\column@=\count313
+\maxfields@=\count314
+\andhelp@=\toks34
+\eqnshift@=\dimen181
+\alignsep@=\dimen182
+\tagshift@=\dimen183
+\tagwidth@=\dimen184
+\totwidth@=\dimen185
+\lineht@=\dimen186
+\@envbody=\toks35
+\multlinegap=\skip74
+\multlinetaggap=\skip75
+\mathdisplay@stack=\toks36
 LaTeX Info: Redefining \[ on input line 2855.
 LaTeX Info: Redefining \] on input line 2856.
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/substr/substr.sty
 Package: substr 2009/10/20 v1.2 Handle substrings
-\c@su@anzahl=\count313
+\c@su@anzahl=\count315
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/datatool/datatool-fp.sty
 Package: datatool-fp 2019/09/27 v2.32 (NLCT)
@@ -1307,19 +1316,19 @@ Package: fp 1995/04/02
 `Fixed Point Package', Version 0.8, April 2, 1995 (C) Michael Mehlich
 (/usr/local/texlive/2019/texmf-dist/tex/latex/fp/defpattern.sty
 Package: defpattern 1994/10/12
-\actioncount=\count314
+\actioncount=\count316
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/fp/fp-basic.sty
 Package: fp-basic 1996/05/13
-\FP@xs=\count315
-\FP@xia=\count316
-\FP@xib=\count317
-\FP@xfa=\count318
-\FP@xfb=\count319
-\FP@rega=\count320
-\FP@regb=\count321
-\FP@regs=\count322
-\FP@times=\count323
+\FP@xs=\count317
+\FP@xia=\count318
+\FP@xib=\count319
+\FP@xfa=\count320
+\FP@xfb=\count321
+\FP@rega=\count322
+\FP@regb=\count323
+\FP@regs=\count324
+\FP@times=\count325
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/fp/fp-addons.sty
 Package: fp-addons 1995/03/15
@@ -1338,7 +1347,7 @@ Package: fp-pas 1994/08/29
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/fp/fp-random.sty
 Package: fp-random 1995/02/23
-\FPseed=\count324
+\FPseed=\count326
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/fp/fp-eqn.sty
 Package: fp-eqn 1995/04/03
@@ -1349,27 +1358,27 @@ Package: fp-upn 1996/10/21
 (/usr/local/texlive/2019/texmf-dist/tex/latex/fp/fp-eval.sty
 Package: fp-eval 1995/04/03
 )))
-\@dtl@toks=\toks36
-\@dtl@tmpcount=\count325
-\dtl@tmplength=\skip75
-\dtl@sortresult=\count326
-\@dtl@numgrpsepcount=\count327
-\@dtl@datatype=\count328
-\dtl@codeA=\count329
-\dtl@codeB=\count330
-\@dtl@foreach@level=\count331
+\@dtl@toks=\toks37
+\@dtl@tmpcount=\count327
+\dtl@tmplength=\skip76
+\dtl@sortresult=\count328
+\@dtl@numgrpsepcount=\count329
+\@dtl@datatype=\count330
+\dtl@codeA=\count331
+\dtl@codeB=\count332
+\@dtl@foreach@level=\count333
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/glossaries/base/glossaries-compat
 ible-307.sty
 Package: glossaries-compatible-307 2019/09/28 v4.43 (NLCT)
 )
-\gls@level=\count332
-\@gls@tmpb=\toks37
-\gls@tmplen=\skip76
-\glskeylisttok=\toks38
-\glslabeltok=\toks39
-\glsshorttok=\toks40
-\glslongtok=\toks41
+\gls@level=\count334
+\@gls@tmpb=\toks38
+\gls@tmplen=\skip77
+\glskeylisttok=\toks39
+\glslabeltok=\toks40
+\glsshorttok=\toks41
+\glslongtok=\toks42
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/glossaries/styles/glossary-hypern
 av.sty
@@ -1378,94 +1387,127 @@ Package: glossary-hypernav 2019/09/28 v4.43 (NLCT)
 (/usr/local/texlive/2019/texmf-dist/tex/latex/glossaries/styles/glossary-list.s
 ty
 Package: glossary-list 2019/09/28 v4.43 (NLCT)
-\glslistdottedwidth=\skip77
+\glslistdottedwidth=\skip78
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/glossaries/styles/glossary-long.s
 ty
 Package: glossary-long 2019/09/28 v4.43 (NLCT)
  (/usr/local/texlive/2019/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2019/02/06 v4.12 Multi-page Table package (DPC)
-\LTleft=\skip78
-\LTright=\skip79
-\LTpre=\skip80
-\LTpost=\skip81
-\LTchunksize=\count333
-\LTcapwidth=\dimen186
-\LT@head=\box97
-\LT@firsthead=\box98
-\LT@foot=\box99
-\LT@lastfoot=\box100
-\LT@cols=\count334
-\LT@rows=\count335
-\c@LT@tables=\count336
-\c@LT@chunks=\count337
-\LT@p@ftn=\toks42
+\LTleft=\skip79
+\LTright=\skip80
+\LTpre=\skip81
+\LTpost=\skip82
+\LTchunksize=\count335
+\LTcapwidth=\dimen187
+\LT@head=\box98
+\LT@firsthead=\box99
+\LT@foot=\box100
+\LT@lastfoot=\box101
+\LT@cols=\count336
+\LT@rows=\count337
+\c@LT@tables=\count338
+\c@LT@chunks=\count339
+\LT@p@ftn=\toks43
 )
 Class scrartcl Info: longtable captions redefined on input line 43.
-\glsdescwidth=\skip82
-\glspagelistwidth=\skip83
+\glsdescwidth=\skip83
+\glspagelistwidth=\skip84
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/glossaries/styles/glossary-super.
 sty
 Package: glossary-super 2019/09/28 v4.43 (NLCT)
  (/usr/local/texlive/2019/texmf-dist/tex/latex/supertabular/supertabular.sty
 Package: supertabular 2004/02/20 v4.1e the supertabular environment
-\c@tracingst=\count338
-\ST@wd=\dimen187
-\ST@rightskip=\skip84
-\ST@leftskip=\skip85
-\ST@parfillskip=\skip86
-\ST@pageleft=\dimen188
-\ST@headht=\dimen189
-\ST@tailht=\dimen190
-\ST@pagesofar=\dimen191
-\ST@pboxht=\dimen192
-\ST@lineht=\dimen193
-\ST@stretchht=\dimen194
-\ST@prevht=\dimen195
-\ST@toadd=\dimen196
-\ST@dimen=\dimen197
-\ST@pbox=\box101
+\c@tracingst=\count340
+\ST@wd=\dimen188
+\ST@rightskip=\skip85
+\ST@leftskip=\skip86
+\ST@parfillskip=\skip87
+\ST@pageleft=\dimen189
+\ST@headht=\dimen190
+\ST@tailht=\dimen191
+\ST@pagesofar=\dimen192
+\ST@pboxht=\dimen193
+\ST@lineht=\dimen194
+\ST@stretchht=\dimen195
+\ST@prevht=\dimen196
+\ST@toadd=\dimen197
+\ST@dimen=\dimen198
+\ST@pbox=\box102
 ))
 (/usr/local/texlive/2019/texmf-dist/tex/latex/glossaries/styles/glossary-tree.s
 ty
 Package: glossary-tree 2019/09/28 v4.43 (NLCT)
-\glstreeindent=\skip87
+\glstreeindent=\skip88
 ))
 (/usr/local/texlive/2019/texmf-dist/tex/latex/glossaries-extra/glossaries-extra
 -bib2gls.sty
 Package: glossaries-extra-bib2gls 2019/04/09 v1.41 (NLCT)
 )
-\glsxtrresourcecount=\count339
-\@glsxtrnewgls@inner=\count340
-\glsshortpltok=\toks43
-\glslongpltok=\toks44
+\glsxtrresourcecount=\count341
+\@glsxtrnewgls@inner=\count342
+\glsshortpltok=\toks44
+\glslongpltok=\toks45
 )
 (/usr/local/texlive/2019/texmf-dist/tex/latex/silence/silence.sty
 Package: silence 2012/07/02 v1.5b Selective filtering of warnings and error mess
 ages
-\sl@Save=\count341
-\sl@StateNumber=\count342
-\sl@MessageCount=\count343
-\sl@Casualties=\count344
-\sl@Filter=\toks45
-\sl@Message=\toks46
-\sl@UnexpandedMessage=\toks47
-\sl@Mess@ge=\toks48
-\sl@WarningCount=\count345
-\sl@WarningNumber=\count346
-\sl@WarningCasualties=\count347
-\sl@TempBOW=\toks49
-\sl@BankOfWarnings=\toks50
+\sl@Save=\count343
+\sl@StateNumber=\count344
+\sl@MessageCount=\count345
+\sl@Casualties=\count346
+\sl@Filter=\toks46
+\sl@Message=\toks47
+\sl@UnexpandedMessage=\toks48
+\sl@Mess@ge=\toks49
+\sl@WarningCount=\count347
+\sl@WarningNumber=\count348
+\sl@WarningCasualties=\count349
+\sl@TempBOW=\toks50
+\sl@BankOfWarnings=\toks51
 LaTeX Info: Redefining \GenericWarning on input line 433.
-\sl@ErrorCount=\count348
-\sl@ErrorNumber=\count349
-\sl@ErrorCasualties=\count350
-\sl@TempBOE=\toks51
-\sl@BankOfErrors=\toks52
+\sl@ErrorCount=\count350
+\sl@ErrorNumber=\count351
+\sl@ErrorCasualties=\count352
+\sl@TempBOE=\toks52
+\sl@BankOfErrors=\toks53
 LaTeX Info: Redefining \GenericError on input line 601.
 ))
 (./settings/macros.tex) (./settings/layout.tex
+
+Package fontspec Info: Font family 'LibertinusSerif(0)' created for font
+(fontspec)             'Libertinus Serif' with options [Ligatures=TeX].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->"LibertinusSerif:mode=node;script=latn;language=DFLT;+
+tlig;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
+(fontspec)             <->"LibertinusSerif:mode=node;script=latn;language=DFLT;+
+tlig;+smcp;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->"LibertinusSerif/B:mode=node;script=latn;language=DFLT
+;+tlig;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
+(fontspec)             <->"LibertinusSerif/B:mode=node;script=latn;language=DFLT
+;+tlig;+smcp;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.:
+(fontspec)             <->"LibertinusSerif/I:mode=node;script=latn;language=DFLT
+;+tlig;"
+(fontspec)             - 'italic small caps'  (m/itsc) with NFSS spec.:
+(fontspec)             <->"LibertinusSerif/I:mode=node;script=latn;language=DFLT
+;+tlig;+smcp;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
+(fontspec)             <->"LibertinusSerif/BI:mode=node;script=latn;language=DFL
+T;+tlig;"
+(fontspec)             - 'bold italic small caps'  (b/itsc) with NFSS spec.:
+(fontspec)             <->"LibertinusSerif/BI:mode=node;script=latn;language=DFL
+T;+tlig;+smcp;"
+
+LaTeX Info: Redefining \rmfamily on input line 5.
 
 Package fontspec Info: Could not resolve font "TH-Tshyn-P0/BI" (it probably
 (fontspec)             doesn't exist).
@@ -1488,18 +1530,18 @@ Package fontspec Info: Font family 'TH-Tshyn-P0(0)' created for font
 (fontspec)             series/shapes:
 (fontspec)              
 
-LaTeX Font Info:    Redeclaring symbol font `mincho' on input line 5.
+LaTeX Font Info:    Redeclaring symbol font `mincho' on input line 6.
 LaTeX Font Info:    Overwriting symbol font `mincho' in version `normal'
-(Font)                  JY3/mc/m/n --> JY3/TH-Tshyn-P0(0)/m/n on input line 5.
+(Font)                  JY3/mc/m/n --> JY3/TH-Tshyn-P0(0)/m/n on input line 6.
 LaTeX Font Info:    Overwriting symbol font `mincho' in version `bold'
-(Font)                  JY3/gt/m/n --> JY3/TH-Tshyn-P0(0)/m/n on input line 5.
+(Font)                  JY3/gt/m/n --> JY3/TH-Tshyn-P0(0)/m/n on input line 6.
 LaTeX Font Info:    Overwriting symbol font `mincho' in version `bold'
 (Font)                  JY3/TH-Tshyn-P0(0)/m/n --> JY3/TH-Tshyn-P0(0)/b/n on inp
-ut line 5.
+ut line 6.
 LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/n' will be
-(Font)              scaled to size 10.53629pt on input line 5.
+(Font)              scaled to size 10.53629pt on input line 6.
 LaTeX Font Info:    Font shape `JY3/TH-Tshyn-P0(0)/m/n' will be
-(Font)              scaled to size 10.53629pt on input line 5.
+(Font)              scaled to size 10.53629pt on input line 6.
 
 (/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
@@ -1561,20 +1603,20 @@ Package: lltjp-array 2018/03/29 Patch to array for LuaTeX-ja
 Package scrbase Info: activating english \contentsname on input line 17.
 Package scrbase Info: activating english \listfigurename on input line 17.
 Package scrbase Info: activating english \listtablename on input line 17.
-\c@lstlisting=\count351
+\c@lstlisting=\count353
  (/usr/local/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count352
-\scratchdimen=\dimen198
-\scratchbox=\box102
-\nofMPsegments=\count353
-\nofMParguments=\count354
-\everyMPshowfont=\toks53
-\MPscratchCnt=\count355
-\MPscratchDim=\dimen199
-\MPnumerator=\count356
-\makeMPintoPDFobject=\count357
-\everyMPtoPDFconversion=\toks54
+\scratchcounter=\count354
+\scratchdimen=\dimen199
+\scratchbox=\box103
+\nofMPsegments=\count355
+\nofMParguments=\count356
+\everyMPshowfont=\toks54
+\MPscratchCnt=\count357
+\MPscratchDim=\dimen256
+\MPnumerator=\count358
+\makeMPintoPDFobject=\count359
+\everyMPtoPDFconversion=\toks55
 )
 Package hyperref Info: Link coloring ON on input line 17.
  (/usr/local/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
@@ -1586,7 +1628,7 @@ Package: refcount 2016/05/16 v3.5 Data extraction from label references (HO)
 (/usr/local/texlive/2019/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count358
+\c@section@level=\count360
 )
 LaTeX Info: Redefining \ref on input line 17.
 LaTeX Info: Redefining \pageref on input line 17.
@@ -1619,7 +1661,7 @@ File: bkm-pdftex.def 2019/06/04 v1.27 bookmark driver for pdfTeX (HO)
 Package auxhook Info: \AddLineBeginMainAux comes a little late,
 (auxhook)             because the main .aux file is already opened on input line
  164.
-\BKM@id=\count359
+\BKM@id=\count361
 ))
 ABD: EverySelectfont initializing macros
 
@@ -1715,82 +1757,146 @@ LaTeX Font Info:    Font shape `JY3/TH-Tshyn-P0(0)/m/n' will be
 \tf@lot=\write6
 
 \openout6 = master.lot
-LaTeX Font Info:    Font shape `TU/lmss/b/n' in size <12> not available
-(Font)              Font shape `TU/lmss/bx/n' tried instead on input line 26.
-LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/b/n' will be
-(Font)              scaled to size 11.54663pt on input line 26.
-LaTeX Font Info:    Font shape `JY3/TH-Tshyn-P0(0)/b/n' will be
-(Font)              scaled to size 11.54663pt on input line 26.
+LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/n' will be
+(Font)              scaled to size 7.69775pt on input line 42.
  [1
 
 
-{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-
-LaTeX Font Warning: Font shape `JT3/TH-Tshyn-P0(0)/m/it' undefined
-(Font)              using `JT3/TH-Tshyn-P0(0)/m/n' instead on input line 50.
-
+{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (/usr/l
+ocal/texlive/2019/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstlang2.sty
+File: lstlang2.sty 2019/09/10 1.8c listings language file
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstlang3.sty
+File: lstlang3.sty 2019/09/10 1.8c listings language file
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstlang2.sty
+File: lstlang2.sty 2019/09/10 1.8c listings language file
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstlang3.sty
+File: lstlang3.sty 2019/09/10 1.8c listings language file
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstlang2.sty
+File: lstlang2.sty 2019/09/10 1.8c listings language file
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstlang3.sty
+File: lstlang3.sty 2019/09/10 1.8c listings language file
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
+)
 LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/n' will be
-(Font)              scaled to size 10.53629pt on input line 50.
-
-LaTeX Font Warning: Font shape `JY3/TH-Tshyn-P0(0)/m/it' undefined
-(Font)              using `JY3/TH-Tshyn-P0(0)/m/n' instead on input line 50.
-
-LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/it' will be
-(Font)              scaled to size 10.53629pt on input line 50.
-LaTeX Font Info:    Font shape `JY3/TH-Tshyn-P0(0)/m/it' will be
-(Font)              scaled to size 10.53629pt on input line 50.
-LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/n' will be
-(Font)              scaled to size 9.6222pt on input line 100.
+(Font)              scaled to size 9.6222pt on input line 66.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
-Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'. [
-2
+Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
+Removing  `ltj.process_input_buffer' from `process_input_buffer'.
+Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
+Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
+LaTeX Font Info:    Font shape `TU/lmss/b/n' in size <12> not available
+(Font)              Font shape `TU/lmss/bx/n' tried instead on input line 86.
+LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/b/n' will be
+(Font)              scaled to size 11.54663pt on input line 86.
+LaTeX Font Info:    Font shape `JY3/TH-Tshyn-P0(0)/b/n' will be
+(Font)              scaled to size 11.54663pt on input line 86.
+
+
+LaTeX Font Warning: Font shape `JT3/TH-Tshyn-P0(0)/m/it' undefined
+(Font)              using `JT3/TH-Tshyn-P0(0)/m/n' instead on input line 110.
+
+LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/n' will be
+(Font)              scaled to size 10.53629pt on input line 110.
+
+LaTeX Font Warning: Font shape `JY3/TH-Tshyn-P0(0)/m/it' undefined
+(Font)              using `JY3/TH-Tshyn-P0(0)/m/n' instead on input line 110.
+
+LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/it' will be
+(Font)              scaled to size 10.53629pt on input line 110.
+LaTeX Font Info:    Font shape `JY3/TH-Tshyn-P0(0)/m/it' will be
+(Font)              scaled to size 10.53629pt on input line 110.
+
+Overfull \hbox (0.82776pt too wide) in paragraph at lines 111--121
+[]\TU/LibertinusSerif(0)/m/n/10.95 This op-tion en-ables sup-port for the trans
+lit-er-a-tion scheme [] for the lan-guage []
+ []
+
+
+Overfull \hbox (0.51262pt too wide) in paragraph at lines 111--121
+\TU/LibertinusSerif(0)/m/n/10.95 by set-ting up the match-ing con-verter in Lua
+ and de-fines the com-mands [],
+ []
+
+
+Overfull \hbox (4.47165pt too wide) in paragraph at lines 111--121
+\TU/LibertinusSerif(0)/m/n/10.95 want to change it, use the [] op-tion or the [
+]
+ []
+
+[2]
+Overfull \hbox (19.86247pt too wide) in paragraph at lines 122--125
+[]\TU/LibertinusSerif(0)/m/n/10.95 In or-der to suc-cess-fully load a scheme, T
+ransconv has to be able to find a file []/[].lua
+ []
+
+Removing  `ltj.process_input_buffer' from `process_input_buffer'.
+Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
+Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
+Removing  `ltj.listings_unicode' from `process_input_buffer'. [3
 warning  (pdf backend): ignoring duplicate destination with the name '030000:sch
 eme.2'
 
 warning  (pdf backend): ignoring duplicate destination with the name '030000:def
 aultscheme.2'
 ]
-Removing  `ltj.listings_unicode' from `process_input_buffer'.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
-Removing  `ltj.listings_unicode' from `process_input_buffer'. [3]
-Overfull \hbox (11.57191pt too wide) in paragraph at lines 209--213
-\TU/lmr/m/n/10.95 pack-age op-tion. As with the op-tion, each scheme should be 
-spec-i-fied as []
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
+Overfull \hbox (5.86955pt too wide) in paragraph at lines 228--230
+[]\TU/LibertinusSerif(0)/m/n/10.95 where [] is again a scheme de-clared via [] 
+or the op-tion []. 
  []
 
-[4]
+[4] [5]
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
 LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/it' will be
-(Font)              scaled to size 9.6222pt on input line 244.
+(Font)              scaled to size 9.6222pt on input line 304.
 LaTeX Font Info:    Font shape `JY3/TH-Tshyn-P0(0)/m/it' will be
-(Font)              scaled to size 9.6222pt on input line 244.
+(Font)              scaled to size 9.6222pt on input line 304.
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 10.53629pt on input line 264.
+(Font)              scaled to size 10.53629pt on input line 324.
 
 
 LaTeX Font Warning: Font shape `JT3/gt/m/it' undefined
-(Font)              using `JT3/gt/m/n' instead on input line 264.
+(Font)              using `JT3/gt/m/n' instead on input line 324.
 
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 10.53629pt on input line 264.
+(Font)              scaled to size 10.53629pt on input line 324.
 
 LaTeX Font Warning: Font shape `JY3/gt/m/it' undefined
-(Font)              using `JY3/gt/m/n' instead on input line 264.
+(Font)              using `JY3/gt/m/n' instead on input line 324.
 
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
-Removing  `ltj.listings_unicode' from `process_input_buffer'. [5]
+Removing  `ltj.listings_unicode' from `process_input_buffer'. [6]
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
@@ -1804,20 +1910,18 @@ Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
 Removing  `ltj.listings_unicode' from `process_input_buffer'.
 LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/n' will be
-(Font)              scaled to size 7.69775pt on input line 378.
-LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/n' will be
-(Font)              scaled to size 8.65997pt on input line 381.
+(Font)              scaled to size 8.65997pt on input line 441.
 LaTeX Font Info:    Font shape `JY3/TH-Tshyn-P0(0)/m/n' will be
-(Font)              scaled to size 8.65997pt on input line 381.
+(Font)              scaled to size 8.65997pt on input line 441.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 381.
+(Font)              <9> on input line 441.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 381.
+(Font)              <5> on input line 441.
 LaTeX Font Info:    Font shape `JY3/TH-Tshyn-P0(0)/m/n' will be
-(Font)              scaled to size 4.8111pt on input line 381.
+(Font)              scaled to size 4.8111pt on input line 441.
 LaTeX Font Info:    Font shape `JT3/TH-Tshyn-P0(0)/m/n' will be
-(Font)              scaled to size 5.77332pt on input line 381.
- [6]
+(Font)              scaled to size 5.77332pt on input line 441.
+ [7]
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
@@ -1825,22 +1929,252 @@ Removing  `ltj.listings_unicode' from `process_input_buffer'.
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
-Removing  `ltj.listings_unicode' from `process_input_buffer'. [7] [8]
-Overfull \hbox (6.63826pt too wide) in paragraph at lines 470--474
-[]\TU/lmr/m/n/10.95 call the [] method again, but this time us-ing the []
+Removing  `ltj.listings_unicode' from `process_input_buffer'. [8] [9] [10] [11]
+Removing  `ltj.process_input_buffer' from `process_input_buffer'.
+Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
+Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
+Removing  `ltj.listings_unicode' from `process_input_buffer'. [12]
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstlang2.sty
+File: lstlang2.sty 2019/09/10 1.8c listings language file
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstlang3.sty
+File: lstlang3.sty 2019/09/10 1.8c listings language file
+)
+Removing  `ltj.process_input_buffer' from `process_input_buffer'.
+Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
+Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
+(../transconv.sty
+Overfull \hbox (0.66138pt too wide) in paragraph at lines 15--16
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[9] [10]
+
+Overfull \hbox (0.16138pt too wide) in paragraph at lines 26--27
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[13]
+Overfull \hbox (67.91138pt too wide) in paragraph at lines 33--34
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (10.16138pt too wide) in paragraph at lines 43--44
+[][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (36.41138pt too wide) in paragraph at lines 74--75
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[14]
+Overfull \hbox (15.41138pt too wide) in paragraph at lines 83--84
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (9.66138pt too wide) in paragraph at lines 87--88
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (46.41138pt too wide) in paragraph at lines 91--92
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+ []
+
+
+Overfull \hbox (41.66138pt too wide) in paragraph at lines 95--96
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (20.66138pt too wide) in paragraph at lines 96--98
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (10.16138pt too wide) in paragraph at lines 99--100
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[15])
+Removing  `ltj.listings_unicode' from `process_input_buffer'. (/usr/local/texli
+ve/2019/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+)
+(/usr/local/texlive/2019/texmf-dist/tex/latex/listings/lstlang2.sty
+File: lstlang2.sty 2019/09/10 1.8c listings language file
+)
 Removing  `ltj.process_input_buffer' from `process_input_buffer'.
 Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
 Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'.
-Removing  `ltj.listings_unicode' from `process_input_buffer'. [11]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 653.
- [12]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 653.
+(../lua/transconv/init.lua
+Overfull \hbox (9.16138pt too wide) in paragraph at lines 17--18
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[16]
+Overfull \hbox (9.16138pt too wide) in paragraph at lines 25--26
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (9.16138pt too wide) in paragraph at lines 36--37
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (3.91138pt too wide) in paragraph at lines 37--38
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (9.16138pt too wide) in paragraph at lines 61--62
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (87.91138pt too wide) in paragraph at lines 66--67
+[][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[17]
+Overfull \hbox (10.16138pt too wide) in paragraph at lines 82--83
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (15.41138pt too wide) in paragraph at lines 83--84
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (3.91138pt too wide) in paragraph at lines 90--91
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][] 
+ []
+
+
+Overfull \hbox (15.41138pt too wide) in paragraph at lines 101--103
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (15.41138pt too wide) in paragraph at lines 107--108
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[18])
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
+Removing  `ltj.process_input_buffer' from `process_input_buffer'.
+Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
+Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'. (../lua/transconv/converter.lua
+Overfull \hbox (57.41138pt too wide) in paragraph at lines 8--9
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (88.91138pt too wide) in paragraph at lines 18--19
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][] 
+ []
+
+[19] [20]
+Overfull \hbox (8.16138pt too wide) in paragraph at lines 85--86
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (3.91138pt too wide) in paragraph at lines 116--117
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[21]
+Overfull \hbox (8.16138pt too wide) in paragraph at lines 131--132
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (3.91138pt too wide) in paragraph at lines 144--145
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[22]
+Overfull \hbox (15.41138pt too wide) in paragraph at lines 216--217
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[23]
+Overfull \hbox (3.66138pt too wide) in paragraph at lines 219--220
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (3.66138pt too wide) in paragraph at lines 220--221
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+)
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
+Removing  `ltj.process_input_buffer' from `process_input_buffer'.
+Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
+Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'. (../lua/transconv/raw.lua [24]
+Overfull \hbox (2.91138pt too wide) in paragraph at lines 38--39
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (13.41138pt too wide) in paragraph at lines 39--40
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+)
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
+Removing  `ltj.process_input_buffer' from `process_input_buffer'.
+Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
+Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'. (../lua/transconv/cmn/pinyin.lua
+Overfull \hbox (4.91138pt too wide) in paragraph at lines 4--5
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[25]
+Overfull \hbox (4.91138pt too wide) in paragraph at lines 23--24
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (9.16138pt too wide) in paragraph at lines 55--56
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][] 
+ []
+
+[26])
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
+Removing  `ltj.process_input_buffer' from `process_input_buffer'.
+Inserting `ltj.listings_unicode' at position 1 in `process_input_buffer'.
+Inserting `ltj.process_input_buffer' at position 2 in `process_input_buffer'. (../lua/transconv/cmn/raw.lua
+Overfull \hbox (4.91138pt too wide) in paragraph at lines 4--5
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (9.91138pt too wide) in paragraph at lines 23--24
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[27])
+Removing  `ltj.listings_unicode' from `process_input_buffer'.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 735.
+ [28]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 735.
  (./master.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 653.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 653.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 735.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 735.
 Package rerunfilecheck Info: File `master.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
@@ -1850,35 +2184,33 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 )
 
 Here is how much of LuaTeX's memory you used:
- 35288 strings out of 493861
- 305222,1373583 words of node,token memory allocated
- 18304 words of node memory still in use:
-   11 hlist, 2 vlist, 5 rule, 7 glue, 196 kern, 1 glyph, 4923 attribute, 1315 gl
-ue_spec, 273 attribute_list, 1 write, 16 user_defined, 1 pdf_action nodes
-   avail lists: 1:19,2:83649,3:279,4:780,5:317,6:51,7:6142,8:38,9:849,10:12,11:3
-60
- 38619 multiletter control sequences out of 65536+600000
- 90 fonts using 143196727 bytes
- 75i,9n,137p,10087b,1248s stack positions out of 5000i,500n,10000p,200000b,100000s
+ 38312 strings out of 493861
+ 381533,1373583 words of node,token memory allocated
+ 29705 words of node memory still in use:
+   12 hlist, 2 vlist, 5 rule, 7 glue, 196 kern, 1 glyph, 4955 attribute, 3579 gl
+ue_spec, 275 attribute_list, 1 write, 17 user_defined, 1 pdf_action nodes
+   avail lists: 1:18,2:84607,3:294,4:3836,5:797,6:96,7:6349,8:97,9:4140,10:9,11:
+370
+ 40685 multiletter control sequences out of 65536+600000
+ 103 fonts using 149644255 bytes
+ 75i,9n,157p,10087b,1811s stack positions out of 5000i,500n,10000p,200000b,100000s
 </usr/local/texlive/2019/texmf-dist/fonts/opentype/public/lm/lmmono9-regular.otf
 ></usr/local/share/fonts/t/TH_Tshyn_P0.ttf></usr/local/texlive/2019/texmf-dist/f
-onts/opentype/public/lm/lmroman9-regular.otf></usr/local/texlive/2019/texmf-dist
-/fonts/opentype/public/lm/lmroman6-regular.otf></usr/local/texlive/2019/texmf-di
-st/fonts/opentype/public/lm/lmroman8-regular.otf></usr/local/texlive/2019/texmf-
-dist/fonts/opentype/public/lm/lmmono10-italic.otf></usr/local/texlive/2019/texmf
--dist/fonts/opentype/public/lm/lmroman10-italic.otf>{/usr/local/texlive/2019/tex
-mf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/local/texlive/2019/texmf-dist/fon
-ts/opentype/public/lm/lmmono10-regular.otf></usr/local/texlive/2019/texmf-dist/f
-onts/opentype/public/lm/lmroman10-regular.otf></usr/local/texlive/2019/texmf-dis
+onts/opentype/public/lm/lmmono10-italic.otf></usr/local/texlive/2019/texmf-dist/
+fonts/opentype/public/libertinus-fonts/LibertinusSerif-Italic.otf>{/usr/local/te
+xlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/local/texlive/2019/
+texmf-dist/fonts/opentype/public/lm/lmmono10-regular.otf>{/usr/local/texlive/201
+9/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}</usr/local/texlive/2019/texmf-dis
 t/fonts/opentype/public/lm/lmsans10-bold.otf></usr/local/texlive/2019/texmf-dist
-/fonts/opentype/public/lm/lmroman12-regular.otf></usr/local/texlive/2019/texmf-d
-ist/fonts/opentype/public/lm/lmmonolt10-bold.otf></usr/local/texlive/2019/texmf-
-dist/fonts/opentype/public/lm/lmromandemi10-regular.otf></usr/local/texlive/2019
-/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on master.pdf (12 pages, 100884 bytes).
+/fonts/opentype/public/libertinus-fonts/LibertinusSerif-Regular.otf></usr/local/
+texlive/2019/texmf-dist/fonts/opentype/public/lm/lmmonolt10-bold.otf></usr/local
+/texlive/2019/texmf-dist/fonts/opentype/public/libertinus-fonts/LibertinusSerif-
+Bold.otf></usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></
+usr/local/texlive/2019/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
+Output written on master.pdf (28 pages, 143690 bytes).
 
-PDF statistics: 440 PDF objects out of 1000 (max. 8388607)
- 382 compressed objects within 4 object streams
- 122 named destinations out of 1000 (max. 131072)
- 385 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 1231 PDF objects out of 1440 (max. 8388607)
+ 1160 compressed objects within 12 object streams
+ 840 named destinations out of 1000 (max. 131072)
+ 425 words of extra memory for PDF output out of 10000 (max. 100000000)
 

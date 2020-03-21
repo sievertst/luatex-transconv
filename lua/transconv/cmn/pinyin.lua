@@ -1,6 +1,8 @@
 #!/usr/bin/env lua5.3
 
 local function join_sbs(self, sbs)
+    -- list of vowels before which an apostrophe needs to be inserted if they
+    -- are not the first syllable in a word
     local vowels = {["a"]=true, ["e"]=true, ["o"]=true, ["\\={a}"]=true,
         ["\\={e}"]=true, ["\\={o}"]=true, ["\\\'{a}"]=true,
         ["\\\'{e}"]=true, ["\\\'{o}"]=true, ["\\v{a}"]=true,
@@ -18,7 +20,7 @@ local function join_sbs(self, sbs)
 end
 
 local function place_tone_digit(self, sb, tone)
-    -- For digraphs iu place digit behind the u (ui is caught by the vowel
+    -- For the digraph iu place digit behind the u (ui is caught by the vowel
     -- list later)
     if string.match(sb, "iu") then
         return sb:gsub("iu", string.format("iu%d", tone), 1)

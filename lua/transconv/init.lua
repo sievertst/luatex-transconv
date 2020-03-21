@@ -1,4 +1,5 @@
 #!/usr/bin/env lua5.3
+
 main_dir = ...
 if main_dir ~= "init" then
     main_dir = main_dir.."."

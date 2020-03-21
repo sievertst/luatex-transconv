@@ -13,7 +13,6 @@ package}
 % set up environment %
 %%%%%%%%%%%%%%%%%%%%%%
 % Requires the package transconv to be in LuaTeX's search path for packages.
-% TODO: is it possible to make loading the module independent from the lua path?
 \directlua{transconv = require "transconv"}
 
 %%%%%%%%%%%%%
@@ -80,11 +79,6 @@ package}
         "\tl_use:N \l__transconv_scheme_tl"%
       )%
     }
-    % Insert reference scheme at the end of default_schemes priority
-    % queue for lang.
-    % For example importing "cmn.pinyin" would result in the following Lua
-    % command:
-    % table.insert(transconv.default_schemes["cmn"], transconv.schemes["pinyin"])
 
     % define font switches, but only if if they don't exist already in case the
     % user is redefining an existing scheme but wants to keep font settings
@@ -144,10 +138,10 @@ package}
 %%%%%%%%%%%%%%%%%%%
 % defines legal options and how to process them
 \keys_define:nn { transconv }
-  {
-    scheme .code:n          = \TransconvUseScheme{#1},
-    defaultscheme .code:n   = \TransconvMakeDefaultScheme{#1}
-  }
+{
+  scheme .code:n          = \TransconvUseScheme{#1},
+  defaultscheme .code:n   = \TransconvMakeDefaultScheme{#1}
+}
 
 \ProcessKeysOptions{ transconv }
 

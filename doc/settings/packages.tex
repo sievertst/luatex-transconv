@@ -10,11 +10,17 @@
 \usepackage{color}
 
 \usepackage[%
-    % scheme={nan.tailo},
-    % scheme={nan.poj},
+    scheme={nan.tailo},
+    scheme={nan.poj},
+    scheme={nan.bp},
     % scheme={jpn.hepburn},
     % scheme={jpn.nihon},
   ]{transconv}
+  \newcommand{\textvbaraccent}[1]{#1\symbol{"030D}}
+
+\usepackage{listings}
+
+\usepackage[inline]{enumitem}
 
 \usepackage{array}
 

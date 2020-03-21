@@ -60,7 +60,8 @@ local BP = Converter:new{
 
     rep_strings = {
         {"%-%-", "{-}{-}"}, -- prevent dash ligature for neutral tone marker
-        {"b", "bb"}, {"([^n])g", "gg"},
+        {"b", "bb"}, {"g", "gg"},
+        {"ngg", "ng"}, -- repair "ng"
         {"(.*)n([^g])", "ln"}, {"(.*)m([^$])", "bbn"}, {"(.*)ng([^$])", "ggn"},
         {"lnln", "nn"}, {"nng", "lnng"}, -- repair nasal marker and nng
         -- vowels
@@ -74,7 +75,7 @@ local BP = Converter:new{
         {"tsh", "c"}, {"ts", "z"}, {"j", "zz"},
         {"p", "b"}, {"t", "d"}, {"k", "g"},
         {"b$", "p"}, {"d$", "t"}, {"([^n])g$", "k"}, -- repair final plosives
-        {"ph", "p"}, {"th", "t"}, {"kh", "k"},
+        {"bh", "p"}, {"dh", "t"}, {"gh", "k"},
         -- initial u --> w, i --> y
         {"^([^a-z]*)i([aou])", "y"}, {"^([^a-z]*)u([aei])", "w"},
         {"^([^a-z]*)i([^aou]?)", "yi"}, {"^([^a-z]*)u([^aei]?)", "wu"},

@@ -1,36 +1,41 @@
 \contentsline {section}{\nonumberline List of Tables}{1}{section*.2}%
 \contentsline {section}{\numberline {1}Introduction}{1}{section.1}%
-\contentsline {subsection}{\numberline {1.1}About}{1}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}License}{1}{subsection.1.2}%
-\contentsline {section}{\numberline {2}Installation}{1}{section.2}%
-\contentsline {section}{\numberline {3}Package Options}{2}{section.3}%
-\contentsline {section}{\numberline {4}Basic Interface}{2}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Formatted Conversion Commands}{3}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Unformatted Conversion Commands}{3}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Output Formatting}{4}{subsection.4.3}%
-\contentsline {section}{\numberline {5}Configuration}{4}{section.5}%
-\contentsline {section}{\numberline {6}Custom Schemes and Languages}{5}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Adding a New Transliteration Scheme for an Existing Language}{5}{subsection.6.1}%
-\contentsline {subsubsection}{\numberline {6.1.1}Default Member Variables of Schemes}{5}{subsubsection.6.1.1}%
-\contentsline {paragraph}{\nonumberline \sty {raw}}{6}{section*.3}%
-\contentsline {paragraph}{\nonumberline \sty {rep\textunderscore {}strings}}{6}{section*.4}%
+\contentsline {subsection}{\numberline {1.1}About}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}License}{2}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Installation}{2}{section.2}%
+\contentsline {section}{\numberline {3}Package Options}{3}{section.3}%
+\contentsline {section}{\numberline {4}Basic Interface}{3}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Formatted Conversion Commands}{4}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Unformatted Conversion Commands}{4}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Output Formatting}{5}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Configuration}{5}{section.5}%
+\contentsline {section}{\numberline {6}Custom Schemes and Languages}{6}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Adding a New Transliteration Scheme for an Existing Language}{6}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}Default Member Variables of Schemes}{6}{subsubsection.6.1.1}%
+\contentsline {paragraph}{\nonumberline \sty {raw}}{7}{section*.3}%
+\contentsline {paragraph}{\nonumberline \sty {rep\textunderscore {}strings}}{7}{section*.4}%
 \contentsline {paragraph}{\nonumberline sb\textunderscore {}sep}{7}{section*.5}%
-\contentsline {paragraph}{\nonumberline tone\textunderscore {}markers}{7}{section*.6}%
+\contentsline {paragraph}{\nonumberline tone\textunderscore {}markers}{8}{section*.6}%
 \contentsline {paragraph}{\nonumberline second\textunderscore {}rep\textunderscore {}strings}{8}{section*.7}%
-\contentsline {paragraph}{\nonumberline no\textunderscore {}tones}{8}{section*.8}%
-\contentsline {subsubsection}{\numberline {6.1.2}Adding and Overriding Methods}{8}{subsubsection.6.1.2}%
-\contentsline {paragraph}{\nonumberline convert(self, input)}{8}{section*.9}%
+\contentsline {paragraph}{\nonumberline no\textunderscore {}tones}{9}{section*.8}%
+\contentsline {subsubsection}{\numberline {6.1.2}Adding and Overriding Methods}{9}{subsubsection.6.1.2}%
+\contentsline {paragraph}{\nonumberline convert(self, input)}{9}{section*.9}%
 \contentsline {paragraph}{\nonumberline to\textunderscore {}target\textunderscore {}scheme(self, syllable)}{9}{section*.10}%
-\contentsline {paragraph}{\nonumberline do\textunderscore {}str\textunderscore {}rep(self, syllable, list\textunderscore {}of\textunderscore {}replacements)}{9}{section*.11}%
-\contentsline {paragraph}{\nonumberline place\textunderscore {}tone\textunderscore {}digit(self, syllable, tone)}{9}{section*.12}%
-\contentsline {paragraph}{\nonumberline add\textunderscore {}tone\textunderscore {}marker(self, syllable)}{10}{section*.13}%
-\contentsline {subsection}{\numberline {6.2}Adding a New Language}{10}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Default Raw Scheme Member Variables}{11}{subsection.6.3}%
-\contentsline {paragraph}{\nonumberline cutting\textunderscore {}markers}{11}{section*.14}%
-\contentsline {subsection}{\numberline {6.4}Default Raw Scheme Methods}{11}{subsection.6.4}%
-\contentsline {paragraph}{\nonumberline get\textunderscore {}sb\textunderscore {}and\textunderscore {}tone(self, input)}{11}{section*.15}%
+\contentsline {paragraph}{\nonumberline do\textunderscore {}str\textunderscore {}rep(self, syllable, list\textunderscore {}of\textunderscore {}replacements)}{10}{section*.11}%
+\contentsline {paragraph}{\nonumberline place\textunderscore {}tone\textunderscore {}digit(self, syllable, tone)}{10}{section*.12}%
+\contentsline {paragraph}{\nonumberline add\textunderscore {}tone\textunderscore {}marker(self, syllable)}{11}{section*.13}%
+\contentsline {subsection}{\numberline {6.2}Adding a New Language}{11}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Default Raw Scheme Member Variables}{12}{subsection.6.3}%
+\contentsline {paragraph}{\nonumberline cutting\textunderscore {}markers}{12}{section*.14}%
+\contentsline {subsection}{\numberline {6.4}Default Raw Scheme Methods}{12}{subsection.6.4}%
+\contentsline {paragraph}{\nonumberline get\textunderscore {}sb\textunderscore {}and\textunderscore {}tone(self, input)}{12}{section*.15}%
 \contentsline {paragraph}{\nonumberline is\textunderscore {}valid\textunderscore {}sb(self, input)}{12}{section*.16}%
-\contentsline {paragraph}{\nonumberline split\textunderscore {}sbs(self, input)}{12}{section*.17}%
-\contentsline {section}{\numberline {7}Package Code}{12}{section.7}%
-\contentsline {subsection}{\numberline {7.1}The \sty {transconv.sty} file}{12}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}The Lua code}{12}{subsection.7.2}%
+\contentsline {paragraph}{\nonumberline split\textunderscore {}sbs(self, input)}{13}{section*.17}%
+\contentsline {section}{\numberline {7}Package Code}{13}{section.7}%
+\contentsline {subsection}{\numberline {7.1}The \sty {transconv.sty} file}{13}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}The Lua code}{16}{subsection.7.2}%
+\contentsline {subsubsection}{\numberline {7.2.1}The Main File (\sty {transconv/init.lua})}{16}{subsubsection.7.2.1}%
+\contentsline {subsubsection}{\numberline {7.2.2}The Converter Prototype (\sty {transconv/converter.lua})}{19}{subsubsection.7.2.2}%
+\contentsline {subsubsection}{\numberline {7.2.3}The Raw Scheme Prototype (\sty {transconv/raw.lua})}{24}{subsubsection.7.2.3}%
+\contentsline {subsubsection}{\numberline {7.2.4}An Example Scheme: Hanyu Pinyin (\sty {transconv/cmn/pinyin.lua})}{25}{subsubsection.7.2.4}%
+\contentsline {subsubsection}{\numberline {7.2.5}An Example Raw Scheme: Standard Chinese (\sty {transconv/cmn/raw.lua})}{27}{subsubsection.7.2.5}%

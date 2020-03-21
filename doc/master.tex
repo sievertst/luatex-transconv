@@ -21,7 +21,67 @@
 \tableofcontents
 \listoftables
 
-\section{Introduction}\label{int}
+\section{Introduction}
+\label{int}
+
+As a linguist who primarily works on East Asian languages, I frequently have to
+render languages in the Latin script which do not usually use it. While for some
+contexts, the IPA is certainly the best way to go, there are many situations
+where it is either unnecessarily unwieldy or omits certain information (e.g.
+historical one) which may be crucial to the discussion. Therefore, it is often
+more practical to use a transcription scheme to transcribe the pronunciation
+(and sometimes certain aspects of the orthography) into (usually) the Latin
+script. For example, we may use Hanyu Pinyin to transcribe Standard Chinese.
+
+However, these schemes almost always pose at least one of these two problems on
+a LaTeX user:
+
+\begin{enumerate}
+  \item They use non-ASCII characters which may be annoying to input, e.g.
+    diacritics, super- or subscripts etc. Obviously can do this manually with
+    \LaTeX{} commands but it can be extremely obnoxious if you have to use those
+    macros very frequently.
+  \item There are often multiple competing transcription schemes for each
+    language and the author may not always be free in their choice of scheme.
+    So I might write one article using scheme \(x\), but I end up publishing it
+    in a different paper than anticipated and that paper requires me to use
+    scheme \(y\). So I would essentially have to manually find every single
+    instance of me using \(x\) and change it to \(y\). Obviously this is both
+    annoying and highly error-prone.
+\end{enumerate}
+
+This package hopes to solve these problems by
+\begin{enumerate*}[label=\alph*)]
+  \item letting the user write in a transcription scheme which is easier to
+    input and have the package handle the conversion to the actual output scheme
+    with diacritics etc., and
+  \item abstracting the actual scheme itself away from the text, so the user can
+    switch schemes by simply changing an option, not every instance of them
+    using the scheme.
+\end{enumerate*}
+
+For instance, if I had to transcribe the Southern Min word for \enquote{fifteen}
+in the Tâi-lô scheme (\totailo{tsap8-goo7}), I would normally have to write:
+
+\begin{lstlisting}[language={[latex]tex}]
+ts\textvbaraccent{a}p-g\={o}o
+\end{lstlisting}
+
+But \sty{transconv} allows me to simply use numbers instead of the tone
+diacritics and write:
+
+\begin{lstlisting}[language={[latex]tex}]
+\tonan{tsap8-goo7}
+\end{lstlisting}
+
+What's more, if I suddenly find myself having to use the POJ transcription
+scheme instead, all I have to do is change a package option and recompile, and
+\sty{transconv} will output the correct POJ version instead: \topoj{tsap8-goo7}.
+Or maybe I'm required to use \tobp{Ban5-lam5 phing3-im1}? No problem:
+\tobp{tsap8-goo7}.
+
+Also as you can see, \sty{transconv} has no problem with you switching back and
+forth between multiple different schemes, either, if that is what you need.
 
 \subsection[About]{About \sty{transconv}}
 
@@ -648,6 +708,28 @@ By default it will:
 
 \subsection{The \sty{transconv.sty} file}
 
+\lstinputlisting[language={[allatex]tex}]{../transconv.sty}
+
 \subsection{The Lua code}
+
+\subsubsection{The Main File (\sty{transconv/init.lua})}
+
+\lstinputlisting[language={[5.3]lua},firstline=3]{../lua/transconv/init.lua}
+
+\subsubsection{The Converter Prototype (\sty{transconv/converter.lua})}
+
+\lstinputlisting[language={[5.3]lua},firstline=3]{../lua/transconv/converter.lua}
+
+\subsubsection{The Raw Scheme Prototype (\sty{transconv/raw.lua})}
+
+\lstinputlisting[language={[5.3]lua},firstline=3]{../lua/transconv/raw.lua}
+
+\subsubsection{An Example Scheme: Hanyu Pinyin (\sty{transconv/cmn/pinyin.lua})}
+
+\lstinputlisting[language={[5.3]lua},firstline=3]{../lua/transconv/cmn/pinyin.lua}
+
+\subsubsection{An Example Raw Scheme: Standard Chinese (\sty{transconv/cmn/raw.lua})}
+
+\lstinputlisting[language={[5.3]lua},firstline=3]{../lua/transconv/cmn/raw.lua}
 
 \end{document}
