@@ -54,7 +54,10 @@ local Pinyin = Converter:new{
         -- unmarked tones should be set false
         [0] = false, [1] = "=", [2] = "\'", [3] = "v", [4] = "`", [5] = false,
     },
-    rep_strings = {},
+    rep_strings = {
+        {"gi", "ji"}, {"ki", "qi"}, {"hi", "xi"},
+        {"gü", "ju"}, {"kü", "qu"}, {"hü", "xu"},
+    },
 
     -- functions
     join_sbs = join_sbs,
