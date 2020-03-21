@@ -31,6 +31,7 @@ is_valid_sb	lua/transconv/raw.lua	/^local function is_valid_sb(self,sb)$/;"	f
 join_sbs	lua/transconv/cmn/pinyin.lua	/^local function join_sbs(self, sbs)$/;"	f
 join_sbs	lua/transconv/nan/bp.lua	/^local function join_sbs(self, sbs)$/;"	f
 local __tostring 	lua/transconv/converter.lua	/^local __tostring = function(self)$/;"	f
+local add_tone_marker 	lua/transconv/cmn/wadegiles.lua	/^local add_tone_marker = function(self, instring)$/;"	f
 local add_tone_marker 	lua/transconv/converter.lua	/^local add_tone_marker = function(self, instring)$/;"	f
 local convert 	lua/transconv/converter.lua	/^local convert = function(self, instring)$/;"	f
 local do_str_rep 	lua/transconv/converter.lua	/^local do_str_rep = function(self, instring, rep_dict)$/;"	f
