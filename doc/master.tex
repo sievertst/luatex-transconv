@@ -3,7 +3,7 @@
 %%%%%%%%
 % Meta %
 %%%%%%%%
-\title{The \sty{transconv} Package}
+\title{The \transconv{} Package}
 \author{Sievert\ von\ St\"{u}lpnagel}
 \date{\today}
 
@@ -24,10 +24,10 @@
 \section{Introduction}
 \label{int}
 
-\subsection[About]{About \sty{transconv}}
+\subsection[About]{About \transconv{}}
 
-As a linguist who primarily works on East Asian languages, I frequently have to
-render languages in the Latin script which do not usually use it. While for some
+As a linguist who works on East Asian languages, I frequently have to render
+languages in the Latin script which do not usually use it. While for some
 contexts, the IPA is certainly the best way to go, there are many situations
 where it is either unnecessarily unwieldy or omits certain information (e.g.
 historical one) which may be crucial to the discussion. Therefore, it is often
@@ -48,11 +48,11 @@ a \hologo{LaTeX} user:
     So I might write one article using scheme \(x\), but I end up publishing it
     in a different paper than anticipated and that paper requires me to use
     scheme \(y\). So I would essentially have to manually find every single
-    instance of me using \(x\) and change it to \(y\). Obviously this is both
-    annoying and highly error-prone.
+    instance of me using \(x\) and change it to \(y\) instead. Obviously this is
+    both tedious and highly error-prone.
 \end{enumerate}
 
-The \sty{transconv} \hologo{LuaTeX} package hopes to solve these problems by
+The \transconv{} package for \hologo{LuaTeX} aims to solve these problems by
 \begin{enumerate*}[label=\alph*)]
   \item letting the user write in a transcription scheme which is easier to
     input and have the package handle the conversion to the actual output scheme
@@ -69,7 +69,7 @@ in the T\^{a}i-l\^{o} scheme (\totailo{tsap8-goo7}), I would normally have to wr
 ts\textvbaraccent{a}p-g\={o}o
 \end{lstlisting}
 
-But \sty{transconv} allows me to simply use numbers instead of the tone
+But \transconv{} allows me to simply use numbers instead of the tone
 diacritics and write:
 
 \begin{lstlisting}[language={[latex]tex}]
@@ -78,11 +78,11 @@ diacritics and write:
 
 What's more, if I suddenly find myself having to use the POJ transcription
 scheme instead, all I have to do is change a package option and recompile, and
-\sty{transconv} will output the correct POJ version instead: \topoj{tsap8-goo7}.
+\transconv{} will output the correct POJ version instead: \topoj{tsap8-goo7}.
 Or maybe I'm required to use \tobp{Ban5-lam5 phing3-im1}? No problem:
 \tobp{tsap8-goo7}.
 
-Also as you can see, \sty{transconv} has no problem switching back and forth
+Also as you can see, \transconv{} has no problem switching back and forth
 between multiple different schemes, either, if that is what you need.
 
 \subsection{License}
@@ -93,19 +93,21 @@ any later version. The latest version of this license is in
 \url{https://www.latex-project.org/lppl.txt} and version 1.3 or later is part of
 all distributions of \hologo{LaTeX} version 2005/12/01 or later.
 
-\section{Installation}
+\section{Installing, Uninstalling and Updating}
 
-\sty{transconv} uses Lua code for the conversion, so it will only work with
+\subsection{Installation}
+
+\transconv{} uses Lua code for the conversion, so it will only work with
 \hologo{LuaTeX}!
 
-In order to be able to use \sty{transconv}, you need to copy the
-\sty{transconv.sty} file as well as the \sty{transconv} directory (found inside
+In order to be able to use \transconv{}, you need to copy the
+\sty{transconv.sty} file as well as the \transconv{} directory (found inside
 the \sty{lua} folder) to a place where \hologo{LuaTeX} can find them. The
 suggested location for the \sty{sty} file is within \sty{tex/latex/local/} in
 your local \sty{texmf/} directory (probably found within your \sty{home}
 directory).
 
-The \sty{transconv} folder can be placed in any directory in your kpathsea path.
+The \transconv{} folder can be placed in any directory in your kpathsea path.
 You can check that path with the following console command:
 
 \begin{lstlisting}[language=bash]
@@ -113,10 +115,31 @@ You can check that path with the following console command:
 \end{lstlisting}
 
 The suggested location is within \sty{scripts/} inside your
-local \sty{texmf/} directory. If for some reason, you cannot get \hologo{LuaTeX} to
-find the module, you can consider using the
+local \sty{texmf/} directory.
+
+Assuming your local \sty{texmf} directory is located under that name in your
+home directory, you can simply execute \sty{make install} from the repository's
+top directory (the one containing \sty{transconv.sty}).
+
+If for some reason, you cannot get \hologo{LuaTeX} to find the module, you can
+consider using the
 \href{https://www.ctan.org/pkg/luapackageloader}{luapackageloader} package to
 manually modify the path.
+
+\subsection{Uninstallation}
+
+To uninstall \transconv{}, locate the \sty{transconv.sty} file as well as the
+\sty{transconv/} lua package folder and delete them. Assuming they are located
+in the recommended locations, you can simply run \sty{make uninstall} from
+the top directory (the one containing \sty{transconv.sty}).
+
+\subsection{Updating from Earlier Versions of \transconv{}}
+
+To update \transconv{} to a newer version, locate the \sty{transconv.sty}
+file as well as the \sty{transconv/} lua package folder and replace them with
+the new version. Assuming they are located in the recommended locations, you can
+simply run \sty{make install} from the top directory (the one containing
+\sty{transconv.sty}).
 
 \section{Package Options}
 
@@ -134,7 +157,7 @@ manually modify the path.
   change that default; if you want to change it, use the \sty{defaultscheme}
   option or the \sty{\textbackslash{}TransconvMakeDefaultScheme} command.
 
-  In order to successfully load a scheme, \sty{transconv} has to be able to find
+  In order to successfully load a scheme, \transconv{} has to be able to find
   a file \prm{lang}/\prm{scheme}.lua in its lua folder which returns the
   converter. The option can be used more than once to import multiple schemes.
 
@@ -146,10 +169,18 @@ manually modify the path.
 
   \optitem{defaultscheme}{\prm{lang}.\prm{scheme}}
 
-  Defines the default scheme for the language \prm{lang} in case more than one
-  scheme is added for the same language. Can be used more than once to define
-  defaults for multiple languages. In case of repeated use for the same
-  language, later default scheme assignments override earlier ones.
+  Changes the default scheme for language \prm{lang} to \prm{scheme}.
+  \prm{scheme} needs to have been imported using the \opt{scheme} option,
+  otherwise \opt{defaultscheme} will have no effect at all.
+
+  If you don't use this option, the default setting is the first scheme you
+  imported for \prm{lang} (for instance, if you import both Pinyin and
+  Wade-Giles for Standard Mandarin in that order and don't use
+  \opt{defaultscheme}, \transconv{} will use Pinyin as the default scheme).
+
+ \opt{defaultscheme} can be used more than once to define defaults for multiple
+ languages. In case of repeated use for the same language, later default scheme
+ assignments override earlier ones.
 
   \optitem{defaultscheme}{\{\prm{lang1}.\prm{scheme1},
   \prm{lang2}.\prm{scheme2},\dots\}}
@@ -178,7 +209,8 @@ but text like in the following example, it should be fine:
 \end{ltxcode}
 
 But commands which change some settings (e.\,g.\ the font) will likely
-cause an error. For example both of the following will not compile:
+cause an error, regardless of the environment in which they are used. For
+example both of the following will not compile:
 
 \begin{ltxcode}
   \topinyin{\emph{Zhe3} wu2fa3 bian1yi4.}
@@ -234,7 +266,7 @@ cause an error. For example both of the following will not compile:
   not the formatting.
 
   It is recommended that you use this command only if the formatting hooks
-  provided by \sty{transconv} are insufficient for your purposes, and only to
+  provided by \transconv{} are insufficient for your purposes, and only to
   define a custom macro rather than in the actual text in order to maintain the
   separation of content and presentation.
 
@@ -247,7 +279,7 @@ cause an error. For example both of the following will not compile:
   \hologo{TeX} formatting. Therefore, using this command means you hard-code both the
   transcription scheme and the way it is formatted.  For this reason, it is
   highly recommended that you use this command only if the formatting hooks
-  provided by \sty{transconv} are insufficient for your purposes, and even then
+  provided by \transconv{} are insufficient for your purposes, and even then
   only to define a custom macro rather than in the actual text in order to
   maintain the separation of content and presentation.
 
@@ -339,7 +371,7 @@ cause an error. For example both of the following will not compile:
 Adding a new transliteration scheme involves a little bit of Lua programming,
 though I tried to make it as painless as possible.
 
-As a first step, navigate to the directory where the \sty{transconv} lua files are
+As a first step, navigate to the directory where the \transconv{} lua files are
 found (the exact location depends on where you installed it, but it should be
 called transconv and contain a file named init.lua.
 
@@ -368,11 +400,11 @@ to refer to the scheme within the file itself; it has no consequence outside.
 
 Technically speaking you are now set; you have successfully defined a new scheme
 and should be able to load it by passing \sty{\prm{lang}.\prm{scheme}} to
-\sty{transconv}'s \sty{schemes} option or the
+\transconv{}'s \sty{schemes} option or the
 \sty{\textbackslash{}TransconvUseScheme} macro (make sure to use the
 folder and file name, \emph{not} the name you used inside the Lua file).
 
-However since you didn't specify any settings, \sty{transconv} will use the
+However since you didn't specify any settings, \transconv{} will use the
 default ones -- which result in no changes to the input at all. To get your
 scheme to do something useful, you have to override these settings. This can be
 done by adding member variables and/or functions to your scheme.
@@ -540,7 +572,7 @@ to your scheme table.
 \paragraph{convert(self, input)}
 
 This is the central function of your scheme. It must always be present because
-this is the function which \sty{transconv} will call when you use
+this is the function which \transconv{} will call when you use
 \sty{\textbackslash{}tolang} or a similar command in your document.
 
 By default it will:
@@ -658,7 +690,7 @@ To add your own method to the conversion process, you have to take two steps:
 \subsection{Adding a New Language}
 
 To add a new language for which transcription schemes can be implemented, first
-add a new folder where \sty{transconv} can find it. The folder name will be the
+add a new folder where \transconv{} can find it. The folder name will be the
 language name you will have to use when loading schemes from your document
 later, so make sure you choose something unique and easy to memorise. The
 default languages use the ISO 693-3 abbreviations and it is strongly suggested you
@@ -734,7 +766,7 @@ non-tonal, simply ignore this method.
 \paragraph{is\textunderscore{}valid\textunderscore{}sb(self, input)}
 
 Use this method to test if the passed string is a valid syllable in your input
-string. If it returns \sty{false} for a given string, \sty{transconv} will
+string. If it returns \sty{false} for a given string, \transconv{} will
 simply not make any changes to it. By default it always returns \sty{true}.
 
 \paragraph{split\textunderscore{}sbs(self, input)}

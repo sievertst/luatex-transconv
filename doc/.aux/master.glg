@@ -1,4 +1,0 @@
-bib2gls version 1.9 (2019-04-09)
-Reading master.aux
-TeX character encoding: UTF-8
-Error: Missing \glsxtr@resource in aux file. (Have you used \glsxtrresourcefile or \GlsXtrLoadResources?)

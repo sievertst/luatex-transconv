@@ -1,0 +1,23 @@
+.tags
+
+## TeX gitignores for documentation
+doc/.aux/
+*.aux
+*.dvi
+*.fdb_latexmk
+*.fls
+*.glg
+*.glo
+*.gls
+*.log
+*.lot
+*.lof
+*.out
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex(busy)
+*.pdfsync
+*.toc
+*.xdv
+doc/makefile
