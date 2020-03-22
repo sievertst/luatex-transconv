@@ -4,20 +4,19 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-AUX	doc/makefile	/^AUX := $(ROOT)\/.aux$/;"	m
+AUX	doc/makefile	/^AUX 	:= $(ROOT)\/.aux$/;"	m
 AUXFILES_DEFAULT	doc/makefile	/^AUXFILES_DEFAULT := *-tags.tex *.aux *.bbl *.blg *.bcf *.fdb_latexmk *.fls *.lof *.log *.lot *.out *.run.xml *.synctex.gz *.toc$/;"	m
 AUXFILES_MORE	doc/makefile	/^AUXFILES_MORE := *.glg *.glstex$/;"	m
 Adding a New Language	doc/master.tex	/^\\end{enumerate}$/;"	u
-BIB	doc/makefile	/^BIB := biber$/;"	m
-CC	doc/makefile	/^CC := latexmk -pdf -pdflatex="$(TEX) $(FLAGS)" -use-make #-output-directory=$(AUX)$/;"	m
-CHAPTERS	doc/makefile	/^CHAPTERS := $(shell find $(ROOT)\/tex -name '*.tex')$/;"	m
-FLAGS	doc/makefile	/^FLAGS := -synctex=1 -src-specials -interaction=nonstopmode -file-line-error -halt-on-error$/;"	m
+BIB	doc/makefile	/^BIB 	:= biber$/;"	m
+CC	doc/makefile	/^CC 		:= latexmk -pdf -pdflatex="$(TEX) $(FLAGS)" -use-make #-output-directory=$(AUX)$/;"	m
+FLAGS	doc/makefile	/^FLAGS 	:= -synctex=1 -src-specials -interaction=nonstopmode -file-line-error -halt-on-error$/;"	m
 LUAMOD	makefile	/^LUAMOD := $(TEXDIR)\/scripts\/transconv$/;"	m
-MASTER	doc/makefile	/^MASTER := master$/;"	m
-PROJ	doc/makefile	/^PROJ := transconv$/;"	m
-ROOT	doc/makefile	/^ROOT := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))$/;"	m
+MASTER	doc/makefile	/^MASTER 	:= master$/;"	m
+PROJ	doc/makefile	/^PROJ 	:= transconv$/;"	m
+ROOT	doc/makefile	/^ROOT 	:= $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))$/;"	m
 SETTINGS	doc/makefile	/^SETTINGS := $(shell find $(ROOT)\/settings -name '*.tex')$/;"	m
-TEX	doc/makefile	/^TEX := lualatex$/;"	m
+TEX	doc/makefile	/^TEX 	:= lualatex$/;"	m
 TEXDIR	makefile	/^TEXDIR := $$HOME\/texmf\/$/;"	m
 TEXPKG	makefile	/^TEXPKG := $(TEXDIR)\/tex\/latex\/local\/transconv.sty$/;"	m
 get_sb_and_tone	lua/transconv/cmn/raw.lua	/^local function get_sb_and_tone(self, sb)$/;"	f

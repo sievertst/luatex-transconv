@@ -24,6 +24,8 @@
 \section{Introduction}
 \label{int}
 
+\subsection[About]{About \sty{transconv}}
+
 As a linguist who primarily works on East Asian languages, I frequently have to
 render languages in the Latin script which do not usually use it. While for some
 contexts, the IPA is certainly the best way to go, there are many situations
@@ -34,13 +36,13 @@ more practical to use a transcription scheme to transcribe the pronunciation
 script. For example, we may use Hanyu Pinyin to transcribe Standard Chinese.
 
 However, these schemes almost always pose at least one of these two problems on
-a LaTeX user:
+a \hologo{LaTeX} user:
 
 \begin{enumerate}
   \item They use non-ASCII characters which may be annoying to input, e.g.
-    diacritics, super- or subscripts etc. Obviously can do this manually with
-    \LaTeX{} commands but it can be extremely obnoxious if you have to use those
-    macros very frequently.
+    diacritics, super- or subscripts etc. Obviously it is possible to do this
+    manually with \hologo{LaTeX} commands but it can be extremely obnoxious if you
+    have to use those macros very frequently.
   \item There are often multiple competing transcription schemes for each
     language and the author may not always be free in their choice of scheme.
     So I might write one article using scheme \(x\), but I end up publishing it
@@ -50,7 +52,7 @@ a LaTeX user:
     annoying and highly error-prone.
 \end{enumerate}
 
-This package hopes to solve these problems by
+The \sty{transconv} \hologo{LuaTeX} package hopes to solve these problems by
 \begin{enumerate*}[label=\alph*)]
   \item letting the user write in a transcription scheme which is easier to
     input and have the package handle the conversion to the actual output scheme
@@ -61,7 +63,7 @@ This package hopes to solve these problems by
 \end{enumerate*}
 
 For instance, if I had to transcribe the Southern Min word for \enquote{fifteen}
-in the Tâi-lô scheme (\totailo{tsap8-goo7}), I would normally have to write:
+in the T\^{a}i-l\^{o} scheme (\totailo{tsap8-goo7}), I would normally have to write:
 
 \begin{lstlisting}[language={[latex]tex}]
 ts\textvbaraccent{a}p-g\={o}o
@@ -80,25 +82,38 @@ scheme instead, all I have to do is change a package option and recompile, and
 Or maybe I'm required to use \tobp{Ban5-lam5 phing3-im1}? No problem:
 \tobp{tsap8-goo7}.
 
-Also as you can see, \sty{transconv} has no problem with you switching back and
-forth between multiple different schemes, either, if that is what you need.
-
-\subsection[About]{About \sty{transconv}}
+Also as you can see, \sty{transconv} has no problem switching back and forth
+between multiple different schemes, either, if that is what you need.
 
 \subsection{License}
 
+This work may be distributed and/or modified under the conditions of the
+\hologo{LaTeX} Project Public License, either version 1.3c or (at your option)
+any later version. The latest version of this license is in
+\url{https://www.latex-project.org/lppl.txt} and version 1.3 or later is part of
+all distributions of \hologo{LaTeX} version 2005/12/01 or later.
+
 \section{Installation}
+
+\sty{transconv} uses Lua code for the conversion, so it will only work with
+\hologo{LuaTeX}!
 
 In order to be able to use \sty{transconv}, you need to copy the
 \sty{transconv.sty} file as well as the \sty{transconv} directory (found inside
-the \sty{lua} folder) to a place where Lua\TeX{} can find them. The suggested
-location for the \sty{sty} file is within \sty{tex/latex/local/} in your local
-\sty{texmf/} directory (probably found within your \sty{home} directory).
+the \sty{lua} folder) to a place where \hologo{LuaTeX} can find them. The
+suggested location for the \sty{sty} file is within \sty{tex/latex/local/} in
+your local \sty{texmf/} directory (probably found within your \sty{home}
+directory).
 
 The \sty{transconv} folder can be placed in any directory in your kpathsea path.
-You can check that path with the console command \sty{kpsewhich
---show-path=lua}. The suggested location is within \sty{scripts/} inside your
-local \sty{texmf/} directory. If for some reason, you cannot get Lua\TeX{} to
+You can check that path with the following console command:
+
+\begin{lstlisting}[language=bash]
+  kpsewhich --show-path=lua
+\end{lstlisting}
+
+The suggested location is within \sty{scripts/} inside your
+local \sty{texmf/} directory. If for some reason, you cannot get \hologo{LuaTeX} to
 find the module, you can consider using the
 \href{https://www.ctan.org/pkg/luapackageloader}{luapackageloader} package to
 manually modify the path.
@@ -119,7 +134,7 @@ manually modify the path.
   change that default; if you want to change it, use the \sty{defaultscheme}
   option or the \sty{\textbackslash{}TransconvMakeDefaultScheme} command.
 
-  In order to successfully load a scheme, Transconv has to be able to find
+  In order to successfully load a scheme, \sty{transconv} has to be able to find
   a file \prm{lang}/\prm{scheme}.lua in its lua folder which returns the
   converter. The option can be used more than once to import multiple schemes.
 
@@ -229,7 +244,7 @@ cause an error. For example both of the following will not compile:
   \sty{\textbackslash{}TransconvUseScheme} or the option \opt{scheme}.
 
   This command merely constitutes a wrapper around the Lua converter without any
-  \TeX{} formatting. Therefore, using this command means you hard-code both the
+  \hologo{TeX} formatting. Therefore, using this command means you hard-code both the
   transcription scheme and the way it is formatted.  For this reason, it is
   highly recommended that you use this command only if the formatting hooks
   provided by \sty{transconv} are insufficient for your purposes, and even then
@@ -283,6 +298,40 @@ cause an error. For example both of the following will not compile:
   otherwise this command will have no effect.
 \end{ltxsyntax}
 
+\section{Currently Supported Languages and Schemes}
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    Abbreviation  & Language              & Supported Schemes \\
+    \midrule
+
+    \sty{cmn}     & Standard Chinese      & \makecell[tl]{%
+                                              Hanyu Pinyin (\sty{cmn.pinyin}) \\
+                                              Wade-Giles (\sty{cmn.wadegiles})
+                                            } \\
+    \sty{jpn}     & Standard Japanese     & \makecell[tl]{%
+                                              Hepburn (\sty{jap.hepburn}) \\
+                                              Kunrei-shiki (\sty{jap.kunrei}) \\
+                                              Nihon-shiki (\sty{jap.nihon}) \\
+                                            } \\
+    \sty{kor}     & Standard Korean       & \makecell[tl]{%
+                                              Revised Romanisation (\sty{kor.revised})
+                                            } \\
+    \sty{nan}     & Hokkien/Southern Min  & \makecell[tl]{%
+                                              Bbánlám pìngyīm (\sty{nan.bp}) \\
+                                              POJ/Church Romanisation (\sty{nan.poj}) \\
+                                              Tâi-lô (\sty{nan.tailo}) \\
+                                              TLPA (\sty{nan.tlpa}) \\
+                                            } \\
+
+    \bottomrule
+  \end{tabular}
+  \caption{Supported languages}
+  \label{tab:langs}
+\end{table}
+
 \section{Custom Schemes and Languages}
 
 \subsection{Adding a New Transliteration Scheme for an Existing Language}
@@ -290,7 +339,7 @@ cause an error. For example both of the following will not compile:
 Adding a new transliteration scheme involves a little bit of Lua programming,
 though I tried to make it as painless as possible.
 
-As a first step, navigate to the directory where the Transconv lua files are
+As a first step, navigate to the directory where the \sty{transconv} lua files are
 found (the exact location depends on where you installed it, but it should be
 called transconv and contain a file named init.lua.
 
