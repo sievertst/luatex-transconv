@@ -1,37 +1,26 @@
 # The Transconv package for LuaTeX
 
-As a linguist who works on East Asian languages, I frequently have to render
-languages in the Latin script which do not usually use it. While for some
-contexts, the IPA is certainly the best way to go, there are many situations
-where it is either unnecessarily unwieldy or omits certain information (e.g.
-historical one) which may be crucial to the discussion. Therefore, it is often
-more practical to use a transcription scheme to transcribe the pronunciation
-(and sometimes certain aspects of the orthography) into (usually) the Latin
-script. For example, we may use Hanyu Pinyin to transcribe Standard Chinese.
+The Transconv package for LuaTeX aims to make the use of transcriptions in LaTeX
+easier.
 
-However, these schemes almost always pose at least one of these two problems on
-a LaTeX user:
+As it is, there are two main problems concerning transcriptions:
 
-* They use non-ASCII characters which may be annoying to input, e.g.
-  diacritics, super- or subscripts etc. Obviously it is possible to do this
-  manually with LaTeX commands but it can be extremely obnoxious if you
-  have to use those macros very frequently.
-* There are often multiple competing transcription schemes for each
-  language and the author may not always be free in their choice of scheme.
-  So I might write one article using scheme x, but I end up publishing it
-  in a different paper than anticipated and that paper requires me to use
-  scheme y. So I would essentially have to manually find every single
-  instance of me using x and change it to y instead. Obviously this is
-  both tedious and highly error-prone.
+1. The transcription scheme of choice might be annoying to input (requiring the
+   frequent use of macros to input characters which might not be accessible on
+   the keyboard), and
+2. there are often multiple competing schemes for the same language, so an
+   author who was originally using scheme x might find themselves having to
+   switch to scheme y. In practice this amounts to manually track down and
+   change every place where x was used – which of course is both tedious and
+   error-prone.
 
-The Transconv package for LuaTeX aims to solve these problems by:
+Transconv solves these problems by:
 
 * letting the user write in a transcription scheme which is easier to
-  input and have the package handle the conversion to the actual output scheme
-  with diacritics etc., and
-* abstracting the actual scheme itself away from the text, so the user can
-  switch schemes by simply changing an option, not every instance of them
-  using the scheme.
+  input (normally pure ASCII) and have the package handle the conversion to the
+  actual output scheme with diacritics etc., and
+* abstracting the actual scheme itself away from the text. This allows the user
+  to switch schemes by simply changing an option.
 
 For instance, if I had to transcribe the Southern Min word for “fifteen”
 in the Tâi-lô scheme (tsa&#x030D;p-gōo), I would normally have to write:
@@ -47,14 +36,9 @@ diacritics and write:
 \tonan{tsap8-goo7}
 ```
 
-What's more, if I suddenly find myself having to use the POJ transcription
+What's more, if I suddenly find myself having to use the Bbánlám pìngyīm transcription
 scheme instead, all I have to do is change a package option and recompile, and
-Transconv will output the correct POJ version instead: cha&#x030D;p-gō&#x0358;.
-Or maybe I'm required to use Bbánlám pìngyīm? No problem:
-zápggoô.
-
-Also as you can see, Transconv has no problem switching back and forth
-between multiple different schemes, either, if that is what you need.
+Transconv will output the correct Bbánlám pìngyīm version instead: zápggoô.
 
 ## Currently Supported Languages
 
@@ -113,7 +97,8 @@ between multiple different schemes, either, if that is what you need.
   </tbody>
 </table>
 
-## Adding New Schemes or Languages
+It is also possible to add more languages and schemes with just a limited amount
+of work.
 
 ## Installation
 
