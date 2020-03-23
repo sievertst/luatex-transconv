@@ -2,7 +2,8 @@
 
 --[[
     Use Hanyu Pinyin but with the tone as a number after the syllable. Both 0
-    and 5 are accepted as markers for the neutral tone.
+    and 5 are accepted as markers for the neutral tone. Optionally use v instead
+    of ü if that is more convenient.
 
     Optionally differentiate original velars before i and ü by spelling them as
     such (e.g. "Nan2ging1") for compatability with historicising schemes. G, k,
