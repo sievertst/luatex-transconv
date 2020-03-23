@@ -1,7 +1,9 @@
 #!/usr/bin/env lua5.3
 
 --[[
-    Spell each syllable exactly as it is spelt in Hangeul, separating syllable
+    Spell each syllable exactly as it is spelt in Hangeul with each jamo in
+    its Revised Romanisation spelling (for consonant jamo use their initial
+    position spelling, even for letters in the batchim. Separate syllable
     blocks with apostrophes or – between separate morphemes – a hyphen.
     Individual letters use the same spelling as in Revised Romanisation (for
     consonants always the syllable-initial spelling).
