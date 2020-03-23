@@ -19,10 +19,9 @@ local Revised = Converter:new{
         {"[\'-]w", "-w"},
 
         -- TODO: palatalisation of digeut and ti-eut
-        {"d=i", "j=i"}, {"t=i", "ch=i"},
 
         -- use pronunciation of finals but preserve before vowels
-        {"g$", "k"}, {"d\'", "t\'"}, {"b\'", "p\'"}, {"j\'", "t\'"},
+        {"g\'", "k"}, {"d\'", "t\'"}, {"b\'", "p\'"}, {"j\'", "t\'"},
         {"kk\'", "k\'"}, {"tt\'", "t\'"}, {"pp\'", "p\'"}, {"ss\'", "t\'"},
         {"r\'", "l\'"}, {"s\'", "t\'"}, {"jj\'", "t\'"}, {"ch\'", "t\'"},
         -- hi-eut
