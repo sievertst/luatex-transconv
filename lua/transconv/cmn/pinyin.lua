@@ -55,6 +55,7 @@ local Pinyin = Converter:new{
         [0] = false, [1] = "=", [2] = "\'", [3] = "v", [4] = "`", [5] = false,
     },
     rep_strings = {
+        {"v", "ü"},
         {"gi", "ji"}, {"ki", "qi"}, {"hi", "xi"},
         {"gü", "ju"}, {"kü", "qu"}, {"hü", "xu"},
     },

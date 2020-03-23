@@ -22,6 +22,7 @@ local WadeGiles = Converter:new{
     sb_sep = "-",
 
     rep_strings = {
+        {"v", "ü"},
         {"gi", "ji"}, {"ki", "qi"}, {"hi", "xi"},
         {"gü", "ju"}, {"kü", "qu"}, {"hü", "xu"},
         {"ju", "jü"}, {"qu", "qü"}, {"xu", "hsü"}, {"yu", "yü"},

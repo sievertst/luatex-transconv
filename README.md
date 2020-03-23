@@ -77,7 +77,7 @@ Transconv will output the correct Bbánlám pìngyīm version instead: zápggoô
       <td rowspan="1"><code>kor</code></td>
       <td rowspan="1">Standard Korean</td>
       <td rowspan="1">modified Revised</td>
-      <td>Revised Romanisation (<code>kor.revised</code>)</td>
+      <td>Revised Romanisation (<code>kor.revised</code>) (WIP)</td>
     </tr>
     <tr>
       <td rowspan="4"><code>nan</code></td>
