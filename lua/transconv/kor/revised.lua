@@ -18,10 +18,37 @@ local Revised = Converter:new{
         {"[\'-]o", "-o"}, {"[\'-]u", "-u"}, {"[\'-]y", "-y"},
         {"[\'-]w", "-w"},
 
+        {"ng", "ŋ"}, -- for easier processing
+
+        -- g
+        {"g\'g", "kg"}, {"[ŋgk]\'[nlr]", "ngn"}, {"g\'d", "kd"},
+        {"[gk]\'m", "ngm"}, {"g\'b", "kb"}, {"g\'s", "ks"}, {"g\'j", "kj"}, {"g\'c", "kc"},
+        {"g\'k", "k-k"}, {"g\'t", "kt"}, {"g\'p", "kp"}, {"g\'h", "kh"},
+        -- n
+        {"n\'g", "n-g"}, {"n\'[lr]", "ll"},
+        -- d
+        {"[dsj]\'g", "tg"}, {"[dtsjh]\'[nlr]", "nn"}, {"[dsj]\'d", "td"},
+        {"[dtsj]\'m", "nm"}, {"[dsj]\'b", "tb"}, {"[dsj]\'s", "ts"},
+        {"[dsj]\'j", "tj"}, {"[dsjh]\'c", "tc"},
+        {"[dsjh]\'k", "tk"}, {"[dsj]\'t", "t-t"}, {"[dsjh]\'p", "tp"}, {"[dsj]\'h", "th"},
+        -- r/l
+        {"r\'g", "lg"}, {"[lr]\'[nlr]", "ll"}, {"r\'d", "ld"},
+        {"r\'m", "lm"}, {"r\'b", "lb"}, {"r\'s", "ls"}, {"r\'j", "lj"}, {"r\'c", "lc"},
+        {"r\'k", "lk"}, {"r\'t", "lt"}, {"r\'p", "lp"}, {"r\'h", "lh"},
+        -- m
+        {"[bpm]\'[nlr]", "mn"},
+        -- b
+        {"b\'g", "pg"}, {"b\'d", "td"},
+        {"[bp]\'m", "mm"}, {"b\'b", "pb"}, {"b\'s", "ps"}, {"b\'j", "pj"}, {"b\'c", "pc"},
+        {"b\'k", "pk"}, {"b\'t", "pt"}, {"b\'p", "p-p"}, {"b\'h", "ph"},
+        -- h
+        {"h\'g", "k"}, {"h\'d", "t"}, {"h\'b", "p"}, {"h\'h", "t"},
+
         -- TODO: palatalisation of digeut and ti-eut
 
         -- use pronunciation of finals but preserve before vowels
-        {"g\'", "k"}, {"d\'", "t\'"}, {"b\'", "p\'"}, {"j\'", "t\'"},
+        -- {"g\'", "k"}, {"d\'", "t\'"}, {"b\'", "p\'"}, {"j\'", "t\'"},
+
         {"kk\'", "k\'"}, {"tt\'", "t\'"}, {"pp\'", "p\'"}, {"ss\'", "t\'"},
         {"r\'", "l\'"}, {"s\'", "t\'"}, {"jj\'", "t\'"}, {"ch\'", "t\'"},
         -- hi-eut
