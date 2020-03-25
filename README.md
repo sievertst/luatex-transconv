@@ -8,7 +8,7 @@ As it is, there are two main problems concerning transcriptions:
 1. The transcription scheme of choice might be annoying to input (requiring the
    frequent use of macros to input characters which might not be accessible on
    the keyboard), and
-2. there are often multiple competing schemes for the same language, so an
+2. There are often multiple competing schemes for the same language, so an
    author who was originally using scheme x might find themselves having to
    switch to scheme y. In practice this amounts to manually track down and
    change every place where x was used – which of course is both tedious and
@@ -119,8 +119,12 @@ kpsewhich --show-path=lua
 
 The suggested location is within `scripts/` inside your local `texmf/`
 directory. Assuming your local `texmf/` directory is located under that name in
-your home directory, you can simply execute `make install` from the repository’s
-top directory (the one containing `transconv.sty`).
+your home directory, you can simply execute the following command from the
+repository’s top directory (the one containing `transconv.sty`).
+
+```bash
+make install
+```
 
 If for some reason, you cannot get LuaTeX to find the module, you can consider
 using the <a
@@ -131,5 +135,9 @@ manually modify the path.
 
 To uninstall Transconv, locate the `transconv.sty` file as well as the
 `transconv/` lua package folder and delete them. Assuming they are located in
-the recommended locations, you can simply run make uninstall from the top
+the recommended locations, you can simply run the following command from the top
 directory (the one containing `transconv.sty`).
+
+```bash
+make uninstall
+```
