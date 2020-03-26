@@ -58,7 +58,7 @@ local add_tone_marker = function(self, instring)
     return instring
 end
 
-local do_str_rep = function(self, instring, rep_dict)
+local do_str_rep = function(self, instring, rep_list)
     --[[
         Do the appropriate string replacements according to the passed
         replacement dictionary. E.g. Tâi-lô "ts" becoming "ch" in POJ.
@@ -67,44 +67,75 @@ local do_str_rep = function(self, instring, rep_dict)
         whole thing?
     --]]
 
-    for _, rep_pair in pairs(rep_dict) do
+    local function process_match(starti, endi, ...)
+        -- helper function which packs the data returned by the string.find
+        -- function into a table representing a match
+        return {
+            starti = starti,
+            endi = endi,
+            capts = {...} -- captures
+        }
+    end
+
+    local function is_letter(str)
+        return (str:match("%w") and not str:match("%d"))
+    end
+
+    local function insert_captures(str, capts)
+        -- helper function which inserts captured values into the string at the
+        -- correct places. Expects that the string contains a "%i" for every
+        -- index in capts
+
+        for i,c in ipairs(capts) do
+            -- need to use different marker than %i so string.format doesn't
+            -- complain
+            str = str:gsub("%%(%d)", "{cap%1}")
+            str = str:gsub("{cap"..i.."}", "%%s")
+            str = str:format(c)
+        end
+        return str
+    end
+
+    local rep_i = 1
+    -- loop over rep_list
+    while rep_list[rep_i] do
+        local rep_pair = rep_list[rep_i]
         local lower_input = instring:lower()
 
-        local orig = rep_pair[1]:lower()
-        local rep = rep_pair[2]:lower()
+        local orig_low = rep_pair[1]:lower()
 
-        -- find starting index of match if there is one
-        -- also capture groups (look behind and look ahead) if returned
-        local st, en, groupi, groupii = lower_input:find(orig)
-        -- put empty strings if nothing was captured
-        local groupi = groupi or ""
-        local groupii = groupii or ""
+        -- try to match and also capture groups
+        local match = process_match(lower_input:find(orig_low))
 
-        -- match cases
-        if st then
-            -- update start and end indexes according to lengths of the groups
-            st = st + groupi:len()
-            en = en - groupii:len()
+        if match.starti then
+            local matchstring = instring:sub(match.starti,match.endi)
+            local match_first = matchstring:sub(1,1)
+            local match_second = matchstring:sub(2,2)
 
-            -- use indexes to check original input string for the case of
-            -- the first two letters
-            local match_first = instring:sub(st,st)
-            local match_second = instring:sub(st+1,st+1)
+            -- insert captures into the replacement string
+            local rep = insert_captures(rep_pair[2], match.capts)
 
-            -- if first letter is lower, assume it's all lower
+            local rep_true = ""
+            -- if first letter is lower, assume lower case (replacement already
+            -- is lower)
             if match_first == match_first:lower() then
-                rep = rep:lower()
+                rep_true = rep:lower()
             -- if it's upper and the second is lower, assume title case
-            elseif match_second == match_second:lower() then
-                rep = rep:sub(1,1):upper()..rep:sub(2)
-            -- if both are upper, assume all upper case
+            elseif match_second and match_second == match_second:lower() then
+                rep_true = rep:sub(1,1):upper()..rep:sub(2,2):lower()
+                if rep:sub(3) then rep_true = rep_true..rep:sub(3):lower() end
+            -- if both are upper, assume all caps
             else
-                rep = rep:upper()
+                rep_true = rep:upper()
             end
 
             -- escape special characters in match string before substitution
-            local match = instring:sub(st, en):gsub("([^%w])", "%%%1")
-            instring = instring:gsub(match, rep)
+            rep_true = rep_true:gsub("([^%w])", "%%%1")
+            instring = instring:gsub(matchstring, rep_true)
+        else
+            -- increase index by one if no match was found (otherwise try to
+            -- match again with the same pair)
+            rep_i = rep_i + 1
         end
     end
 

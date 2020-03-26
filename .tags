@@ -22,6 +22,8 @@ TEXPKG	makefile	/^TEXPKG := $(TEXDIR)\/tex\/latex\/local\/transconv.sty$/;"	m
 get_sb_and_tone	lua/transconv/cmn/raw.lua	/^local function get_sb_and_tone(self, sb)$/;"	f
 get_sb_and_tone	lua/transconv/nan/raw.lua	/^local function get_sb_and_tone(self, sb)$/;"	f
 get_sb_and_tone	lua/transconv/raw.lua	/^local function get_sb_and_tone(self, sb)$/;"	f
+insert_captures	lua/transconv/converter.lua	/^    local function insert_captures(str, capts)$/;"	f
+is_letter	lua/transconv/converter.lua	/^    local function is_letter(str)$/;"	f
 is_valid_sb	lua/transconv/cmn/raw.lua	/^local function is_valid_sb(self, sb)$/;"	f
 is_valid_sb	lua/transconv/example/raw.lua	/^local function is_valid_sb(self, sb)$/;"	f
 is_valid_sb	lua/transconv/jpn/raw.lua	/^local function is_valid_sb(self, sb)$/;"	f
@@ -33,7 +35,7 @@ local __tostring 	lua/transconv/converter.lua	/^local __tostring = function(self
 local add_tone_marker 	lua/transconv/cmn/wadegiles.lua	/^local add_tone_marker = function(self, instring)$/;"	f
 local add_tone_marker 	lua/transconv/converter.lua	/^local add_tone_marker = function(self, instring)$/;"	f
 local convert 	lua/transconv/converter.lua	/^local convert = function(self, instring)$/;"	f
-local do_str_rep 	lua/transconv/converter.lua	/^local do_str_rep = function(self, instring, rep_dict)$/;"	f
+local do_str_rep 	lua/transconv/converter.lua	/^local do_str_rep = function(self, instring, rep_list)$/;"	f
 local join_sbs 	lua/transconv/converter.lua	/^local join_sbs = function(self, sbs)$/;"	f
 local new 	lua/transconv/converter.lua	/^local new = function(self, conv)$/;"	f
 local place_tone_digit 	lua/transconv/converter.lua	/^local place_tone_digit = function(self, sb, tone)$/;"	f
@@ -47,6 +49,7 @@ place_tone_digit	lua/transconv/cmn/pinyin.lua	/^local function place_tone_digit(
 place_tone_digit	lua/transconv/nan/bp.lua	/^local function place_tone_digit(self, sb, tone)$/;"	f
 place_tone_digit	lua/transconv/nan/poj.lua	/^local function place_tone_digit(self, sb, tone)$/;"	f
 place_tone_digit	lua/transconv/nan/tailo.lua	/^local function place_tone_digit(self, sb, tone)$/;"	f
+process_match	lua/transconv/converter.lua	/^    local function process_match(starti, endi, ...)$/;"	f
 reorder	lua/transconv/jpn/raw.lua	/^local function reorder(self, syllable)$/;"	f
 sb textunderscore 	doc/master.tex	/^\\end{lstlisting}$/;"	P
 split_sbs	lua/transconv/cmn/raw.lua	/^local function split_sbs(self, instring)$/;"	f
