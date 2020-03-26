@@ -1,7 +1,8 @@
 #!/usr/bin/env lua5.3
 
 --[[
-    The original version of McCune-Reischauer.
+    The variant of McCune-Reischauer used as the official transcription system
+    in South Korea between 1984 and 2000.
 --]]
 
 local function to_target_scheme(self, instring)
@@ -25,6 +26,10 @@ local Revised = Converter:new{
         -- always use r for initial rieul
         {"la", "ra"}, {"le", "re"}, {"li", "ri"}, {"lo", "ro"}, {"lu", "ru"},
 
+        -- temporarily replace ng so we don't have to worry about excluding it
+        -- when we handle final g
+        {"ng", "ŋ"},
+
         -- insert marker at the end of syllables which are followed by
         -- vowel-initial syllables
         {"\'a", "v\'a"}, {"\'e", "v\'e"}, {"\'i", "v\'i"},
@@ -38,21 +43,17 @@ local Revised = Converter:new{
         {"a\'", "a\'v"}, {"e\'", "e\'v"}, {"e\'", "e\'v"},
         {"i\'", "i\'v"}, {"o\'", "o\'v"}, {"m\'", "m\'v"},
         {"n\'", "n\'v"}, {"ŋ\'", "ŋ\'v"}, {"l\'", "l\'v"},
-        {"r\'", "l\'v"},
-
-        -- write e as ë after a and o (to distinguish ae and oe from a-e and o-e)
-        {"av\'e", "a\'\\\"{e}"}, {"ov\'e", "o\'\\\"{e}"},
 
         -- replace vowels
-        {"eo", "\\u{o}"}, {"wo", "w\\u{o}"},
+        {"eo", "\\u{o}"},
         {"eu", "\\u{u}"}, {"ui", "\\u{u}i"},
 
         -- temporarily replace ng so we don't have to worry about excluding it
         -- when we handle final g
         {"ng", "ŋ"},
 
-        -- ensure distinguishing n'g from ng (x will become ' later)
-        {"n\'vg", "n\'xvg"}, {"ŋv\'", "ŋvx\'"},
+        -- ensure distinguishing n'g from double ieung
+        {"n\'vg", "n-vg"}, {"ŋv\'", "ŋv-"},
 
         -- insert marker after aspiratae (later we'll use ', but that is
         -- currently still used as a syllable separator)
@@ -61,6 +62,16 @@ local Revised = Converter:new{
         {"p", "px"}, {"pxpx", "pp"},
         {"ch", "chx"},
 
+        -- hieut-assimilations (including nh and lh)
+        {"g\'h", "\'kx"}, {"h\'g", "\'k"}, {"h\'k", "\'k"},
+        {"d\'h", "\'tx"}, {"h\'d", "\'t"}, {"h\'t", "\'t"},
+        {"b\'h", "\'px"}, {"h\'b", "\'p"}, {"h\'p", "\'p"},
+        {"j\'h", "\'chx"}, {"h\'j", "\'ch"}, {"h\'ch", "\'ch"},
+        {"g\'%-h", "k\'-h"}, {"h\'%-g", "\'-k"}, {"h\'%-k", "\'-k"},
+        {"d\'%-h", "t\'-h"}, {"h\'%-d", "\'-t"}, {"h\'%-t", "\'-t"},
+        {"b\'%-h", "p\'-h"}, {"h\'%-b", "\'-p"}, {"h\'%-p", "\'-p"},
+        {"j\'%-h", "ch\'-"}, {"h\'%-j", "\'-ch"}, {"h\'%-ch", "\'-ch"},
+
         -- write tenuis consonants as voiceless, except between sonorants
         {"g", "k"}, {"kv", "gv"}, {"vk", "vg"},
         {"d", "t"}, {"tv", "dv"}, {"vt", "vd"},
@@ -68,16 +79,6 @@ local Revised = Converter:new{
         {"j", "ch"}, {"chv", "jv"},  {"vch", "j"}, {"chch", "tch"},
         -- repair aspiratae
         {"gx", "kx"}, {"dx", "tx"}, {"bx", "px"}, {"jx", "chx"},
-
-        -- hieut-assimilations (including nh and lh)
-        {"g\'h", "k\'h"}, {"h\'g", "\'k"}, {"h\'k", "\'k"},
-        {"d\'h", "t\'h"}, {"h\'d", "\'t"}, {"h\'t", "\'t"},
-        {"b\'h", "p\'h"}, {"h\'b", "\'p"}, {"h\'p", "\'p"},
-        {"j\'h", "ch\'"}, {"h\'j", "\'ch"}, {"h\'ch", "\'ch"},
-        {"g\'%-h", "k\'-h"}, {"h\'%-g", "\'-k"}, {"h\'%-k", "\'-k"},
-        {"d\'%-h", "t\'-h"}, {"h\'%-d", "\'-t"}, {"h\'%-t", "\'-t"},
-        {"b\'%-h", "p\'-h"}, {"h\'%-b", "\'-p"}, {"h\'%-p", "\'-p"},
-        {"j\'%-h", "ch\'-"}, {"h\'%-j", "\'-ch"}, {"h\'%-ch", "\'-ch"},
 
         -- syllable-final (not before vowel)
         {"gg\'", "k\'"}, {"kk\'", "k\'"}, {"g\'", "k\'"},
@@ -93,8 +94,6 @@ local Revised = Converter:new{
         {"lb\'", "l\'"}, {"ls\'", "l\'"}, {"lt\'", "l\'"},
         {"bs\'", "p\'"}, {"lp\'", "p\'"},
         {"lm\'", "m\'"},
-
-        {"l\'vh", "r\'h"},
 
         -- syllable-finals (before vowel)
         {"gsv", "ksv"}, {"rg", "lgv"}, {"nhv", "nv"},
@@ -124,7 +123,7 @@ local Revised = Converter:new{
         {"lr", "ll"}, {"ln", "ll"}, {"nl", "ll"},
 
         -- special
-        {"swi", "shwi"},
+        {"si", "shi"},
     },
 
     -- -- functions
