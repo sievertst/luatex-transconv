@@ -130,7 +130,7 @@ local do_str_rep = function(self, instring, rep_list)
             end
 
             -- escape special characters in match string before substitution
-            rep_true = rep_true:gsub("([^%w])", "%%%1")
+            matchstring = matchstring:gsub("([^%w])", "%%%1")
             instring = instring:gsub(matchstring, rep_true)
         else
             -- increase index by one if no match was found (otherwise try to
