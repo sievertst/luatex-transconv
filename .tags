@@ -58,6 +58,8 @@ to textunderscore 	doc/master.tex	/^\\end{enumerate}$/;"	P
 to_target_scheme	lua/transconv/jpn/hepburn.lua	/^local function to_target_scheme(self, instring)$/;"	f
 to_target_scheme	lua/transconv/jpn/kunrei.lua	/^local function to_target_scheme(self, instring)$/;"	f
 to_target_scheme	lua/transconv/jpn/nihon.lua	/^local function to_target_scheme(self, instring)$/;"	f
+to_target_scheme	lua/transconv/kor/mcr-n.lua	/^local function to_target_scheme(self, instring)$/;"	f
+to_target_scheme	lua/transconv/kor/mcr-s.lua	/^local function to_target_scheme(self, instring)$/;"	f
 to_target_scheme	lua/transconv/kor/mcr.lua	/^local function to_target_scheme(self, instring)$/;"	f
 to_target_scheme	lua/transconv/kor/revised.lua	/^local function to_target_scheme(self, instring)$/;"	f
 tone textunderscore 	doc/master.tex	/^string.$/;"	P

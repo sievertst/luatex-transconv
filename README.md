@@ -74,10 +74,16 @@ Transconv will output the correct Bbánlám pìngyīm version instead: zápggoô
       <td>Nihon-shiki (<code>jap.nihon</code>)</td>
     </tr>
     <tr>
-      <td rowspan="2"><code>kor</code></td>
-      <td rowspan="2">Standard Korean</td>
-      <td rowspan="2">modified Revised</td>
-      <td>McCune-Reischauer (<code>kor.mcr</code>)</td>
+      <td rowspan="4"><code>kor</code></td>
+      <td rowspan="4">Standard Korean</td>
+      <td rowspan="4">modified Revised</td>
+      <td>McCune-Reischauer (original) (<code>kor.mcr</code>)</td>
+    </tr>
+    <tr>
+      <td>McCune-Reischauer (DPRK variant) (<code>kor.mcr-n</code>)</td>
+    </tr>
+    <tr>
+      <td>McCune-Reischauer (ROK variant) (<code>kor.mcr-s</code>)</td>
     </tr>
     <tr>
       <td>Revised Romanisation (<code>kor.revised</code>)</td>

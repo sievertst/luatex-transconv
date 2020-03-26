@@ -1,7 +1,8 @@
 #!/usr/bin/env lua5.3
 
 --[[
-    The original version of McCune-Reischauer.
+    The variant of McCune-Reischauer used as the official transcription system
+    in North Korea.
 --]]
 
 local function to_target_scheme(self, instring)
@@ -25,6 +26,10 @@ local Revised = Converter:new{
         -- always use r for initial rieul
         {"la", "ra"}, {"le", "re"}, {"li", "ri"}, {"lo", "ro"}, {"lu", "ru"},
 
+        -- temporarily replace ng so we don't have to worry about excluding it
+        -- when we handle final g
+        {"ng", "ŋ"},
+
         -- insert marker at the end of syllables which are followed by
         -- vowel-initial syllables
         {"\'a", "v\'a"}, {"\'e", "v\'e"}, {"\'i", "v\'i"},
@@ -40,6 +45,10 @@ local Revised = Converter:new{
         {"n\'", "n\'v"}, {"ŋ\'", "ŋ\'v"}, {"l\'", "l\'v"},
         {"r\'", "l\'v"},
 
+        -- ensure distinguishing n-g from double ieung
+        {"n\'vg", "n-vg"},
+        {"ŋv\'", "ŋv-"}, {"ŋv%-y", "ŋv\'y"}, {"ŋv%-w", "ŋv\'w"},
+
         -- write e as ë after a and o (to distinguish ae and oe from a-e and o-e)
         {"av\'e", "a\'\\\"{e}"}, {"ov\'e", "o\'\\\"{e}"},
 
@@ -52,20 +61,18 @@ local Revised = Converter:new{
         {"ng", "ŋ"},
 
         -- ensure distinguishing n'g from ng (x will become ' later)
-        {"n\'vg", "n\'xvg"}, {"ŋv\'", "ŋvx\'"},
+        {"n\'g", "n\'xg"},
 
         -- insert marker after aspiratae (later we'll use ', but that is
         -- currently still used as a syllable separator)
-        {"k", "kx"}, {"kxkx", "kk"},
-        {"t", "tx"}, {"txtx", "tt"},
-        {"p", "px"}, {"pxpx", "pp"},
-        {"ch", "chx"},
+        {"k", "kx"}, {"kxkx", "kk"}, {"kx\'", "k\'"},
+        {"t", "tx"}, {"txtx", "tt"}, {"tx\'", "t\'"},
+        {"p", "px"}, {"pxpx", "pp"}, {"px\'", "p\'"},
 
         -- write tenuis consonants as voiceless, except between sonorants
         {"g", "k"}, {"kv", "gv"}, {"vk", "vg"},
         {"d", "t"}, {"tv", "dv"}, {"vt", "vd"},
         {"b", "p"}, {"pv", "bv"}, {"vp", "vb"},
-        {"j", "ch"}, {"chv", "jv"},  {"vch", "j"}, {"chch", "tch"},
         -- repair aspiratae
         {"gx", "kx"}, {"dx", "tx"}, {"bx", "px"}, {"jx", "chx"},
 
@@ -94,8 +101,6 @@ local Revised = Converter:new{
         {"bs\'", "p\'"}, {"lp\'", "p\'"},
         {"lm\'", "m\'"},
 
-        {"l\'vh", "r\'h"},
-
         -- syllable-finals (before vowel)
         {"gsv", "ksv"}, {"rg", "lgv"}, {"nhv", "nv"},
         {"lhv", "rv"}, {"rhv", "rv"},
@@ -115,13 +120,13 @@ local Revised = Converter:new{
         {"%-vw", "w"}, {"%-vy", "y"}, {"ng%-v", "ng"},
         {"%-v%-", "-"},
         {"v", ""}, {"\'", ""},
-        {"x", "\'"},
+        {"x", "h"},
 
         -- assimilations
-        {"kn", "ngn"}, {"kr", "ngn"}, {"km", "ngm"},
-        {"tn", "nn"}, {"tr", "nn"}, {"tm", "nm"},
-        {"pn", "mn"}, {"pr", "mn"}, {"pm", "mm"},
-        {"lr", "ll"}, {"ln", "ll"}, {"nl", "ll"},
+        {"kn", "ngn"}, {"kr", "ngr"}, {"km", "ngm"},
+        {"tn", "nn"}, {"tr", "nr"}, {"tm", "nm"},
+        {"pn", "mn"}, {"pr", "mr"}, {"pm", "mm"},
+        {"ln", "ll"}, {"nl", "ll"}, -- rieul-rieul clusters are written lr
 
         -- special
         {"swi", "shwi"},
