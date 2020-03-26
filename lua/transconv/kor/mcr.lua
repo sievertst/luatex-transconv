@@ -20,28 +20,21 @@ local Revised = Converter:new{
 
         -- insert ' at the end of word-final syllables for easier processing
         {" ", "\' "}, {"%.", "\'."}, {"%?", "\'?"}, {"!", "\'!"},
-        {")", "\')"}, {"%-", "\'-"},
+        {")", "\')"},
 
         -- always use r for initial rieul
+        {"l([aeiouyw])", "r%1"},
         {"la", "ra"}, {"le", "re"}, {"li", "ri"}, {"lo", "ro"}, {"lu", "ru"},
 
         -- insert marker at the end of syllables which are followed by
         -- vowel-initial syllables
-        {"\'a", "v\'a"}, {"\'e", "v\'e"}, {"\'i", "v\'i"},
-        {"\'o", "v\'o"}, {"\'u", "v\'u"}, {"\'y", "v\'y"},
-        {"\'w", "v\'w"},
-        {"\'%-a", "v\'-a"}, {"\'%-e", "v\'-e"}, {"\'%-i", "v\'-i"},
-        {"\'%-o", "v\'-o"}, {"\'%-u", "v\'-u"}, {"\'%-y", "v\'-y"},
-        {"\'%-w", "v\'-w"},
+        {"([^v])([-\'][aeiouyw])", "%1v%2"},
         -- also insert the marker at the beginning of syllables if the previous
         -- one is open or ends in a sonorant
-        {"a\'", "a\'v"}, {"e\'", "e\'v"}, {"e\'", "e\'v"},
-        {"i\'", "i\'v"}, {"o\'", "o\'v"}, {"m\'", "m\'v"},
-        {"n\'", "n\'v"}, {"ŋ\'", "ŋ\'v"}, {"l\'", "l\'v"},
-        {"r\'", "l\'v"},
+        {"([aeiou][\'%-])[^v]", "%1v"},
 
         -- write e as ë after a and o (to distinguish ae and oe from a-e and o-e)
-        {"av\'e", "a\'\\\"{e}"}, {"ov\'e", "o\'\\\"{e}"},
+        {"([ao])v\'e", "%1\'\\\"{e}"},
 
         -- replace vowels
         {"eo", "\\u{o}"}, {"wo", "w\\u{o}"},
@@ -56,10 +49,8 @@ local Revised = Converter:new{
 
         -- insert marker after aspiratae (later we'll use ', but that is
         -- currently still used as a syllable separator)
-        {"k", "kx"}, {"kxkx", "kk"},
-        {"t", "tx"}, {"txtx", "tt"},
-        {"p", "px"}, {"pxpx", "pp"},
-        {"ch", "chx"},
+        {"([ptk])([^x])", "%1x%2"}, {"pxpx", "pp"}, {"txtx", "tt"}, {"kxkx", "kk"},
+        {"ch([^x])", "chx%1"},
 
         -- write tenuis consonants as voiceless, except between sonorants
         {"g", "k"}, {"kv", "gv"}, {"vk", "vg"},
@@ -70,40 +61,34 @@ local Revised = Converter:new{
         {"gx", "kx"}, {"dx", "tx"}, {"bx", "px"}, {"jx", "chx"},
 
         -- hieut-assimilations (including nh and lh)
-        {"g\'h", "k\'h"}, {"h\'g", "\'k"}, {"h\'k", "\'k"},
-        {"d\'h", "t\'h"}, {"h\'d", "\'t"}, {"h\'t", "\'t"},
-        {"b\'h", "p\'h"}, {"h\'b", "\'p"}, {"h\'p", "\'p"},
-        {"j\'h", "ch\'"}, {"h\'j", "\'ch"}, {"h\'ch", "\'ch"},
-        {"g\'%-h", "k\'-h"}, {"h\'%-g", "\'-k"}, {"h\'%-k", "\'-k"},
-        {"d\'%-h", "t\'-h"}, {"h\'%-d", "\'-t"}, {"h\'%-t", "\'-t"},
-        {"b\'%-h", "p\'-h"}, {"h\'%-b", "\'-p"}, {"h\'%-p", "\'-p"},
-        {"j\'%-h", "ch\'-"}, {"h\'%-j", "\'-ch"}, {"h\'%-ch", "\'-ch"},
+        {"g([\'%-])h", "k%1h"}, {"h([\'%-])[gk]", "%1k"},
+        {"d([\'%-])h", "t%1h"}, {"h([\'%-])[dt]", "%1t"},
+        {"b([\'%-])h", "p%1h"}, {"h([\'%-])[bp]", "%1p"},
+        {"j([\'%-])h", "ch%1"}, {"h([\'%-])j", "%1ch"}, {"h([\'%-])ch", "%1ch"},
+        {"cv", "chv"}, -- repair final ch before vowels
 
         -- syllable-final (not before vowel)
-        {"gg\'", "k\'"}, {"kk\'", "k\'"}, {"g\'", "k\'"},
-        {"dd\'", "t\'"}, {"ss\'", "t\'"}, {"jj\'", "t\'"}, {"tt\'", "t\'"},
-        {"d\'", "t\'"}, {"s\'", "t\'"}, {"j\'", "t\'"}, {"t\'", "t\'"},
-        {"ch\'", "t\'"},
-        {"r\'", "l\'"},
-        {"bb\'", "p\'"}, {"pp\'", "p\'"}, {"b\'", "p\'"},
-        {"h\'", "t\'"},
+        {"gg([\'%-])", "k%1"}, {"kk([\'%-])", "k%1"}, {"g([\'%-])", "k%1"},
+        {"dd([\'%-])", "t%1"}, {"ss([\'%-])", "t%1"}, {"jj([\'%-])", "t%1"}, {"tt([\'%-])", "t%1"},
+        {"[dsjh]([\'%-])", "t%1"},
+        {"ch([\'%-])", "t%1"},
+        {"r([\'%-])", "l%1"},
+        {"bb([\'%-])", "p%1"}, {"pp([\'%-])", "p%1"}, {"b([\'%-])", "p%1"},
         -- double consonants
-        {"gs\'", "k\'"}, {"rg\'", "k\'"}, {"lg\'", "k\'"},
-        {"nj\'", "n\'"},
-        {"lb\'", "l\'"}, {"ls\'", "l\'"}, {"lt\'", "l\'"},
-        {"bs\'", "p\'"}, {"lp\'", "p\'"},
-        {"lm\'", "m\'"},
+        {"gs([\'%-])", "k%1"}, {"[lr]g([\'%-])", "k%1"},
+        {"nj([\'%-])", "n%1"},
+        {"l[bst]([\'%-])", "l%1"},
+        {"bs([\'%-])", "p%1"}, {"l([pm])([\'%-])", "%1%2"},
+        {"lm([\'%-])", "m%1"},
 
-        {"l\'vh", "r\'h"},
+        {"l([\'%-])vh", "r%1h"},
 
         -- syllable-finals (before vowel)
         {"gsv", "ksv"}, {"rg", "lgv"}, {"nhv", "nv"},
-        {"lhv", "rv"}, {"rhv", "rv"},
-        {"cv", "chv"}, -- repair final ch before vowels
+        {"[lr]hv", "rv"},
 
         -- palatalisation of digeut and ti-eut
-        {"dv\'i", "jv\'i"}, {"dv\'%-i", "jv\'-i"},
-        {"tv\'i", "chv\'i"}, {"tv\'%-i", "chv\'-i"},
+        {"dv([\'%-])i", "jv\'i"}, {"txv([\'%-])i", "chv\'i"},
 
         -- get rid of helping characters
         {"ŋ", "ng"},
@@ -114,14 +99,12 @@ local Revised = Converter:new{
         -- but no hyphen for w, y or ng between vowels
         {"%-vw", "w"}, {"%-vy", "y"}, {"ng%-v", "ng"},
         {"%-v%-", "-"},
-        {"v", ""}, {"\'", ""},
-        {"x", "\'"},
+        {"v", ""}, {"\'", ""}, {"x", "\'"},
 
         -- assimilations
-        {"kn", "ngn"}, {"kr", "ngn"}, {"km", "ngm"},
-        {"tn", "nn"}, {"tr", "nn"}, {"tm", "nm"},
-        {"pn", "mn"}, {"pr", "mn"}, {"pm", "mm"},
-        {"lr", "ll"}, {"ln", "ll"}, {"nl", "ll"},
+        {"k[nr]", "ngn"}, {"t[nr]", "nn"}, {"p[nr]", "mn"},
+        {"km", "ngm"}, {"tm", "nm"}, {"pm", "mm"},
+        {"l[nr]", "ll"}, {"nl", "ll"},
 
         -- special
         {"swi", "shwi"},

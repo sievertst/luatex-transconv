@@ -16,19 +16,14 @@ local Revised = Converter:new{
 
         -- insert ' at the end of word-final syllables for easier processing
         {" ", "\' "}, {"%.", "\'."}, {"%?", "\'?"}, {"!", "\'!"},
-        {")", "\')"}, {"%-", "\'-"},
+        {")", "\')"},
 
         -- always use r for initial rieul
-        {"la", "ra"}, {"le", "re"}, {"li", "ri"}, {"lo", "ro"}, {"lu", "ru"},
+        {"l([aeiouyw])", "r%1"},
 
         -- insert marker at the end of syllables which are followed by
         -- vowel-initial syllables
-        {"\'a", "v\'a"}, {"\'e", "v\'e"}, {"\'i", "v\'i"},
-        {"\'o", "v\'o"}, {"\'u", "v\'u"}, {"\'y", "v\'y"},
-        {"\'w", "v\'w"},
-        {"\'%-a", "v\'-a"}, {"\'%-e", "v\'-e"}, {"\'%-i", "v\'-i"},
-        {"\'%-o", "v\'-o"}, {"\'%-u", "v\'-u"}, {"\'%-y", "v\'-y"},
-        {"\'%-w", "v\'-w"},
+        {"([^v])([-\'][aeiouyw])", "%1v%2"},
 
         -- temporarily replace ng so we don't have to worry about excluding it
         -- when we handle final g
@@ -38,38 +33,30 @@ local Revised = Converter:new{
         {"n\'g", "n\'-g"},
 
         -- hieut-assimilations (including nh and lh)
-        {"g\'h", "k\'h"}, {"h\'g", "\'k"}, {"h\'k", "\'k"},
-        {"d\'h", "t\'h"}, {"h\'d", "\'t"}, {"h\'t", "\'t"},
-        {"b\'h", "p\'h"}, {"h\'b", "\'p"}, {"h\'p", "\'p"},
-        {"j\'h", "ch\'"}, {"h\'j", "\'ch"}, {"h\'ch", "\'ch"},
-        {"g\'%-h", "k\'-h"}, {"h\'%-g", "\'-k"}, {"h\'%-k", "\'-k"},
-        {"d\'%-h", "t\'-h"}, {"h\'%-d", "\'-t"}, {"h\'%-t", "\'-t"},
-        {"b\'%-h", "p\'-h"}, {"h\'%-b", "\'-p"}, {"h\'%-p", "\'-p"},
-        {"j\'%-h", "ch\'-"}, {"h\'%-j", "\'-ch"}, {"h\'%-ch", "\'-ch"},
+        {"b([\'%-])h", "p%1h"}, {"d([\'%-])h", "t%1h"}, {"g([\'%-])h", "g%1h"},
+        {"j([\'%-])h", "ch%1"},
+        {"([ptk])([\'%-])h", "%1%2"},
+        {"h([\'%-])[gk]", "%1k"}, {"h([\'%-])[dt]", "%1t"}, {"h([\'%-])[bp]", "%1p"},
 
-        -- syllable-final (not before vowel)
-        {"gg\'", "k\'"}, {"kk\'", "k\'"}, {"g\'", "k\'"},
-        {"dd\'", "t\'"}, {"ss\'", "t\'"}, {"jj\'", "t\'"}, {"tt\'", "t\'"},
-        {"d\'", "t\'"}, {"s\'", "t\'"}, {"j\'", "t\'"}, {"t\'", "t\'"},
-        {"ch\'", "t\'"},
-        {"r\'", "l\'"},
-        {"bb\'", "p\'"}, {"pp\'", "p\'"}, {"b\'", "p\'"},
-        {"h\'", "t\'"},
         -- double consonants
-        {"gs\'", "k\'"}, {"rg\'", "k\'"}, {"lg\'", "k\'"},
-        {"nj\'", "n\'"},
-        {"lb\'", "l\'"}, {"ls\'", "l\'"}, {"lt\'", "l\'"},
-        {"bs\'", "p\'"}, {"lp\'", "p\'"},
-        {"lm\'", "m\'"},
+        {"gs([\'%-])", "k%1"}, {"[rl]g([\'%-])", "k%1"},
+        {"nj([\'%-])", "n%1"},
+        {"l[bst]([\'%-])", "l%1"},-- {"ls([\'%-])", "l%1"}, {"lt([\'%-])", "l%1"},
+        {"bs([\'%-])", "p%1"}, {"l([pm])([\'%-])", "%1%2"},
+        -- syllable-final (not before vowel)
+        {"gg([\'%-])", "k%1"}, {"kk([\'%-])", "k%1"}, {"g([\'%-])", "k%1"},
+        {"dd([\'%-])", "t%1"}, {"ss([\'%-])", "t%1"}, {"jj([\'%-])", "t%1"},
+        {"tt([\'%-])", "t%1"},
+        {"[dsjh]([\'%-])", "t%1"}, {"ch([\'%-])", "t%1"},
+        {"r([\'%-])", "l%1"},
+        {"bb([\'%-])", "p%1"}, {"pp\'", "p%1"}, {"b\'", "p%1"},
 
         -- syllable-finals (before vowel)
-        {"gsv", "ksv"}, {"rg", "lgv"}, {"nhv", "nv"},
-        {"lhv", "rv"}, {"rhv", "rv"},
-        {"cv", "chv"}, -- repair final ch before vowels
+        {"gsv", "ksv"}, {"rg", "lgv"}, {"([nr])hv", "%1v"},
+        {"lhv", "rv"},
 
         -- palatalisation of digeut and ti-eut
-        {"dv\'i", "jv\'i"}, {"dv\'%-i", "jv\'-i"},
-        {"tv\'i", "chv\'i"}, {"tv\'%-i", "chv\'-i"},
+        {"dv([\'%-])i", "jv%1i"}, {"tv([\'%-])i", "chv%1i"},
 
         -- get rid of helping characters
         {"ŋ", "ng"},
@@ -82,10 +69,10 @@ local Revised = Converter:new{
         {"v", ""}, {"\'", ""},
 
         -- assimilations
-        {"kn", "ngn"}, {"kr", "ngn"}, {"km", "ngm"},
-        {"tn", "nn"}, {"tr", "nn"}, {"tm", "nm"},
-        {"pn", "mn"}, {"pr", "mn"}, {"pm", "mm"},
-        {"lr", "ll"}, {"ln", "ll"}, {"nl", "ll"},
+        {"k[nr]", "ngn"}, {"km", "ngm"},
+        {"t[nr]", "nn"}, {"tm", "nm"},
+        {"p[nr]", "mn"}, {"pm", "mm"},
+        {"l[nr]", "ll"}, {"nl", "ll"},
     },
 
     -- -- functions
