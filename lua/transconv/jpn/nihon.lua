@@ -13,9 +13,8 @@ local NihonShiki = Converter:new{
         -- long vowels
         {"aa", "\\^{a}"}, {"ii", "\\^{\\i}"}, {"uu", "\\^{u}"}, {"ee", "\\^{e}"},
         {"ei", "\\^{e}"}, {"oo", "\\^{o}"}, {"ou", "\\^{o}"},
-        -- vowels with ch\\^{o}onpu
-        {"a=", "\\^{a}"}, {"i=", "\\^{\\i}"}, {"u=", "\\^{u}"}, {"e=", "\\^{e}"},
-        {"o=", "\\^{o}"},
+        -- vowels with chōonpu
+        {"([aeiou])=", "\\^{%1}"},
         -- delete separating hyphen between vowels that do not represent long
         -- vowels
         {"a%-a", "aa"}, {"e%-e", "ee"}, {"e%-i", "ei"}, {"u%-u", "uu"},

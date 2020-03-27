@@ -10,7 +10,7 @@ local function to_target_scheme(self, instring)
     return self.do_str_rep(self, instring.."\'", self.rep_strings)
 end
 
-local Revised = Converter:new{
+local MCR = Converter:new{
     name = "kor.revised",
     raw = require(transconv.path_of(...)..".raw"),
 
@@ -19,8 +19,9 @@ local Revised = Converter:new{
         {"=", ""}, {"v", "a"},
 
         -- insert ' at the end of word-final syllables for easier processing
-        {" ", "\' "}, {"%.", "\'."}, {"%?", "\'?"}, {"!", "\'!"},
-        {")", "\')"},
+        {"([^\']) ", "%1\' "}, {"([^\'])%.", "%1\'."}, {"([^\'])%?", "%1\'?"},
+        {"([^\'])!", "%1\'!"},
+        {"([^\'])%)", "%1\')"},
 
         -- always use r for initial rieul
         {"l([aeiouyw])", "r%1"},
@@ -30,7 +31,7 @@ local Revised = Converter:new{
         {"([^v])([\'%-][aeiouyw])", "%1v%2"},
         -- also insert the marker at the beginning of syllables if the previous
         -- one is open or ends in a sonorant
-        {"([aeiou][\'%-])[^v]", "%1v"},
+        {"([aeiou][\'%-])([^v])", "%1v%2"},
 
         -- write e as ë after a and o (to distinguish ae and oe from a-e and o-e)
         {"([ao])v\'e", "%1\'\\\"{e}"},
@@ -64,21 +65,19 @@ local Revised = Converter:new{
         {"d([\'%-])h", "t%1h"}, {"h([\'%-])[dt]", "%1t"},
         {"b([\'%-])h", "p%1h"}, {"h([\'%-])[bp]", "%1p"},
         {"j([\'%-])h", "ch%1"}, {"h([\'%-])j", "%1ch"}, {"h([\'%-])ch", "%1ch"},
-        {"cv", "chv"}, -- repair final ch before vowels
 
         -- syllable-final (not before vowel)
-        {"gg([\'%-])", "k%1"}, {"kk([\'%-])", "k%1"}, {"g([\'%-])", "k%1"},
+        {"gg?([\'%-])", "k%1"}, {"kk([\'%-])", "k%1"},
         {"dd([\'%-])", "t%1"}, {"ss([\'%-])", "t%1"}, {"jj([\'%-])", "t%1"}, {"tt([\'%-])", "t%1"},
         {"[dsjh]([\'%-])", "t%1"},
         {"ch([\'%-])", "t%1"},
         {"r([\'%-])", "l%1"},
-        {"bb([\'%-])", "p%1"}, {"pp([\'%-])", "p%1"}, {"b([\'%-])", "p%1"},
+        {"bb?([\'%-])", "p%1"}, {"pp([\'%-])", "p%1"},
         -- double consonants
         {"gs([\'%-])", "k%1"}, {"[lr]g([\'%-])", "k%1"},
         {"nj([\'%-])", "n%1"},
         {"l[bst]([\'%-])", "l%1"},
         {"bs([\'%-])", "p%1"}, {"l([pm])([\'%-])", "%1%2"},
-        {"lm([\'%-])", "m%1"},
 
         {"l([\'%-])vh", "r%1h"},
 
@@ -96,7 +95,7 @@ local Revised = Converter:new{
         -- or to accidentally delete any that the user entered
         {"v\'", "-v"},
         -- but no hyphen for w, y or ng between vowels
-        {"%-vw", "w"}, {"%-vy", "y"}, {"ng%-v", "ng"},
+        {"%-v([wy])", "%1"},{"ng%-v", "ng"},
         {"%-v%-", "-"},
         {"v", ""}, {"\'", ""}, {"x", "\'"},
 
@@ -114,4 +113,4 @@ local Revised = Converter:new{
     convert = convert,
 }
 
-return Revised
+return MCR

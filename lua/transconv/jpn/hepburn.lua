@@ -11,15 +11,14 @@ local Hepburn = Converter:new{
 
     rep_strings = {
         -- consonants
-        {"ti", "chi"}, {"di", "ji"}, {"si", "shi"}, {"zi", "ji"},
+        {"ti", "chi"}, {"[dz]i", "ji"}, {"si", "shi"},
         {"tu", "tsu"}, {"du", "zu"},
-        {"ty", "ch"}, {"dy", "j"}, {"sy", "sh"}, {"zy", "j"},
+        {"ty", "ch"}, {"[dz]y", "j"}, {"sy", "sh"},
         -- long vowels
         {"aa", "\\={a}"}, {"uu", "\\={u}"}, {"ee", "\\={e}"}, {"oo", "\\={o}"},
         {"ou", "\\={o}"},
         -- vowels with ch\\={o}onpu
-        {"a=", "\\={a}"}, {"i=", "\\={\\i}"}, {"u=", "\\={u}"}, {"e=", "\\={e}"},
-        {"o=", "\\={o}"},
+        {"([aeiou])=", "\\={%1}"},
         -- delete separating hyphen between vowels that do not represent long
         -- vowels
         {"a%-a", "aa"}, {"e%-e", "ee"}, {"e%-i", "ei"}, {"u%-u", "uu"},

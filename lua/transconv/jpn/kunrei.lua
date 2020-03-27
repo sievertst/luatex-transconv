@@ -13,16 +13,14 @@ local KunreiShiki = Converter:new{
         -- long vowels
         {"aa", "\\^{a}"}, {"uu", "\\^{u}"}, {"ee", "\\^{e}"}, {"oo", "\\^{o}"},
         {"ou", "\\^{o}"},
-        -- vowels with ch\\^{o}onpu
-        {"a=", "\\^{a}"}, {"i=", "\\^{\\i}"}, {"u=", "\\^{u}"}, {"e=", "\\^{e}"},
-        {"o=", "\\^{o}"},
+        -- vowels with chōonpu
+        {"([aeiou])=", "\\^{%1}"},
         -- delete separating hyphen between vowels that do not represent long
         -- vowels
         {"a%-a", "aa"}, {"e%-e", "ee"}, {"e%-i", "ei"}, {"u%-u", "uu"},
         {"o%-o", "oo"}, {"o%-u", "ou"},
         -- consonants
-        {"di", "zi"}, {"du", "zu"},
-        {"wi", "i"}, {"we", "e"},
+        {"d([iu])", "z%1"}, {"w([ei])", "%1"},
         -- particles
         {"%-ha", "-wa"}, {"%-he", "-e"}, {"%-wo", "-o"},
     },
