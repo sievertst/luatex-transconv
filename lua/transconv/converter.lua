@@ -77,21 +77,21 @@ local do_str_rep = function(self, instring, rep_list)
         }
     end
 
-    local function is_letter(str)
-        return (str:match("%w") and not str:match("%d"))
-    end
-
     local function insert_captures(str, capts)
-        -- helper function which inserts captured values into the string at the
-        -- correct places. Expects that the string contains a "%i" for every
-        -- index in capts
+        --[[
+            helper function which inserts captured values into the string at the
+            correct places. Expects that the string contains a "%i" for every
+            index in capts
+        -- ]]
 
         for i,c in ipairs(capts) do
             -- need to use different marker than %i so string.format doesn't
             -- complain
-            str = str:gsub("%%(%d)", "{cap%1}")
-            str = str:gsub("{cap"..i.."}", "%%s")
-            str = str:format(c)
+            local st, en = str:find("%%"..i)
+            if st then
+                -- cut c into the string in place of the insert marker
+                str = str:sub(1,st-1)..c..str:sub(en+1)
+            end
         end
         return str
     end

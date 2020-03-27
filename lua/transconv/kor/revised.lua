@@ -23,7 +23,7 @@ local Revised = Converter:new{
 
         -- insert marker at the end of syllables which are followed by
         -- vowel-initial syllables
-        {"([^v])([-\'][aeiouyw])", "%1v%2"},
+        {"([^v])([\'%-][aeiouyw])", "%1v%2"},
 
         -- temporarily replace ng so we don't have to worry about excluding it
         -- when we handle final g

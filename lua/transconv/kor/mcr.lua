@@ -24,11 +24,10 @@ local Revised = Converter:new{
 
         -- always use r for initial rieul
         {"l([aeiouyw])", "r%1"},
-        {"la", "ra"}, {"le", "re"}, {"li", "ri"}, {"lo", "ro"}, {"lu", "ru"},
 
         -- insert marker at the end of syllables which are followed by
         -- vowel-initial syllables
-        {"([^v])([-\'][aeiouyw])", "%1v%2"},
+        {"([^v])([\'%-][aeiouyw])", "%1v%2"},
         -- also insert the marker at the beginning of syllables if the previous
         -- one is open or ends in a sonorant
         {"([aeiou][\'%-])[^v]", "%1v"},

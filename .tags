@@ -23,7 +23,6 @@ get_sb_and_tone	lua/transconv/cmn/raw.lua	/^local function get_sb_and_tone(self,
 get_sb_and_tone	lua/transconv/nan/raw.lua	/^local function get_sb_and_tone(self, sb)$/;"	f
 get_sb_and_tone	lua/transconv/raw.lua	/^local function get_sb_and_tone(self, sb)$/;"	f
 insert_captures	lua/transconv/converter.lua	/^    local function insert_captures(str, capts)$/;"	f
-is_letter	lua/transconv/converter.lua	/^    local function is_letter(str)$/;"	f
 is_valid_sb	lua/transconv/cmn/raw.lua	/^local function is_valid_sb(self, sb)$/;"	f
 is_valid_sb	lua/transconv/example/raw.lua	/^local function is_valid_sb(self, sb)$/;"	f
 is_valid_sb	lua/transconv/jpn/raw.lua	/^local function is_valid_sb(self, sb)$/;"	f
