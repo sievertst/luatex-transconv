@@ -62,16 +62,16 @@ Transconv will output the correct Bbánlám pìngyīm version instead: zápggoô
       <td>Wade-Giles (<code>cmn.wadegiles</code>)</td>
     </tr>
     <tr>
-      <td rowspan="3"><code>jap</code></td>
+      <td rowspan="3"><code>jpn</code></td>
       <td rowspan="3">Standard Japanese</td>
       <td rowspan="3">modified Hepburn</td>
-      <td>Hepburn (<code>jap.hepburn</code>)</td>
+      <td>Hepburn (<code>jpn.hepburn</code>)</td>
     </tr>
     <tr>
-      <td>Kunrei-shiki (<code>jap.kunrei</code>)</td>
+      <td>Kunrei-shiki (<code>jpn.kunrei</code>)</td>
     </tr>
     <tr>
-      <td>Nihon-shiki (<code>jap.nihon</code>)</td>
+      <td>Nihon-shiki (<code>jpn.nihon</code>)</td>
     </tr>
     <tr>
       <td rowspan="4"><code>kor</code></td>
