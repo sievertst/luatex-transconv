@@ -97,7 +97,7 @@
 
 -- the following defines the converter object
 local Example = Converter:new{
-    -- scheme name -- should be identical to the language folder name + the file
+    -- scheme name. Should be identical to the language folder name + the file
     -- name without the extension, separated with a dot (e.g. "cmn.pinyin" for
     -- Hanyu Pinyin)
     name = "example.example",
@@ -118,11 +118,14 @@ local Example = Converter:new{
     -- should contain pairs of strings: The first is the string to be replaced,
     -- the second the replacement string
     rep_strings = {
-        -- {"ae", "æ"}, -- sample
+        -- {"ae", "æ"}, -- sample: changes all instances of ae to æ
+        -- {"k([ij])", "c%1"}   -- sample with capture: changes k to c, but only
+                                -- following i or j
     },
 
     -- functions
-    -- remember to associate all functions you (re)defined above here like so:
+    -- remember to associate all functions you (re)defined above with your table
+    -- like so:
     --   my_function = my_function,
 }
 
