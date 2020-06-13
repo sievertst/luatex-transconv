@@ -11,7 +11,7 @@ Adding a New Language	doc/master.tex	/^\\end{enumerate}$/;"	u
 BIB	doc/makefile	/^BIB 	:= biber$/;"	m
 CC	doc/makefile	/^CC 		:= latexmk -pdf -pdflatex="$(TEX) $(FLAGS)" -use-make #-output-directory=$(AUX)$/;"	m
 FLAGS	doc/makefile	/^FLAGS 	:= -synctex=1 -src-specials -interaction=nonstopmode -file-line-error -halt-on-error$/;"	m
-LUAMOD	makefile	/^LUAMOD := $(TEXDIR)\/scripts\/transconv$/;"	m
+LUAMOD	makefile	/^LUAMOD := $(TEXDIR)\/scripts\/kpsewhich\/lua$/;"	m
 MASTER	doc/makefile	/^MASTER 	:= master$/;"	m
 PROJ	doc/makefile	/^PROJ 	:= transconv$/;"	m
 ROOT	doc/makefile	/^ROOT 	:= $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))$/;"	m
