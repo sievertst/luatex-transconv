@@ -77,7 +77,6 @@ local BP = Converter:new{
         {"^[^a-z]*ni([aou])", "yn%1"}, {"^[^a-z]*nu([aei])", "wn%1"},
         {"^[^a-z]*ni([^aou]?)", "yni%1"}, {"^[^a-z]*nu([^aei]?)", "wnu%1"},
     },
-
     second_rep_strings = {
         {"{i}", "{\\i}"}, -- use dotless i with diacritics
     },

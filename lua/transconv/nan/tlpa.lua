@@ -10,9 +10,6 @@ local TLPA = Converter:new{
         {"%-%-", "{-}{-}"}, -- prevent dash ligature for neutral tone marker
         {"ts", "c"}
     },
-    -- second_rep_strings = {
-    --     {"(%d)", "\\textsuperscript{%1}"},
-    -- },
     second_rep_strings = {
         {"[^{](%d)", "\\textsuperscript{%1}"},
     },
