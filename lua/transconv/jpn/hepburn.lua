@@ -26,6 +26,9 @@ local Hepburn = Converter:new{
         -- particles
         {"%-ha", "-wa"}, {"%-he", "-e"}, {"%-wo", "-o"},
     },
+    second_rep_strings = {
+        {"{i}", "{\\i}"}, -- use dotless i with diacritics
+    },
 
     -- functions
     to_target_scheme = to_target_scheme,

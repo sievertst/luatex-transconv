@@ -20,6 +20,9 @@ local NihonShiki = Converter:new{
         {"a%-a", "aa"}, {"e%-e", "ee"}, {"e%-i", "ei"}, {"u%-u", "uu"},
         {"o%-o", "oo"}, {"o%-u", "ou"},
     },
+    second_rep_strings = {
+        {"{i}", "{\\i}"}, -- use dotless i with diacritics
+    },
 
     -- functions
     to_target_scheme = to_target_scheme,
