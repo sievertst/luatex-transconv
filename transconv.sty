@@ -118,7 +118,9 @@ package}
 
     % set up the converter.
     % For example importing "cmn.pinyin" would result in the following Lua command:
-    % transconv.schemes["pinyin"] = transconv.new_converter("cmn", "pinyin")
+    % transconv:new_converter("cmn", "pinyin")
+    % Converter does not need to be stored in variable because conversion
+    % commands will retrieve it from dictionaries/arrays of the transconv table
     \directlua{%
       transconv:new_converter(%
         "\tl_use:N \l__transconv_lang_tl",%

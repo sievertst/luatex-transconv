@@ -59,9 +59,6 @@ local Pinyin = Converter:new{
         {"g([iü])", "j%1"}, {"k([iü])", "q%1"}, {"h([iü])", "x%1"},
         {"([jqx])ü", "%1u"},
     },
-    second_rep_strings = {
-        {"{i}", "{\\i}"}, -- use dotless i with diacritics
-    },
 
     -- functions
     join_sbs = join_sbs,

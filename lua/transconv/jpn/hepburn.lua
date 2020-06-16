@@ -18,16 +18,14 @@ local Hepburn = Converter:new{
         {"aa", "\\={a}"}, {"uu", "\\={u}"}, {"ee", "\\={e}"}, {"oo", "\\={o}"},
         {"ou", "\\={o}"},
         -- vowels with ch\\={o}onpu
-        {"([aeiou])=", "\\={%1}"},
+        {"([aeou])=", "\\={%1}"},
+        {"i=", "\\={\\i}"}, -- use dotless i as a basis for diacritics
         -- delete separating hyphen between vowels that do not represent long
         -- vowels
         {"a%-a", "aa"}, {"e%-e", "ee"}, {"e%-i", "ei"}, {"u%-u", "uu"},
         {"o%-o", "oo"}, {"o%-u", "ou"},
         -- particles
         {"%-ha", "-wa"}, {"%-he", "-e"}, {"%-wo", "-o"},
-    },
-    second_rep_strings = {
-        {"{i}", "{\\i}"}, -- use dotless i with diacritics
     },
 
     -- functions
