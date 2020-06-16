@@ -14,7 +14,8 @@ local KunreiShiki = Converter:new{
         {"aa", "\\^{a}"}, {"uu", "\\^{u}"}, {"ee", "\\^{e}"}, {"oo", "\\^{o}"},
         {"ou", "\\^{o}"},
         -- vowels with chōonpu
-        {"([aeiou])=", "\\^{%1}"},
+        {"([aeou])=", "\\^{%1}"},
+        {"i=", "\\^{\\i}"}, -- use dotless i as a basis for diacritics
         -- delete separating hyphen between vowels that do not represent long
         -- vowels
         {"a%-a", "aa"}, {"e%-e", "ee"}, {"e%-i", "ei"}, {"u%-u", "uu"},
@@ -23,9 +24,6 @@ local KunreiShiki = Converter:new{
         {"d([iu])", "z%1"}, {"w([ei])", "%1"},
         -- particles
         {"%-ha", "-wa"}, {"%-he", "-e"}, {"%-wo", "-o"},
-    },
-    second_rep_strings = {
-        {"{i}", "{\\i}"}, -- use dotless i with diacritics
     },
 
     to_target_scheme = to_target_scheme,

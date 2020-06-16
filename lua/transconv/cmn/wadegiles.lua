@@ -28,10 +28,6 @@ local WadeGiles = Converter:new{
         {"k(\'?)ui", "k%1uei"},
     },
 
-    second_rep_strings = {
-        {"([^{])([1-4])", "%1\\textsuperscript{%2}"}, {"(%w)[05]", "%1"},
-    },
-
     -- functions
     add_tone_marker = add_tone_marker,
 }

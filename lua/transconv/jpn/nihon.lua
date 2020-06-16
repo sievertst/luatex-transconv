@@ -15,13 +15,11 @@ local NihonShiki = Converter:new{
         {"ei", "\\^{e}"}, {"oo", "\\^{o}"}, {"ou", "\\^{o}"},
         -- vowels with chōonpu
         {"([aeiou])=", "\\^{%1}"},
+        {"i=", "\\^{\\i}"}, -- use dotless i as a basis for diacritics
         -- delete separating hyphen between vowels that do not represent long
         -- vowels
         {"a%-a", "aa"}, {"e%-e", "ee"}, {"e%-i", "ei"}, {"u%-u", "uu"},
         {"o%-o", "oo"}, {"o%-u", "ou"},
-    },
-    second_rep_strings = {
-        {"{i}", "{\\i}"}, -- use dotless i with diacritics
     },
 
     -- functions
