@@ -25,9 +25,7 @@ local add_tone_marker = function(self, instring)
         -- try to match the tone digit after a letter in the input string
         local needle = string.format('[%%w]%d', t)
         local match = string.match(instring, needle)
-        -- ü has to be matched separately because it being 2 bytes long
-        -- confuses the matching function if used together with the others
-        match = match or string.match(instring, "ü"..t)
+
         -- if matched and tone is not unmarked
         if match and marker then
             -- get the letter which will carry the tone marker
