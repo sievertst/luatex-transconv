@@ -1,7 +1,7 @@
 #!/usr/bin/env lua5.3
 
 -- factory function
-local new = function(self, conv)
+local function new(self, conv)
     -- TODO: ensure proper encapsulation
     conv = conv or {} -- create converter object if not specified
     setmetatable(conv, self)
@@ -10,7 +10,7 @@ local new = function(self, conv)
     return conv
 end
 
-local add_tone_marker = function(self, instring)
+local function add_tone_marker(self, instring)
     --[[
         Receives a string and returns it with tone digits replaced with the
         correct diacritics.
@@ -56,7 +56,7 @@ local add_tone_marker = function(self, instring)
     return instring
 end
 
-local do_str_rep = function(self, instring, rep_list)
+local function do_str_rep(self, instring, rep_list)
     --[[
         Do the appropriate string replacements according to the passed
         replacement dictionary. E.g. Tâi-lô "ts" becoming "ch" in POJ.
@@ -140,7 +140,7 @@ local do_str_rep = function(self, instring, rep_list)
     return instring
 end
 
-local join_sbs = function(self, sbs)
+local function join_sbs(self, sbs)
     --[[
         Receives a list of syllables in target scheme and joins them together
         to a valid output string.
@@ -168,7 +168,7 @@ local join_sbs = function(self, sbs)
     return table.concat(sbs)
 end
 
-local place_tone_digit = function(self, sb, tone)
+local function place_tone_digit(self, sb, tone)
     --[[
         Receive a syllable with the tone number at the end and return it with
         the number moved behind the letter that is going to carry the
@@ -177,7 +177,7 @@ local place_tone_digit = function(self, sb, tone)
     return sb..tostring(tone)
 end
 
-local to_target_scheme = function(self, sb)
+local function to_target_scheme(self, sb)
     --[[
         Takes a SINGLE SYLLABLE in raw scheme and converts it to target
         scheme of the converter.
@@ -201,7 +201,7 @@ local to_target_scheme = function(self, sb)
     return sb
 end
 
-local convert = function(self, instring)
+local function convert(self, instring)
     --[[
         Use splitting function to split input strings into syllables.  For
         each syllable, check cache if it has been converted before. If not,
@@ -231,7 +231,7 @@ local convert = function(self, instring)
     return self.join_sbs(self, outsbs)
 end
 
-local __tostring = function(self)
+local function __tostring(self)
     return self.name
 end
 
