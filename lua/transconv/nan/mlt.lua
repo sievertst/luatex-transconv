@@ -17,7 +17,7 @@ local function convert(self, instring)
         -- Do replacements only on syllables that are valid in raw scheme
         if self.raw:is_valid_sb(sb) then
             if self.cache[sb] == nil then
-                self.cache[sb] = self.to_target_scheme(self, sb)
+                self.cache[sb] = self:do_str_rep(sb, self.second_rep_strings)
             end
             table.insert(outsbs, self.cache[sb])
         else
@@ -47,6 +47,10 @@ local Tailo = Converter:new{
     second_rep_strings = {
         {"if", "y"}, {"uf", "w"},
         {"air", "ae"}, {"aur", "ao"}, {"ir", "ie"}, {"ur", "uo"}, {"er", "ea"},
+        -- {"([aeioun])5", "%1-%1"}, -- double capture seems to cause an infinite loop? why?
+        {"a5", "aa"}, {"e5", "ee"}, {"i5", "ii"}, {"o5", "oo"}, {"u5", "uu"}, {"n5", "nn"},
+        {"ø5", "øo"},
+        {"4h", "q"}, {"4p", "b"}, {"4t", "d"}, {"4k", "g"},
     },
 
     -- functions
