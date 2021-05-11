@@ -10,8 +10,8 @@ local function join_sbs(self, sbs)
         ["\\`{o}"]=true,
     }
     for i, sb in ipairs(sbs) do
-        if i ~= 1 and vowels[sb:match("^%w")]
-            or vowels[sb:match("^\\[v=\'`]{%w}")] then
+        if i ~= 1 and (vowels[sb:match("^%w")]
+            or vowels[sb:match("^\\[v=\'`]{%w}")]) then
             sbs[i] = "\'"..sb
         end
     end
@@ -57,6 +57,8 @@ local Pinyin = Converter:new{
     rep_strings = {
         {"v", "ü"},
         {"gi", "ji"}, {"ki", "qi"}, {"hi", "xi"},
+        -- repair "shi"
+        {"sxi", "shi"},
         {"gü", "ju"}, {"kü", "qu"}, {"hü", "xu"},
     },
 

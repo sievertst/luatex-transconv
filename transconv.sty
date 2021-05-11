@@ -92,7 +92,7 @@ package}
   % e.g. "\topinyin"
   \expandafter\cs_set_protected:Npx\cs:w to#1\cs_end: ##1
   {%
-    \cs:w #1font\cs_end:\cs:w #1convert\cs_end:{##1}
+    {\cs:w #1font\cs_end:\cs:w #1convert\cs_end:{##1}}
   }
 }
 
