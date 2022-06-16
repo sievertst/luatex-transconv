@@ -8,9 +8,10 @@
 
   But:
   - write chōonpu as "="
-  - if you want to prevent two consecutive vowels from being interpreted as one
-      long vowel, separate them with a hyphen. E.g. 湖(みずうみ): mizu-umi
-  - separate particles from the NP with hyphens: 日本(にほん)は: nihon-ha
+  - if you need to indicate a syllable boundary (either after ん or between two
+    vowels which should not be contracted), separate them with an apostrophe.
+    E.g. 湖(みずうみ): mizu'umi
+  - separate affixes with hyphens: 日本(にほん)は: nihon-ha
 --]]
 
 local function is_valid_sb(self, sb)

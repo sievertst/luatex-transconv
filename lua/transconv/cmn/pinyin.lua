@@ -57,8 +57,8 @@ local Pinyin = Converter:new{
     rep_strings = {
         {"v", "ü"},
         {"gi", "ji"}, {"ki", "qi"}, {"hi", "xi"},
-        -- repair "shi"
-        {"sxi", "shi"},
+        -- repair "zhi, chi, shi"
+        {"zxi", "zhi"}, {"cxi", "chi"}, {"sxi", "shi"},
         {"gü", "ju"}, {"kü", "qu"}, {"hü", "xu"},
     },
 
