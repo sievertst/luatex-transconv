@@ -1,5 +1,6 @@
 .tags
 .token
+tests/
 
 ## TeX gitignores for documentation
 doc/.aux/

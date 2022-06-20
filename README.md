@@ -104,6 +104,12 @@ Transconv will output the correct Bbánlám pìngyīm version instead: zápggoô
       <td>TLPA (<code>nan.tlpa</code>)</td>
     </tr>
   </tbody>
+  <tr>
+    <td rowspan="1"><code>san</code></td>
+    <td rowspan="1">Sanskrit</td>
+    <td rowspan="1">modified Velthuis</td>
+    <td rowspan="1">IAST (<code>san.iast</code>)</td>
+  </tr>
 </table>
 
 It is also possible to add more languages and schemes with just a limited amount
