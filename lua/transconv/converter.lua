@@ -75,36 +75,53 @@ local do_str_rep = function(self, instring, rep_dict)
 
         -- find starting index of match if there is one
         -- also capture groups (look behind and look ahead) if returned
-        local st, en, groupi, groupii = lower_input:find(orig)
-        -- put empty strings if nothing was captured
-        local groupi = groupi or ""
-        local groupii = groupii or ""
+        local failsafe = 0 -- guard against infinite loops
+        local checked_to_index = 0
+        while lower_input:find(orig, checked_to_index) do
+            local st, en, groupi, groupii = lower_input:find(orig, checked_to_index)
+            -- put empty strings if nothing was captured
+            local groupi = groupi or ""
+            local groupii = groupii or ""
 
-        -- match cases
-        if st then
             -- update start and end indexes according to lengths of the groups
             st = st + groupi:len()
             en = en - groupii:len()
 
-            -- use indexes to check original input string for the case of
-            -- the first two letters
-            local match_first = instring:sub(st,st)
-            local match_second = instring:sub(st+1,st+1)
+            local match = instring:sub(st, en)
 
-            -- if first letter is lower, assume it's all lower
-            if match_first == match_first:lower() then
+            -- case matching
+            -- test for all lower case
+            if match == match:lower() then
                 rep = rep:lower()
-            -- if it's upper and the second is lower, assume title case
-            elseif match_second == match_second:lower() then
+            -- test for title case (first letter upper, rest lower)
+            elseif match == match:sub(1,1):upper()..match:sub(2):lower() then
                 rep = rep:sub(1,1):upper()..rep:sub(2)
-            -- if both are upper, assume all upper case
+            -- test for all upper case *after* title case because otherwise
+            -- a single uppercase input character going to multiple output
+            -- characters would always return all uppercase. That is usually
+            -- not what we want
+            elseif match == match:upper() then
+                -- turn to upper case but protect LaTeX command name
+                rep = self.__protected_upper_case(rep)
+            -- if none of these matched, assume we want all lower case
             else
-                rep = rep:upper()
+                rep = rep:lower()
             end
 
             -- escape special characters in match string before substitution
             local match = instring:sub(st, en):gsub("([^%w])", "%%%1")
+            local old_instring = instring
             instring = instring:gsub(match, rep)
+
+            -- need to update both of these for the loop check
+            lower_input = instring:lower()
+            checked_to_index = st+rep:len()
+
+            -- update failsafe loopguard
+            failsafe = failsafe + 1
+            if failsafe > 10 then
+                break
+            end
         end
     end
 
@@ -206,6 +223,25 @@ local __tostring = function(self)
     return self.name
 end
 
+local __protected_upper_case = function(instr)
+    -- find all command names in input and store them in an array (including the
+    -- backslash)
+    local command_names = {}
+    for c in instr:gmatch("\\%S[%[{%s]") do
+        print(c)
+        table.insert(command_names, c)
+    end
+
+    local outstr = instr:upper()
+
+    -- loop over array of stored commands and replace the uppercased names in
+    -- the outstr
+    for _, c in ipairs(command_names) do
+        outstr = outstr:gsub(c:upper(), c)
+    end
+    return outstr
+end
+
 local Converter = {
     -- converter prototype object
     name = "",
@@ -229,6 +265,7 @@ local Converter = {
     place_tone_digit = place_tone_digit,
     to_target_scheme = to_target_scheme,
     __tostring = __tostring,
+    __protected_upper_case = __protected_upper_case,
 }
 
 return Converter

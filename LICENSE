@@ -12,14 +12,16 @@ This work has the LPPL maintenance status `maintained'.
 The Current Maintainer of this work is Sievert von Stülpnagel.
 
 This work consists of the following files:
+    README.md
+    LICENSE
     transconv.sty
     doc/master.tex
+    doc/transconv.pdf
     doc/settings/layout.tex
     doc/settings/macros.tex
     doc/settings/packages.tex
-    doc/transconv.pdf
-    lua/transconv/init.lua
     lua/transconv/converter.lua
+    lua/transconv/init.lua
     lua/transconv/raw.lua
     lua/transconv/cmn/raw.lua
     lua/transconv/cmn/pinyin.lua
@@ -30,6 +32,9 @@ This work consists of the following files:
     lua/transconv/jpn/hepburn.lua
     lua/transconv/jpn/kunrei.lua
     lua/transconv/jpn/nihon.lua
+    lua/transconv/kor/mcr.lua
+    lua/transconv/kor/mcr-n.lua
+    lua/transconv/kor/mcr-s.lua
     lua/transconv/kor/raw.lua
     lua/transconv/kor/revised.lua
     lua/transconv/nan/raw.lua
@@ -37,3 +42,5 @@ This work consists of the following files:
     lua/transconv/nan/poj.lua
     lua/transconv/nan/tailo.lua
     lua/transconv/nan/tlpa.lua
+    lua/transconv/san/raw.lua
+    lua/transconv/san/iast.lua
