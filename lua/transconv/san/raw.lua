@@ -3,11 +3,11 @@
 --[[
   Spell everything in Velthuis.
 
-  Exceptions: TODO
+  Exceptions:
   - capital letters are not allowed as alternatives for special letters but
     are interpreted as capitalised versions of the lowercase letter
   - For di- or trigraphs, each letter has to be capitalised to get a capital
-    output (TODO)
+    output
   - use underscore for nuqta letters: _ka, _kha, _ga, _za, _zha, _ra, _rha,
     _pha, _va. The following shorthands are permitted but may not be supported
     by all schemes:

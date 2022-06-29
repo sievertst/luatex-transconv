@@ -1,11 +1,5 @@
 #!/usr/bin/env lua5.3
 
--- TODO: capitalised digraphs only work if all letters are capitals (no
--- lowercase letters or punctuation at all)
--- TODO: capitalised digraphs cause following non-capitalised digraphs of the
--- same type within the same call to stop working (e.g. the input "AA aa"
--- results in the output "Ā aa)
-
 local function to_target_scheme(self, instring)
     -- skip all the fancy stuff except string replacement
     return self.do_str_rep(self, instring, self.rep_strings)
