@@ -53,6 +53,12 @@ Transconv will output the correct Bbánlám pìngyīm version instead: zápggoô
   </thead>
   <tbody>
     <tr>
+      <td><code>ara</code></td>
+      <td>Arabic</td>
+      <td>modified ArabTeX</td>
+      <td>DIN 31635 (<code>ara.din</code>, WIP)</td>
+    </tr>
+    <tr>
       <td rowspan="2"><code>cmn</code></td>
       <td rowspan="2">Standard Chinese</td>
       <td rowspan="2">modified Pinyin</td>

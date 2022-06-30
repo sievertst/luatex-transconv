@@ -78,6 +78,7 @@ local do_str_rep = function(self, instring, rep_dict)
         local failsafe = 0 -- guard against infinite loops
         local checked_to_index = 0
         while lower_input:find(orig, checked_to_index) do
+
             local st, en, groupi, groupii = lower_input:find(orig, checked_to_index)
             -- put empty strings if nothing was captured
             local groupi = groupi or ""
@@ -88,30 +89,34 @@ local do_str_rep = function(self, instring, rep_dict)
             en = en - groupii:len()
 
             local match = instring:sub(st, en)
+            texio.write_nl("Replacing: "..match.." with "..rep.." in "..instring.."\n")
 
-            -- case matching
-            -- test for all lower case
-            if match == match:lower() then
-                rep = rep:lower()
-            -- test for title case (first letter upper, rest lower)
-            elseif match == match:sub(1,1):upper()..match:sub(2):lower() then
-                rep = rep:sub(1,1):upper()..rep:sub(2)
-            -- test for all upper case *after* title case because otherwise
-            -- a single uppercase input character going to multiple output
-            -- characters would always return all uppercase. That is usually
-            -- not what we want
-            elseif match == match:upper() then
-                -- turn to upper case but protect LaTeX command name
-                rep = self.__protected_upper_case(rep)
-            -- if none of these matched, assume we want all lower case
-            else
-                rep = rep:lower()
+            -- match case if the replacement string is all lower case
+            if not rep == rep:lower() then
+                -- test for all lower case
+                if match == match:lower() then
+                    rep = rep:lower()
+                -- test for title case (first letter upper, rest lower)
+                elseif match == match:sub(1,1):upper()..match:sub(2):lower() then
+                    rep = rep:sub(1,1):upper()..rep:sub(2)
+                -- test for all upper case *after* title case because otherwise
+                -- a single uppercase input character going to multiple output
+                -- characters would always return all uppercase. That is usually
+                -- not what we want
+                elseif match == match:upper() then
+                    -- turn to upper case but protect LaTeX command name
+                    rep = self.__protected_upper_case(rep)
+                -- if none of these matched, assume we want all lower case
+                else
+                    rep = rep:lower()
+                end
             end
 
             -- escape special characters in match string before substitution
             local match = instring:sub(st, en):gsub("([^%w])", "%%%1")
             local old_instring = instring
             instring = instring:gsub(match, rep)
+            texio.write_nl("Result: "..instring.."\n")
 
             -- need to update both of these for the loop check
             lower_input = instring:lower()

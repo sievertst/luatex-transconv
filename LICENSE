@@ -23,6 +23,8 @@ This work consists of the following files:
     lua/transconv/converter.lua
     lua/transconv/init.lua
     lua/transconv/raw.lua
+    lua/transconv/ara/din.lua
+    lua/transconv/ara/raw.lua
     lua/transconv/cmn/raw.lua
     lua/transconv/cmn/pinyin.lua
     lua/transconv/cmn/wadegiles.lua
