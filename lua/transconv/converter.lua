@@ -58,6 +58,50 @@ local add_tone_marker = function(self, instring)
     return instring
 end
 
+local match_case = function(self, needle, replacement, match)
+    --[[
+        Determines an appropriate casing for the replacement for match and
+        returns it. If the original needle contains at least one uppercase
+        letter, the replacement is case-sensitive. Otherwise it is
+        case-insensitive and the casing in haystack is preserved.
+    --]]
+    if needle ~= needle:lower() then
+        return replacement
+    else
+        -- test for all lower case
+        if match == match:lower() then
+            -- replacement is already correct, so do nothing
+
+        -- test for title case (first letter upper, rest lower)
+        -- TODO: change the check to ignore leading non-word characters
+        elseif match == match:sub(1,1):upper()..match:sub(2):lower() then
+            replacement = replacement:sub(1,1):upper()..replacement:sub(2)
+
+        -- test for all upper case *after* title case because otherwise
+        -- a single uppercase input character going to multiple output
+        -- characters would always return all uppercase. That is usually
+        -- not what we want
+        elseif match == match:upper() then
+            -- turn to upper case but protect LaTeX command name
+            replacement = self.__protected_upper_case(replacement)
+
+        -- if none of these matched, assume we want all lower case
+        else
+            replacement = replacement:lower()
+        end
+
+        return replacement
+    end
+end
+
+local find_case_insensitive = function(self, haystack, needle)
+    return haystack:lower():find(needle:lower())
+end
+
+local escape_special_characters = function(self, input)
+    return input:gsub("([^%w])", "%%%1")
+end
+
 local do_str_rep = function(self, instring, rep_dict)
     --[[
         Do the appropriate string replacements according to the passed
@@ -68,59 +112,37 @@ local do_str_rep = function(self, instring, rep_dict)
     --]]
 
     for _, rep_pair in pairs(rep_dict) do
-        local lower_input = instring:lower()
+        local orig = rep_pair[1]
+        local rep = rep_pair[2]
 
-        local orig = rep_pair[1]:lower()
-        local rep = rep_pair[2]:lower()
-
-        -- find starting index of match if there is one
-        -- also capture groups (look behind and look ahead) if returned
+        local check_from_index = 0
         local failsafe = 0 -- guard against infinite loops
-        local checked_to_index = 0
-        while lower_input:find(orig, checked_to_index) do
-
-            local st, en, groupi, groupii = lower_input:find(orig, checked_to_index)
-            -- put empty strings if nothing was captured
+        while instring:lower():find(orig:lower(), check_from_index) do
+            local remaining_string = instring:sub(check_from_index)
+            local st, en, groupi, groupii = self:find_case_insensitive(remaining_string, orig)
+            -- put empty strings in capture groups if nothing was captured
             local groupi = groupi or ""
             local groupii = groupii or ""
-
-            -- update start and end indexes according to lengths of the groups
+            -- update start and end indexes according to lengths of the group
             st = st + groupi:len()
             en = en - groupii:len()
 
-            local match = instring:sub(st, en)
-            texio.write_nl("Replacing: "..match.." with "..rep.." in "..instring.."\n")
+            local match = remaining_string:sub(st, en)
+            print_debug("Match cases for: "..orig)
+            print_debug("Match: \'"..match.."\' at index: "..st.." in "..remaining_string)
+            local replacement = self:match_case(orig, rep, match)
+            print_debug("Determined replacement: "..replacement)
 
-            -- match case if the replacement string is all lower case
-            if not rep == rep:lower() then
-                -- test for all lower case
-                if match == match:lower() then
-                    rep = rep:lower()
-                -- test for title case (first letter upper, rest lower)
-                elseif match == match:sub(1,1):upper()..match:sub(2):lower() then
-                    rep = rep:sub(1,1):upper()..rep:sub(2)
-                -- test for all upper case *after* title case because otherwise
-                -- a single uppercase input character going to multiple output
-                -- characters would always return all uppercase. That is usually
-                -- not what we want
-                elseif match == match:upper() then
-                    -- turn to upper case but protect LaTeX command name
-                    rep = self.__protected_upper_case(rep)
-                -- if none of these matched, assume we want all lower case
-                else
-                    rep = rep:lower()
-                end
-            end
+            local needle = self:escape_special_characters(match)
+            print_debug("Original: "..instring)
+            instring = instring:gsub(needle, replacement, 1)
+            print_debug("Result: "..instring)
 
-            -- escape special characters in match string before substitution
-            local match = instring:sub(st, en):gsub("([^%w])", "%%%1")
-            local old_instring = instring
-            instring = instring:gsub(match, rep)
-            texio.write_nl("Result: "..instring.."\n")
-
-            -- need to update both of these for the loop check
-            lower_input = instring:lower()
-            checked_to_index = st+rep:len()
+            -- update starting index for the check so the next search starts
+            -- from the END of the previous one
+            check_from_index = check_from_index + st + replacement:len()
+            print_debug("Determined starting index: "..check_from_index.." in "..instring)
+            print_debug("")
 
             -- update failsafe loopguard
             failsafe = failsafe + 1
@@ -180,7 +202,9 @@ local to_target_scheme = function(self, sb)
     sb, tone = self.raw:get_sb_and_tone(sb)
 
     sb = self.do_str_rep(self, sb, self.rep_strings)
-    sb = self.place_tone_digit(self, sb, tone)
+    if tone ~= nil then
+        sb = self.place_tone_digit(self, sb, tone)
+    end
     -- secondary replacements that depend on the digit being in the
     -- right place already
     sb = self.do_str_rep(self, sb, self.second_rep_strings)
@@ -266,7 +290,10 @@ local Converter = {
     add_tone_marker = add_tone_marker,
     convert = convert,
     do_str_rep = do_str_rep,
+    escape_special_characters = escape_special_characters,
+    find_case_insensitive = find_case_insensitive,
     join_sbs = join_sbs,
+    match_case = match_case,
     place_tone_digit = place_tone_digit,
     to_target_scheme = to_target_scheme,
     __tostring = __tostring,

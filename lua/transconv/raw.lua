@@ -16,7 +16,7 @@ local function get_sb_and_tone(self, sb)
         syllable without the tone digit and the tone as an int.
     --]]
 
-    return sb, 0
+    return sb, nil
 end
 
 local function is_valid_sb(self,sb)

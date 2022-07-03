@@ -1,10 +1,5 @@
 #!/usr/bin/env lua5.3
 
--- TODO:
--- - if context-sensitive hamzah is matched just once for deletion, all other
---   hamzahs in the string are deleted as well, regardless of context
---   - may also apply to other context-sensitive replacements (N, T, H)
-
 local function to_target_scheme(self, instring)
     -- skip all the fancy stuff except string replacement
     return self.do_str_rep(self, instring, self.rep_strings)
@@ -47,6 +42,10 @@ local DIN = Converter:new{
         {"([a-zA-z])H", "h"}, {"([a-zA-z])T", "t"},
         -- nunation
         {"N", "n"},
+    },
+
+    second_rep_strings = {
+        {"{i}", "{\\i}"}, -- use dotless i with diacritics
     },
 
     -- functions

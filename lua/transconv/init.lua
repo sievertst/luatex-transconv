@@ -7,10 +7,18 @@ else
     main_dir = ""
 end
 
+DEBUG = false
+
 Raw = require(main_dir.."raw")
 
 schemes = {}
 default_schemes = {}
+
+print_debug = function(instring)
+    if DEBUG then
+        texio.write_nl(instring.."\n")
+    end
+end
 
 local function path_of(path)
     --[[

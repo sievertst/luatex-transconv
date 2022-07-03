@@ -62,6 +62,10 @@ local Pinyin = Converter:new{
         {"gü", "ju"}, {"kü", "qu"}, {"hü", "xu"},
     },
 
+    second_rep_strings = {
+        {"{i}", "{\\i}"}, -- use dotless i with diacritics
+    },
+
     -- functions
     join_sbs = join_sbs,
     place_tone_digit = place_tone_digit,
