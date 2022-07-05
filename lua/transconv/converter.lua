@@ -1,5 +1,7 @@
 #!/usr/bin/env lua5.3
 
+-- TODO: groups don't seem to work properly in string substitution
+
 -- factory function
 local new = function(self, conv)
     -- TODO: ensure proper encapsulation
@@ -58,6 +60,53 @@ local add_tone_marker = function(self, instring)
     return instring
 end
 
+local is_title_case = function(self, str)
+    --[[
+        Receives a string, tests if it's title case and returns the result as a
+        boolean.
+
+        Title case means that the first (true = non-special character) letter is
+        upper case and all following ones are lower case.
+    --]]
+    -- pattern matches any string consisting of
+    --      - any number of non-letter characters (%A) followed by
+    --      - a single uppercase character (%u) and
+    --      - any number of characters which are not uppercase characters (%U)
+    --  If the input string is title case, this pattern should match the entire
+    --  string
+    return str:match("%A*%u%U*") == str
+end
+
+local find_non_command = function(self, char, haystack)
+    --[[
+        Find the first occurrence of char within haystack (only works for single
+        characters!) and returns its index. Returns 0 if char is not found.
+    --]]
+    local outindex = 0
+    local within_command_name = false
+    for i = 1, #haystack do
+        local c = haystack:sub(i,i)
+        if c:match("\\") then
+            within_command_name = true
+            goto continue -- go to tag named continue at the end of the loop
+        end
+
+        if within_command_name then
+            if c:match("%A") ~= nil then
+                within_command_name = false
+            else
+            end
+        else
+            if c:match(char) ~= nil then
+                return i
+            end
+        end
+        ::continue::
+    end
+
+    return i
+end
+
 local match_case = function(self, needle, replacement, match)
     --[[
         Determines an appropriate casing for the replacement for match and
@@ -73,9 +122,17 @@ local match_case = function(self, needle, replacement, match)
             -- replacement is already correct, so do nothing
 
         -- test for title case (first letter upper, rest lower)
-        -- TODO: change the check to ignore leading non-word characters
-        elseif match == match:sub(1,1):upper()..match:sub(2):lower() then
-            replacement = replacement:sub(1,1):upper()..replacement:sub(2)
+        elseif self:is_title_case(match) then
+            -- get the first lowercase character in the replacement but exclude
+            -- command names from search
+            local true_first_char_i = self:find_non_command("%w", replacement)
+
+            local head = replacement:sub(0, true_first_char_i-1)
+            local capitalised = replacement:sub(true_first_char_i, true_first_char_i):upper()
+            local tail = replacement:sub(true_first_char_i+1)
+            -- Since we already know replacement to be all lower case, there is
+            -- no need to call lower() on the tail
+            replacement = head..capitalised..tail
 
         -- test for all upper case *after* title case because otherwise
         -- a single uppercase input character going to multiple output
@@ -99,7 +156,9 @@ local find_case_insensitive = function(self, haystack, needle)
 end
 
 local escape_special_characters = function(self, input)
-    return input:gsub("([^%w])", "%%%1")
+    -- local inp = "a%-b"
+    local output = input:gsub("([%%%-.%^])", "%%%1")
+    return output
 end
 
 local do_str_rep = function(self, instring, rep_dict)
@@ -110,13 +169,13 @@ local do_str_rep = function(self, instring, rep_dict)
         TODO: Can this be optimised so it doesn't have to loop over the
         whole thing?
     --]]
-
     for _, rep_pair in pairs(rep_dict) do
         local orig = rep_pair[1]
         local rep = rep_pair[2]
 
         local check_from_index = 0
         local failsafe = 0 -- guard against infinite loops
+
         while instring:lower():find(orig:lower(), check_from_index) do
             local remaining_string = instring:sub(check_from_index)
             local st, en, groupi, groupii = self:find_case_insensitive(remaining_string, orig)
@@ -128,21 +187,27 @@ local do_str_rep = function(self, instring, rep_dict)
             en = en - groupii:len()
 
             local match = remaining_string:sub(st, en)
-            print_debug("Match cases for: "..orig)
-            print_debug("Match: \'"..match.."\' at index: "..st.." in "..remaining_string)
-            local replacement = self:match_case(orig, rep, match)
-            print_debug("Determined replacement: "..replacement)
+            -- escape special characters so string comparison and substitution
+            -- works correctly
+            local match_to_compare = self:escape_special_characters(match)
 
-            local needle = self:escape_special_characters(match)
-            print_debug("Original: "..instring)
-            instring = instring:gsub(needle, replacement, 1)
-            print_debug("Result: "..instring)
+            local replacement = "" -- initialise empty because we need it later
+
+            -- perform replacements only if either 1) the needle is all
+            -- lower-case (signalling case-insensitive search), or 2) the needle
+            -- matches the found string exactly, including cases
+            local matching_case_insensitively = orig == orig:lower()
+            local is_exact_match = orig == match_to_compare
+            if matching_case_insensitively or is_exact_match then
+                replacement = self:match_case(orig, rep, match)
+
+                local needle = self:escape_special_characters(match)
+                instring = instring:gsub(needle, replacement, 1)
+            end
 
             -- update starting index for the check so the next search starts
             -- from the END of the previous one
             check_from_index = check_from_index + st + replacement:len()
-            print_debug("Determined starting index: "..check_from_index.." in "..instring)
-            print_debug("")
 
             -- update failsafe loopguard
             failsafe = failsafe + 1
@@ -257,7 +322,6 @@ local __protected_upper_case = function(instr)
     -- backslash)
     local command_names = {}
     for c in instr:gmatch("\\%S[%[{%s]") do
-        print(c)
         table.insert(command_names, c)
     end
 
@@ -292,6 +356,8 @@ local Converter = {
     do_str_rep = do_str_rep,
     escape_special_characters = escape_special_characters,
     find_case_insensitive = find_case_insensitive,
+    find_non_command = find_non_command,
+    is_title_case = is_title_case,
     join_sbs = join_sbs,
     match_case = match_case,
     place_tone_digit = place_tone_digit,
