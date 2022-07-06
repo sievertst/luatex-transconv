@@ -42,6 +42,7 @@ local POJ = Converter:new{
         {"ing", "eng"}, {"ik", "ek"}, {"nnh", "hnn"},
         {"nn", "\\textsuperscriptn{}"},
     },
+
     second_rep_strings = {
         {"{i}", "{\\i}"}, -- use dotless i with diacritics
     },

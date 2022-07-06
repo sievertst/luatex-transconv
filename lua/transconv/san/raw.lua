@@ -1,17 +1,21 @@
 #!/usr/bin/env lua5.3
 
 --[[
-  Spell everything exactly as in Kana:
-  - spell particles the way they are written: -は as "-ha", -へ as "-he"
-  - spell ち as "ti", つ as "tu", じ as "zi", ぢ "di" etc
-  - long vowels separate
+  Spell everything in Velthuis.
 
-  But:
-  - write chōonpu as "="
-  - if you need to indicate a syllable boundary (either after ん or between two
-    vowels which should not be contracted), separate them with an apostrophe.
-    E.g. 湖(みずうみ): mizu'umi
-  - separate affixes with hyphens: 日本(にほん)は: nihon-ha
+  Exceptions:
+  - capital letters are not allowed as alternatives for special letters but
+    are interpreted as capitalised versions of the lowercase letter
+  - For di- or trigraphs, each letter has to be capitalised to get a capital
+    output
+  - use underscore for nuqta letters: _ka, _kha, _ga, _za, _zha, _ra, _rha,
+    _pha, _va. The following shorthands are permitted but may not be supported
+    by all schemes:
+    - q instead of _k
+    - z instead of _z
+    - zh instead of _zh
+    - f instead of _ph
+    - w instead of _v
 --]]
 
 local function is_valid_sb(self, sb)
@@ -20,8 +24,7 @@ end
 
 local function reorder(self, syllable)
     --[[
-        Takes a syllable with the tone number somewhere in the middle and
-        moves it to the correct place.
+        Sanskrit doesn't have tones, so no reordering is necessary.
     --]]
     return syllable
 end
@@ -30,10 +33,11 @@ local function split_sbs(self, instring)
     --[[
         Split input string into syllables.
     --]]
-    local sbs = {}
+    local sbs = {instring}
 
+    --[[
     -- TODO: how accurate is this pattern?
-    for sb in instring:gmatch("%W*[%w=%-]*") do
+    for sb in instring:gmatch("%W*%w*") do
 
         -- Test if a) this raw scheme has a (sensible) syllable separator
         -- set, b) that separator is non-empty, and c) the current syllable
@@ -45,11 +49,12 @@ local function split_sbs(self, instring)
 
         table.insert(sbs, sb)
     end
+    --]]
 
     return sbs
 end
 
-local jpnraw = Raw:new{
+local sanraw = Raw:new{
     cutting_markers = {}, -- used for splitting
 
     -- functions
@@ -58,4 +63,4 @@ local jpnraw = Raw:new{
     split_sbs = split_sbs,
 }
 
-return jpnraw
+return sanraw

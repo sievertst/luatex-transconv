@@ -1,15 +1,16 @@
-% \usepackage{luapackageloader} % for using custom search paths
-%   \newcommand{\LuaDir}{/home/uni/Scripts/Lua}
-%   \directlua{package.path = "\LuaDir/?.lua;\LuaDir/?/init.lua;" .. package.path}
+\usepackage{luapackageloader} % for using custom search paths
+  \newcommand{\LuaDir}{../lua}
+  \directlua{package.path = "\LuaDir/?.lua;\LuaDir/?/init.lua;" .. package.path}
 
-\usepackage{luatexja-fontspec}
+% \usepackage{luatexja-fontspec}
+\usepackage{fontspec}
 % \usepackage{polyglossia}
 %   \setmainlanguage[variant=uk]{english}
 
 \usepackage{booktabs}
 \usepackage{makecell}
 
-\usepackage{color}
+\usepackage{luacolor}
 
 \usepackage{hologo}
 
@@ -17,8 +18,6 @@
     scheme={nan.tailo},
     scheme={nan.poj},
     scheme={nan.bp},
-    % scheme={jpn.hepburn},
-    % scheme={jpn.nihon},
   ]{transconv}
 
 \usepackage{listings}

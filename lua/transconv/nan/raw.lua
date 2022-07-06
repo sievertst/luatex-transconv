@@ -15,8 +15,8 @@ local function get_sb_and_tone(self, sb)
         sb = string.sub(sb,1,-2) -- save syllable without tone number
     elseif self.plosive_codas[last] then -- returns nil on index error
         tone = 4
-    else
-        tone = 1
+    -- else
+    --     tone = 1
     end
 
     return sb, tone

@@ -1,5 +1,7 @@
 #!/usr/bin/env lua5.3
 
+-- TODO: groups don't seem to work properly in string substitution
+
 -- factory function
 local new = function(self, conv)
     -- TODO: ensure proper encapsulation
@@ -25,7 +27,9 @@ local add_tone_marker = function(self, instring)
         -- try to match the tone digit after a letter in the input string
         local needle = string.format('[%%w]%d', t)
         local match = string.match(instring, needle)
-
+        -- ü has to be matched separately because it being 2 bytes long
+        -- confuses the matching function if used together with the others
+        match = match or string.match(instring, "ü"..t)
         -- if matched and tone is not unmarked
         if match and marker then
             -- get the letter which will carry the tone marker
@@ -56,84 +60,158 @@ local add_tone_marker = function(self, instring)
     return instring
 end
 
-local do_str_rep = function(self, instring, rep_list)
+local is_title_case = function(self, str)
+    --[[
+        Receives a string, tests if it's title case and returns the result as a
+        boolean.
+        Title case means that the first (true = non-special character) letter is
+        upper case and all following ones are lower case.
+    --]]
+    -- pattern matches any string consisting of
+    --      - any number of non-letter characters (%A) followed by
+    --      - a single uppercase character (%u) and
+    --      - any number of characters which are not uppercase characters (%U)
+    --  If the input string is title case, this pattern should match the entire
+    --  string
+    return str:match("%A*%u%U*") == str
+end
+
+local find_non_command = function(self, char, haystack)
+    --[[
+        Find the first occurrence of char within haystack (only works for single
+        characters!) and returns its index. Returns 0 if char is not found.
+    --]]
+    local outindex = 0
+    local within_command_name = false
+    for i = 1, #haystack do
+        local c = haystack:sub(i,i)
+        if c:match("\\") then
+            within_command_name = true
+            goto continue -- go to tag named continue at the end of the loop
+        end
+
+        if within_command_name then
+            if c:match("%A") ~= nil then
+                within_command_name = false
+            else
+            end
+        else
+            if c:match(char) ~= nil then
+                return i
+            end
+        end
+        ::continue::
+    end
+
+    return i
+end
+
+local match_case = function(self, needle, replacement, match)
+    --[[
+        Determines an appropriate casing for the replacement for match and
+        returns it. If the original needle contains at least one uppercase
+        letter, the replacement is case-sensitive. Otherwise it is
+        case-insensitive and the casing in haystack is preserved.
+    --]]
+    if needle ~= needle:lower() then
+        return replacement
+    else
+        -- test for all lower case
+        if match == match:lower() then
+            -- replacement is already correct, so do nothing
+
+        -- test for title case (first letter upper, rest lower)
+        elseif self:is_title_case(match) then
+            -- get the first lowercase character in the replacement but exclude
+            -- command names from search
+            local true_first_char_i = self:find_non_command("%w", replacement)
+
+            local head = replacement:sub(0, true_first_char_i-1)
+            local capitalised = replacement:sub(true_first_char_i, true_first_char_i):upper()
+            local tail = replacement:sub(true_first_char_i+1)
+            -- Since we already know replacement to be all lower case, there is
+            -- no need to call lower() on the tail
+            replacement = head..capitalised..tail
+
+        -- test for all upper case *after* title case because otherwise
+        -- a single uppercase input character going to multiple output
+        -- characters would always return all uppercase. That is usually
+        -- not what we want
+        elseif match == match:upper() then
+            -- turn to upper case but protect LaTeX command name
+            replacement = self.__protected_upper_case(replacement)
+
+        -- if none of these matched, assume we want all lower case
+        else
+            replacement = replacement:lower()
+        end
+
+        return replacement
+    end
+end
+
+local find_case_insensitive = function(self, haystack, needle)
+    return haystack:lower():find(needle:lower())
+end
+
+local escape_special_characters = function(self, input)
+    -- local inp = "a%-b"
+    local output = input:gsub("([%%%-.%^])", "%%%1")
+    return output
+end
+
+local do_str_rep = function(self, instring, rep_dict)
     --[[
         Do the appropriate string replacements according to the passed
         replacement dictionary. E.g. Tâi-lô "ts" becoming "ch" in POJ.
-
         TODO: Can this be optimised so it doesn't have to loop over the
         whole thing?
     --]]
+    for _, rep_pair in pairs(rep_dict) do
+        local orig = rep_pair[1]
+        local rep = rep_pair[2]
 
-    local function process_match(starti, endi, ...)
-        -- helper function which packs the data returned by the string.find
-        -- function into a table representing a match
-        return {
-            starti = starti,
-            endi = endi,
-            capts = {...} -- captures
-        }
-    end
+        local check_from_index = 0
+        local failsafe = 0 -- guard against infinite loops
 
-    local function insert_captures(str, capts)
-        --[[
-            helper function which inserts captured values into the string at the
-            correct places. Expects that the string contains a "%i" for every
-            index in capts
-        -- ]]
+        while instring:lower():find(orig:lower(), check_from_index) do
+            local remaining_string = instring:sub(check_from_index)
+            local st, en, groupi, groupii = self:find_case_insensitive(remaining_string, orig)
+            -- put empty strings in capture groups if nothing was captured
+            local groupi = groupi or ""
+            local groupii = groupii or ""
+            -- update start and end indexes according to lengths of the group
+            st = st + groupi:len()
+            en = en - groupii:len()
 
-        for i,c in ipairs(capts) do
-            -- need to use different marker than %i so string.format doesn't
-            -- complain
-            local st, en = str:find("%%"..i)
-            if st then
-                -- cut c into the string in place of the insert marker
-                str = str:sub(1,st-1)..c..str:sub(en+1)
-            end
-        end
-        return str
-    end
+            local match = remaining_string:sub(st, en)
+            -- escape special characters so string comparison and substitution
+            -- works correctly
+            local match_to_compare = self:escape_special_characters(match)
 
-    local rep_i = 1
-    -- loop over rep_list
-    while rep_list[rep_i] do
-        local rep_pair = rep_list[rep_i]
-        local lower_input = instring:lower()
+            local replacement = "" -- initialise empty because we need it later
 
-        local orig_low = rep_pair[1]:lower()
+            -- perform replacements only if either 1) the needle is all
+            -- lower-case (signalling case-insensitive search), or 2) the needle
+            -- matches the found string exactly, including cases
+            local matching_case_insensitively = orig == orig:lower()
+            local is_exact_match = orig == match_to_compare
+            if matching_case_insensitively or is_exact_match then
+                replacement = self:match_case(orig, rep, match)
 
-        -- try to match and also capture groups
-        local match = process_match(lower_input:find(orig_low))
-
-        if match.starti then
-            local matchstring = instring:sub(match.starti,match.endi)
-            local match_first = matchstring:sub(1,1)
-            local match_second = matchstring:sub(2,2)
-
-            -- insert captures into the replacement string
-            local rep = insert_captures(rep_pair[2], match.capts)
-
-            local rep_true = ""
-            -- if first letter is lower, assume lower case (replacement already
-            -- is lower)
-            if match_first == match_first:lower() then
-                rep_true = rep:lower()
-            -- if it's upper and the second is lower, assume title case
-            elseif match_second and match_second == match_second:lower() then
-                rep_true = rep:sub(1,1):upper()..rep:sub(2,2):lower()
-                if rep:sub(3) then rep_true = rep_true..rep:sub(3):lower() end
-            -- if both are upper, assume all caps
-            else
-                rep_true = rep:upper()
+                local needle = self:escape_special_characters(match)
+                instring = instring:gsub(needle, replacement, 1)
             end
 
-            -- escape special characters in match string before substitution
-            matchstring = matchstring:gsub("([^%w])", "%%%1")
-            instring = instring:gsub(matchstring, rep_true)
-        else
-            -- increase index by one if no match was found (otherwise try to
-            -- match again with the same pair)
-            rep_i = rep_i + 1
+            -- update starting index for the check so the next search starts
+            -- from the END of the previous one
+            check_from_index = check_from_index + st + replacement:len()
+
+            -- update failsafe loopguard
+            failsafe = failsafe + 1
+            if failsafe > 10 then
+                break
+            end
         end
     end
 
@@ -187,7 +265,9 @@ local to_target_scheme = function(self, sb)
     sb, tone = self.raw:get_sb_and_tone(sb)
 
     sb = self.do_str_rep(self, sb, self.rep_strings)
-    sb = self.place_tone_digit(self, sb, tone)
+    if tone ~= nil then
+        sb = self.place_tone_digit(self, sb, tone)
+    end
     -- secondary replacements that depend on the digit being in the
     -- right place already
     sb = self.do_str_rep(self, sb, self.second_rep_strings)
@@ -235,6 +315,24 @@ local __tostring = function(self)
     return self.name
 end
 
+local __protected_upper_case = function(instr)
+    -- find all command names in input and store them in an array (including the
+    -- backslash)
+    local command_names = {}
+    for c in instr:gmatch("\\%S[%[{%s]") do
+        table.insert(command_names, c)
+    end
+
+    local outstr = instr:upper()
+
+    -- loop over array of stored commands and replace the uppercased names in
+    -- the outstr
+    for _, c in ipairs(command_names) do
+        outstr = outstr:gsub(c:upper(), c)
+    end
+    return outstr
+end
+
 local Converter = {
     -- converter prototype object
     name = "",
@@ -254,10 +352,16 @@ local Converter = {
     add_tone_marker = add_tone_marker,
     convert = convert,
     do_str_rep = do_str_rep,
+    escape_special_characters = escape_special_characters,
+    find_case_insensitive = find_case_insensitive,
+    find_non_command = find_non_command,
+    is_title_case = is_title_case,
     join_sbs = join_sbs,
+    match_case = match_case,
     place_tone_digit = place_tone_digit,
     to_target_scheme = to_target_scheme,
     __tostring = __tostring,
+    __protected_upper_case = __protected_upper_case,
 }
 
 return Converter

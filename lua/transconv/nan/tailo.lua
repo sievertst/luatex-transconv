@@ -41,7 +41,6 @@ local Tailo = Converter:new{
     },
 
     rep_strings = {
-        {"%-%-", "{-}{-}"}, -- prevent dash ligature for neutral tone marker
     },
 
     second_rep_strings = {

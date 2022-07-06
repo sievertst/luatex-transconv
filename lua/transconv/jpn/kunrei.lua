@@ -26,6 +26,10 @@ local KunreiShiki = Converter:new{
         {"%-ha", "-wa"}, {"%-he", "-e"}, {"%-wo", "-o"},
     },
 
+    second_rep_strings = {
+        {"{i}", "{\\i}"}, -- use dotless i with diacritics
+    },
+
     to_target_scheme = to_target_scheme,
 }
 

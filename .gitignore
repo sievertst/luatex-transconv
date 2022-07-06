@@ -1,6 +1,11 @@
 .tags
+<<<<<<< HEAD
 .tags.lock
 .token
+=======
+.token
+tests/
+>>>>>>> master
 
 ## TeX gitignores for documentation
 doc/.aux/
