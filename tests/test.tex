@@ -1,0 +1,27 @@
+\documentclass{scrartcl}
+
+% \newcommand{\LuaDir}{/mnt/Storage/home/sievert/Projects/Transconv/lua}
+\usepackage{fontspec}
+\usepackage{luapackageloader}
+%   \directlua{package.path = "\\LuaDir/?.lua;\\LuaDir/?/init.lua;"..package.path}
+
+\usepackage[
+    scheme = nan.bp,
+    scheme = ara.din,
+    scheme = san.iast,
+  ]
+  {transconv}
+
+\setmainfont{Libertinus Serif}
+
+\begin{document}
+\toara{'l-.d.daa'a}
+
+\tosan{AAaadaa}
+
+\tonan{tsap8-goo7}
+
+\toara{`ala' al-Ddiin}
+
+!rajiduN: \toara{rajiduN}
+\end{document}

@@ -1,5 +1,6 @@
 .tags
 .tags.lock
+.token
 
 ## TeX gitignores for documentation
 doc/.aux/
