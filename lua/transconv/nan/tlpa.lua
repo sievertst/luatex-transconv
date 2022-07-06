@@ -11,7 +11,7 @@ local TLPA = Converter:new{
         {"ts", "c"}
     },
     second_rep_strings = {
-        {"[^{](%d)", "\\textsuperscript{%1}"},
+        {"([^{])(%d)", "%1\\textsuperscript{%2}"},
     },
 }
 

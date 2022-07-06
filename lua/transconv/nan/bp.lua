@@ -60,7 +60,7 @@ local BP = Converter:new{
 
     rep_strings = {
         {"%-%-", "{-}{-}"}, -- prevent dash ligature for neutral tone marker
-        {"[^b]b([^b])", "bb%1"}, {"^b([^b])", "bb%1"}, {"([^gn])g([^g])", "%1gg%2"},
+        {"[^b]b([^b])", "bb%1"}, {"^b([^b])", "bb%1"}, {"g([^g])", "gg%1"},
         {"ngg", "ng"}, -- repair "ng"
         {"([^aeiouln])n([^g])", "%1ln%2"}, {"m([^$])", "bbn%1"}, {"ng([^$])", "ggn%1"},
         {"^n([^g])", "ln%1"},

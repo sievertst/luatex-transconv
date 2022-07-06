@@ -27,6 +27,9 @@ local WadeGiles = Converter:new{
         {"ian", "ien"},
         {"k(\'?)ui", "k%1uei"},
     },
+    second_rep_strings = {
+        {"([^{])(%d)", "%1\\textsuperscript{%2}"},
+    },
 
     -- functions
     add_tone_marker = add_tone_marker,

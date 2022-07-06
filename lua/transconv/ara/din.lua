@@ -54,9 +54,7 @@ local DIN = Converter:new{
         -- tā' marbūṭah
         {"([a-zA-z])H", "%1h"}, {"([a-zA-z])T", "%1t"},
         -- nunation
-        {"N(%W)", "n%1"},
-        {"N$", "n"},
-        {"^N", "n"},
+        {"N(%W)", "n%1"}, {"N$", "n"},
     },
 
     second_rep_strings = {

@@ -207,6 +207,7 @@ local do_str_rep = function(self, instring, rep_dict)
         local failsafe = 0 -- guard against infinite loops
 
         while self:find_case_insensitive(instring, orig, check_from_index) do
+            print_debug("Matched: \""..orig.."\" in \""..instring.."\"")
             local remaining_string = instring:sub(check_from_index)
             local st, en, groupi, groupii = self:find_case_insensitive(remaining_string, orig)
             -- put empty strings in capture groups if nothing was captured
@@ -258,6 +259,7 @@ local do_str_rep = function(self, instring, rep_dict)
                 end
                 instring = instring:gsub(needle, replacement, 1)
             end
+            print_debug("Result: \""..instring.."\"")
 
             -- update starting index for the check so the next search starts
             -- from the END of the previous one
