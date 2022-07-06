@@ -1,7 +1,5 @@
 #!/usr/bin/env lua5.3
 
--- TODO: groups don't seem to work properly in string substitution
-
 -- factory function
 local new = function(self, conv)
     -- TODO: ensure proper encapsulation
@@ -150,8 +148,41 @@ local match_case = function(self, needle, replacement, match)
     end
 end
 
-local find_case_insensitive = function(self, haystack, needle)
-    return haystack:lower():find(needle:lower())
+local case_insensitive_pattern = function(self, pattern)
+    --[[
+        Takes in a pattern string and turns it to lowercase while preserving
+        character classes such as `%S`.
+    --]]
+    -- Match every letter (group 2), but if it is preceded by '%' get that as
+    -- well (group 1) and perform the anonymous function on every match
+    local p = pattern:gsub("(%%?)(.)", function(percent, letter)
+
+        if percent ~= "" or not letter:match("%a") then
+          -- if '%' was matched, or `letter` is not a normal letter, return without
+          -- modification
+          return percent .. letter
+        else
+          -- otherwise, return a case-insensitive character class of the matched letter
+          return letter:lower()
+        end
+
+    end)
+
+  return p
+end
+
+local find_case_insensitive = function(self, haystack, needle, from_index)
+    --[[
+        Performs a case-insensitive search for needle within haystack, starting
+        from from_index (set the start of the string by default).
+    --]]
+    local from_index = from_index or 1
+
+    -- construct lowercase pattern, but respect
+    local p = self:case_insensitive_pattern(needle)
+    local found = haystack:lower():find(p, from_index)
+
+    return haystack:lower():find(p, from_index)
 end
 
 local escape_special_characters = function(self, input)
@@ -167,20 +198,36 @@ local do_str_rep = function(self, instring, rep_dict)
         TODO: Can this be optimised so it doesn't have to loop over the
         whole thing?
     --]]
+    DEBUG=true
     for _, rep_pair in pairs(rep_dict) do
         local orig = rep_pair[1]
         local rep = rep_pair[2]
 
-        local check_from_index = 0
+        local check_from_index = 1
         local failsafe = 0 -- guard against infinite loops
 
-        while instring:lower():find(orig:lower(), check_from_index) do
+        while self:find_case_insensitive(instring, orig, check_from_index) do
             local remaining_string = instring:sub(check_from_index)
             local st, en, groupi, groupii = self:find_case_insensitive(remaining_string, orig)
             -- put empty strings in capture groups if nothing was captured
             local groupi = groupi or ""
             local groupii = groupii or ""
-            -- update start and end indexes according to lengths of the group
+
+            -- update groups in such a way that groupi will always hold
+            -- look behind and groupii look ahead, even if only one group was
+            -- matched
+            if groupi ~= "" and groupii == "" then
+                -- if groupi exists but groupii does not, then we don't know if
+                -- groupi was matched before or after the actual match. In the
+                -- former case, the entire match as a whole (instring:sub(st, en))
+                -- should start with groupi
+                if instring:sub(st, en):find(groupi) > 1 then
+                    groupii = groupi
+                    groupi = ""
+                end
+                -- in all other cases groupi and groupii should already hold the
+                -- correct values
+            end
             st = st + groupi:len()
             en = en - groupii:len()
 
@@ -194,12 +241,21 @@ local do_str_rep = function(self, instring, rep_dict)
             -- perform replacements only if either 1) the needle is all
             -- lower-case (signalling case-insensitive search), or 2) the needle
             -- matches the found string exactly, including cases
-            local matching_case_insensitively = orig == orig:lower()
-            local is_exact_match = orig == match_to_compare
+            local matching_case_insensitively = orig == self:case_insensitive_pattern(orig)
+            -- need to strip look behind/ahead groups from orig. Also need to
+            -- take into account possible anchors for start and end of string
+            local is_exact_match = orig:gsub("%b()", "") == match_to_compare
+                or orig:gsub("%b()", "") == "^"..match_to_compare
+                or orig:gsub("%b()", "") == match_to_compare.."$"
             if matching_case_insensitively or is_exact_match then
                 replacement = self:match_case(orig, rep, match)
 
                 local needle = self:escape_special_characters(match)
+                if groupi == "" then
+                    needle = needle.."("..groupii..")"
+                else
+                    needle = "("..groupi..")"..needle.."("..groupii..")"
+                end
                 instring = instring:gsub(needle, replacement, 1)
             end
 
@@ -210,10 +266,13 @@ local do_str_rep = function(self, instring, rep_dict)
             -- update failsafe loopguard
             failsafe = failsafe + 1
             if failsafe > 10 then
+                texio.write_nl("Exceeded repetition limit for \""..orig.."\" in \"")
+                texio.write(instring..". Investigate for infinite loop!")
                 break
             end
         end
     end
+    DEBUG=false
 
     return instring
 end
@@ -353,6 +412,7 @@ local Converter = {
     convert = convert,
     do_str_rep = do_str_rep,
     escape_special_characters = escape_special_characters,
+    case_insensitive_pattern = case_insensitive_pattern,
     find_case_insensitive = find_case_insensitive,
     find_non_command = find_non_command,
     is_title_case = is_title_case,
