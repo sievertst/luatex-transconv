@@ -24,10 +24,11 @@ local WadeGiles = Converter:new{
         {"([^{iyü])e", "%1\\^{e}"},
         {"cho([^u])", "ch\\^{e}"},
         {"([iyü])e$", "%1eh"},
-        {"ian", "ien"},
+        {"ian", "ien"}, {"ieng", "iang"},
         {"k(\'?)ui", "k%1uei"},
     },
     second_rep_strings = {
+        {"(%p)(%d)", "%1"}, -- no tones after non-word characters
         {"([^{])(%d)", "%1\\textsuperscript{%2}"},
     },
 
