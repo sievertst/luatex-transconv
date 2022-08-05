@@ -8,8 +8,8 @@
     Optionally differentiate original velars before i and ü by spelling them as
     such (e.g. "Nan2ging1") for compatability with historicising schemes. G, k,
     h will be changed to j, q, x for schemes which don't make this distinction.
-    Ü has to be spelt as "ü" in such a case to distinguish it from "u", e.g.
-    "güan3".
+    Ü has to be spelt as "ü" (or "v") in such a case to distinguish it from "u",
+    e.g. "güan3".
 --]]
 
 local function get_sb_and_tone(self, sb)
