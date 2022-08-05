@@ -221,7 +221,7 @@ local do_str_rep = function(self, instring, rep_dict)
                 -- groupi was matched before or after the actual match. In the
                 -- former case, the entire match as a whole (instring:sub(st, en))
                 -- should start with groupi
-                if instring:sub(st, en):find(groupi) > 1 then
+                if instring:sub(st, en):find(groupi) then
                     groupii = groupi
                     groupi = ""
                 end

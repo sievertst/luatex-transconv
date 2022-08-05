@@ -12,7 +12,7 @@ local function to_target_scheme(self, instring)
 end
 
 local MCRS = Converter:new{
-    name = "kor.revised",
+    name = "kor.mcr-s",
     raw = require(transconv.path_of(...)..".raw"),
 
     rep_strings = {
