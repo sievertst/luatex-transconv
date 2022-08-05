@@ -551,6 +551,16 @@ string replacement after it is already decided where the tone marker should go.
 Use this variable for this purpose. It works the same way as
 \sty{rep\textunderscore{}strings}.
 
+\paragraph{final\textunderscore{}rep\textunderscore{}strings}
+
+Sometimes it is necessary to make some final adjustments to the ouput string as
+a very last step. For example, LuaTeX -- at least on some systems -- complains
+if diacritics are added directly to certain non-ASCII characters, so a string like
+\sty{\textbackslash{}v\{{ü}\}} for instance causes problems and we need to convert
+it to \sty{\textbackslash{}v\{\textbackslash{}"\{u\}\}}. For such cases, you can use
+the variable \sty{final\textunderscore{}rep\textunderscore{}strings} which also works the same way as
+\sty{rep\textunderscore{}strings}.
+
 \paragraph{no\textunderscore{}tones}
 
 For tonal languages, this variable can be set to either \sty{true} or

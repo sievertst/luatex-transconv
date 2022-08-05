@@ -1,6 +1,18 @@
 #!/usr/bin/env lua5.3
 
 -- TODO: groups don't seem to work properly in string substitution
+function dump(o)
+   if type(o) == 'table' then
+      local s = '{ '
+      for k,v in pairs(o) do
+         if type(k) ~= 'number' then k = '"'..k..'"' end
+         s = s .. '['..k..'] = ' .. dump(v) .. ','
+      end
+      return s .. '} '
+   else
+      return tostring(o)
+   end
+end
 
 -- factory function
 local new = function(self, conv)
@@ -169,6 +181,7 @@ local do_str_rep = function(self, instring, rep_dict)
         TODO: Can this be optimised so it doesn't have to loop over the
         whole thing?
     --]]
+
     for _, rep_pair in pairs(rep_dict) do
         local orig = rep_pair[1]
         local rep = rep_pair[2]
@@ -279,6 +292,7 @@ local to_target_scheme = function(self, sb)
     if not self.no_tones then
         sb = self.add_tone_marker(self, sb)
     end
+    sb = self.do_str_rep(self, sb, self.final_rep_strings)
 
     return sb
 end
@@ -343,6 +357,7 @@ local Converter = {
     no_tones = false, -- set true to omit tone markers from output
     rep_strings = {},
     second_rep_strings = {}, -- for secondary replacement after number movement
+    final_rep_strings = {}, -- for final replacements on the output
     sb_sep = "",
     tone_markers = {
          -- list all tones as integer keys with their appropriate latex macro

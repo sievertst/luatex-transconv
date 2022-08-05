@@ -29,13 +29,13 @@ local function place_tone_digit(self, sb, tone)
     -- check for letters in the order "a e o i u ng m" and place the digit
     -- behind the first one that is found
     local vowels = {
-        "A", "a", "E", "e", "O", "o", "i", "u", "ü", "Ng", "NG", "M", "m",
+        "A", "a", "E", "e", "O", "o", "i", "u", "v", "Ng", "NG", "M", "m",
     }
     for _, v in ipairs(vowels) do
         if string.match(sb, v) then
             -- put the number behind the first letter in the match
-            local vhead = string.match(v, '^[aeioumnAEOMNü].*')
-            local vtail = string.match(v, '^[aeioumnAEOMNü](.*)')
+            local vhead = string.match(v, '^[aeioumnAEOMNv].*')
+            local vtail = string.match(v, '^[aeioumnAEOMNv](.*)')
             local rep = string.format("%s%d%s", vhead, tone, vtail)
             return sb:gsub(v, rep, 1)
         end
@@ -55,15 +55,20 @@ local Pinyin = Converter:new{
         [0] = false, [1] = "=", [2] = "\'", [3] = "v", [4] = "`", [5] = false,
     },
     rep_strings = {
-        {"v", "ü"},
+        {"ü", "v"}, -- in case somebody enters ü as a letter instead of v
         {"gi", "ji"}, {"ki", "qi"}, {"hi", "xi"},
         -- repair "zhi, chi, shi"
         {"zxi", "zhi"}, {"cxi", "chi"}, {"sxi", "shi"},
-        {"gü", "ju"}, {"kü", "qu"}, {"hü", "xu"},
+        {"gv", "ju"}, {"kv", "qu"}, {"hv", "xu"},
     },
 
     second_rep_strings = {
         {"{i}", "{\\i}"}, -- use dotless i with diacritics
+    },
+
+    final_rep_strings = {
+        {"v", "\\\"{u}"}, -- use dotless i with diacritics
+        {"\\\"{u}{", "v{"}, -- restore \v
     },
 
     -- functions
