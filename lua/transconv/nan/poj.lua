@@ -38,7 +38,7 @@ local POJ = Converter:new{
     },
     rep_strings = {
         {"%-%-", "{-}{-}"}, -- prevent dash ligature for neutral tone marker
-        {"ts", "ch"}, {"ua", "oa"}, {"ue", "oe"}, {"oo", "o͘"},
+        {"ts", "ch"}, {"u([ae])", "o%1"}, {"oo", "o͘"},
         {"ing", "eng"}, {"ik", "ek"}, {"nnh", "hnn"},
         {"nn", "\\textsuperscriptn{}"},
     },

@@ -114,7 +114,7 @@ You can check that path with the following console command:
   kpsewhich --show-path=lua
 \end{lstlisting}
 
-The suggested location is within \sty{scripts/} inside your
+The suggested location is within \sty{scripts/kpsewhich/lua} inside your
 local \sty{texmf/} directory.
 
 Assuming your local \sty{texmf} directory is located under that name in your
@@ -810,7 +810,7 @@ By default it will:
 
 \subsubsection{The Main File (\sty{transconv/init.lua})}
 
-\lstinputlisting[language={[5.3]lua},firstline=3]{../lua/transconv/init.lua}
+\lstinputlisting[language={[5.3]lua},firstline=3]{../lua/transconv/transconv.lua}
 
 \subsubsection{The Converter Prototype (\sty{transconv/converter.lua})}
 
@@ -827,5 +827,14 @@ By default it will:
 \subsubsection{An Example Raw Scheme: Standard Chinese (\sty{transconv/cmn/raw.lua})}
 
 \lstinputlisting[language={[5.3]lua},firstline=3]{../lua/transconv/cmn/raw.lua}
+
+\section{Changelog}
+
+\begin{enumerate}[font=\bfseries]
+  \item[1.1]
+    \begin{itemize}
+      \item add capture capability for replacement strings
+    \end{itemize}
+\end{enumerate}
 
 \end{document}

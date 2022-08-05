@@ -33,7 +33,7 @@ local function split_sbs(self, instring)
     local sbs = {}
 
     -- TODO: how accurate is this pattern?
-    for sb in instring:gmatch("%W*%w*") do
+    for sb in instring:gmatch("%W*[%w=%-]*") do
 
         -- Test if a) this raw scheme has a (sensible) syllable separator
         -- set, b) that separator is non-empty, and c) the current syllable

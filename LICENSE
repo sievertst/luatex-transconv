@@ -38,6 +38,9 @@ This work consists of the following files:
     lua/transconv/kor/mcr-n.lua
     lua/transconv/kor/mcr-s.lua
     lua/transconv/kor/raw.lua
+    lua/transconv/kor/mcr.lua
+    lua/transconv/kor/mcr-n.lua
+    lua/transconv/kor/mcr-s.lua
     lua/transconv/kor/revised.lua
     lua/transconv/nan/raw.lua
     lua/transconv/nan/bp.lua

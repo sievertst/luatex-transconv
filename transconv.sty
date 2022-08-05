@@ -39,6 +39,9 @@
 %     lua/transconv/kor/mcr-n.lua
 %     lua/transconv/kor/mcr-s.lua
 %     lua/transconv/kor/raw.lua
+%     lua/transconv/kor/mcr.lua
+%     lua/transconv/kor/mcr-n.lua
+%     lua/transconv/kor/mcr-s.lua
 %     lua/transconv/kor/revised.lua
 %     lua/transconv/nan/raw.lua
 %     lua/transconv/nan/bp.lua
@@ -122,7 +125,9 @@ package}
 
     % set up the converter.
     % For example importing "cmn.pinyin" would result in the following Lua command:
-    % transconv.schemes["pinyin"] = transconv.new_converter("cmn", "pinyin")
+    % transconv:new_converter("cmn", "pinyin")
+    % Converter does not need to be stored in variable because conversion
+    % commands will retrieve it from dictionaries/arrays of the transconv table
     \directlua{%
       transconv:new_converter(%
         "\tl_use:N \l__transconv_lang_tl",%

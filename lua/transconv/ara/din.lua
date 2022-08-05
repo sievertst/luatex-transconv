@@ -1,9 +1,9 @@
 #!/usr/bin/env lua5.3
 
-local function to_target_scheme(self, instring)
-    -- skip all the fancy stuff except string replacement
-    return self.do_str_rep(self, instring, self.rep_strings)
-end
+-- local function to_target_scheme(self, instring)
+--     -- skip all the fancy stuff except string replacement
+--     return self.do_str_rep(self, instring, self.rep_strings)
+-- end
 
 local DIN = Converter:new{
     name = "san.din",
@@ -48,13 +48,13 @@ local DIN = Converter:new{
         -- long vowels
         {"aa", "\\={a}"}, {"uu", "\\={u}"}, {"ii", "\\={i}"},
         -- delete initial hamzah and waslah
-        {"([^a-zA-z}])\'([a-zA-z])", ""},
+        {"([^a-zA-z}])\'([a-zA-z])", "%1%2"},
         -- hamzah
         {"\'", "ʾ"},
         -- tā' marbūṭah
-        {"([a-zA-z])H", "h"}, {"([a-zA-z])T", "t"},
+        {"([a-zA-z])H", "%1h"}, {"([a-zA-z])T", "%1t"},
         -- nunation
-        {"N([$%w])", "n"},
+        {"N(%W)", "n%1"}, {"N$", "n"},
     },
 
     second_rep_strings = {

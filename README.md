@@ -138,7 +138,7 @@ You can check that path with the following console command:
 kpsewhich --show-path=lua
 ```
 
-The suggested location is within `scripts/` inside your local `texmf/`
+The suggested location is within `scripts/kpsewhich/lua` inside your local `texmf/`
 directory. Assuming your local `texmf/` directory is located under that name in
 your home directory, you can simply execute the following command from the
 repository’s top directory (the one containing `transconv.sty`).

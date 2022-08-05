@@ -60,29 +60,23 @@ local BP = Converter:new{
 
     rep_strings = {
         {"%-%-", "{-}{-}"}, -- prevent dash ligature for neutral tone marker
-        {"b", "bb"}, {"g", "gg"},
+        {"[^b]b([^b])", "bb%1"}, {"^b([^b])", "bb%1"}, {"g([^g])", "gg%1"},
         {"ngg", "ng"}, -- repair "ng"
-        {"(.*)n([^g])", "ln"}, {"(.*)m([^$])", "bbn"}, {"(.*)ng([^$])", "ggn"},
-        {"lnln", "nn"}, {"nng", "lnng"}, -- repair nasal marker and nng
+        {"([^aeiouln])n([^g])", "%1ln%2"}, {"m([^$])", "bbn%1"}, {"ng([^$])", "ggn%1"},
+        {"^n([^g])", "ln%1"},
         -- vowels
-        {"iaunn", "niao"}, {"uainn", "nuai"},
-        {"iann", "nia"}, {"ionn", "nioo"}, {"iunn", "niu"},
-        {"uann", "nua"}, {"uenn", "nue"}, {"uinn", "nui"},
-        {"aunn", "nao"}, {"au", "ao"}, {"ainn", "nai"},
-        {"ann", "na"}, {"enn", "ne"}, {"inn", "ni"}, {"onn", "noo"},
-        {"unn", "nu"},
+        {"([aeiou][aeiou]?[aeiou]?)nn", "n%1"}, {"au", "ao"}, {"no(h?)$", "noo%1"},
         -- consonants
         {"tsh", "c"}, {"ts", "z"}, {"j", "zz"},
         {"p", "b"}, {"t", "d"}, {"k", "g"},
-        {"b$", "p"}, {"d$", "t"}, {"([^n])g$", "k"}, -- repair final plosives
+        {"b$", "p"}, {"d$", "t"}, {"([^n])g$", "%1k"}, -- repair final plosives
         {"bh", "p"}, {"dh", "t"}, {"gh", "k"},
         -- initial u --> w, i --> y
-        {"^([^a-z]*)i([aou])", "y"}, {"^([^a-z]*)u([aei])", "w"},
-        {"^([^a-z]*)i([^aou]?)", "yi"}, {"^([^a-z]*)u([^aei]?)", "wu"},
-        {"^([^a-z]*)ni([aou])", "yn"}, {"^([^a-z]*)nu([aei])", "wn"},
-        {"^([^a-z]*)ni([^aou]?)", "yni"}, {"^([^a-z]*)nu([^aei]?)", "wnu"},
+        {"^[^a-z]*i([aou])", "y%1"}, {"^[^a-z]*u([aei])", "w%1"},
+        {"^[^a-z]*i([^aou]?)", "yi%1"}, {"^[^a-z]*u([^aei]?)", "wu%1"},
+        {"^[^a-z]*ni([aou])", "yn%1"}, {"^[^a-z]*nu([aei])", "wn%1"},
+        {"^[^a-z]*ni([^aou]?)", "yni%1"}, {"^[^a-z]*nu([^aei]?)", "wnu%1"},
     },
-
     second_rep_strings = {
         {"{i}", "{\\i}"}, -- use dotless i with diacritics
     },
