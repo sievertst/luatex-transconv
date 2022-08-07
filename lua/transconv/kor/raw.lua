@@ -8,6 +8,10 @@
     Individual letters use the same spelling as in Revised Romanisation (for
     consonants always the syllable-initial spelling).
 
+    Final ㄼ before a consonant reduces to ㄹ in some words but ㅂ in others
+    (e.g. 짧다 → 짤따 but 밟다 → 밥따). To distinguish the two, ㄼ which reduces
+    to ㅂ should be spelt as "lbb": jjalb'da vs balbb'da
+
     Arae-a can be spelt "v". Target schemes which don't support arae-a will
     treat it like "a".
 
@@ -17,12 +21,7 @@
     Example: Han'gug'eo, Mi'gug-e ga-da, saek'kkal, an'nyeong-ha-sip'ni'kka
 --]]
 
-function split_sbs(self, instring)
-    return {instring}
-end
-
 local korraw = Raw:new{
-    split_sbs = split_sbs,
 }
 
 return korraw

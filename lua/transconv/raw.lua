@@ -31,10 +31,18 @@ local function split_sbs(self, instring)
 
     if next(self.cutting_markers) ~= nil then -- checks if table is empty
         -- TODO: make cut before each marker
+        local current_sbs = {}
+        for _, m in ipairs(self.cutting_markers) do
+            local list = {}
+            for s in instring:gmatch("([^"..m.."]+)") do
+                table.insert(list, s)
+            end
+            current_sbs = list
+        end
+        sbs = current_sbs
     else
         -- TODO: how accurate is this pattern?
         for sb in instring:gmatch("%W*%w*") do
-
             -- Test if a) this raw scheme has a (sensible) syllable separator
             -- set, b) that separator is non-empty, and c) the current syllable
             -- starts with it. If so, remove it

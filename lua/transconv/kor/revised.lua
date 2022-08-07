@@ -15,8 +15,7 @@ local Revised = Converter:new{
         {"=", ""}, {"v", "a"},
 
         -- insert ' at the end of word-final syllables for easier processing
-        {" ", "\' "}, {"%.", "\'."}, {"%?", "\'?"}, {"!", "\'!"},
-        {")", "\')"},
+        {"([^\'])([%.!%?])", "%1\'%2"},
 
         -- always use r for initial rieul
         {"l([aeiouyw])", "r%1"},
@@ -33,15 +32,20 @@ local Revised = Converter:new{
         {"n\'g", "n\'-g"},
 
         -- hieut-assimilations (including nh and lh)
-        {"b([\'%-])h", "p%1h"}, {"d([\'%-])h", "t%1h"}, {"g([\'%-])h", "g%1h"},
-        {"j([\'%-])h", "ch%1"},
-        {"([ptk])([\'%-])h", "%1%2"},
-        {"h([\'%-])[gk]", "%1k"}, {"h([\'%-])[dt]", "%1t"}, {"h([\'%-])[bp]", "%1p"},
+        {"b\'h", "p\'"}, {"d\'h", "t\'"}, {"g\'h", "g\'"},
+        {"j\'h", "ch\'"},
+        {"([ptk])\'h", "%1\'"},
+        {"h\'[gk]", "\'k"}, {"h\'[dt]", "\'t"}, {"h\'[bp]", "\'p"},
+        {"b%-h", "p-"}, {"d%-", "t-"}, {"g%-h", "g-"},
+        {"j%-h", "ch-"},
+        {"([ptk])%-h", "%1-"},
+        {"h%-[gk]", "-k"}, {"h%-[dt]", "-t"}, {"h%-[bp]", "-p"},
 
         -- double consonants
         {"gs([\'%-])", "k%1"}, {"[rl]g([\'%-])", "k%1"},
         {"nj([\'%-])", "n%1"},
-        {"l[bst]([\'%-])", "l%1"},-- {"ls([\'%-])", "l%1"}, {"lt([\'%-])", "l%1"},
+        {"l[bst]([\'%-])", "l%1"}, {"lm([\'%-])", "m%1"},
+        {"lbb([\'%-])", "p%1"}, -- ㄼ which reduces to ㅂ before consonants
         {"bs([\'%-])", "p%1"}, {"l([pm])([\'%-])", "%1%2"},
         -- syllable-final (not before vowel)
         {"gg([\'%-])", "k%1"}, {"kk([\'%-])", "k%1"}, {"g([\'%-])", "k%1"},
@@ -49,11 +53,11 @@ local Revised = Converter:new{
         {"tt([\'%-])", "t%1"},
         {"[dsjh]([\'%-])", "t%1"}, {"ch([\'%-])", "t%1"},
         {"r([\'%-])", "l%1"},
-        {"bb([\'%-])", "p%1"}, {"pp\'", "p%1"}, {"b\'", "p%1"},
+        {"bb([\'%-])", "p%1"}, {"pp([\'%-])", "p%1"}, {"b([\'%-])", "p%1"},
 
         -- syllable-finals (before vowel)
         {"gsv", "ksv"}, {"rg", "lgv"}, {"([nr])hv", "%1v"},
-        {"lhv", "rv"},
+        {"lhv", "rv"}, {"lbbv", "lbv"},
 
         -- palatalisation of digeut and ti-eut
         {"dv([\'%-])i", "jv%1i"}, {"tv([\'%-])i", "chv%1i"},
@@ -71,9 +75,11 @@ local Revised = Converter:new{
         -- assimilations
         {"k[nr]", "ngn"}, {"km", "ngm"},
         {"t[nr]", "nn"}, {"tm", "nm"},
-        {"p[nr]", "mn"}, {"pm", "mm"},
+        {"[pb][nr]", "mn"}, {"[pb]m", "mm"},
         {"l[nr]", "ll"}, {"nl", "ll"},
     },
+
+    sb_sep = " ",
 
     -- -- functions
     to_target_scheme = to_target_scheme,

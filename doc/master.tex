@@ -511,9 +511,10 @@ So if, for example, you want to replace all instances of \enquote{aa} with
 
 Use this variable to define a separator if your output scheme requires one to be
 inserted between different syllables (for example the Wade-Giles scheme for
-Mandarin Chinese has syllables separated with a hyphen). The separator is not
-inserted before a space or special characters. The default setting is an empty
-string.
+Mandarin Chinese has syllables separated with a hyphen). You might also want to
+use this variable to reinsert any character that was used to split the input
+string into smaller parts. The separator is not inserted before a space or
+special characters. The default setting is an empty string.
 
 \paragraph{tone\textunderscore{}markers}
 
@@ -767,7 +768,16 @@ by default:
 A list of strings which can be used to define borders between syllables when
 splitting up an input strings using the \sty{split\textunderscore{}sbs} method.
 If not empty, your raw scheme will scan the input string and make a cut whenever
-it finds one of the strings in this list. By default, the list is empty.
+it finds one of the strings in this list. By default, the list is empty, but it
+is suggested that you add at least one which occurs regularly in your raw
+scheme. The reason is that there is a limit on the number of times that
+Transconv will perform any given replacement rule on the same input string in
+order to protect against bugs getting you caught in an infinite loop. With
+shorter input strings you should never run into any danger of hitting that limit
+by accident, but if you try and convert longer paragraphs of text it might get
+relevant. Splitting the input string into smaller parts prevents this issue. If
+the syllable is not an important unit in your language, there is probably a word
+separating marker (e.g. the space character) that would be appropriate.
 
 \subsection{Default Raw Scheme Methods}
 

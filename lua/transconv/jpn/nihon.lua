@@ -26,6 +26,8 @@ local NihonShiki = Converter:new{
         {"{i}", "{\\i}"}, -- use dotless i with diacritics
     },
 
+    sb_sep = " ",
+
     -- functions
     to_target_scheme = to_target_scheme,
 }
