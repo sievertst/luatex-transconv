@@ -11,8 +11,9 @@ local Revised = Converter:new{
     raw = require(transconv.path_of(...)..".raw"),
 
     rep_strings = {
-        -- level out unsupported vowel length and arae-a
-        {"=", ""}, {"v", "a"},
+        -- level out unsupported features: vowel length, arae-a, following
+        -- consonant strengthening and indication of assimilated ㄹ/ㄴ
+        {"=", ""}, {"v", "a"}, {"q", ""}, {"x[lrn]", ""},
 
         -- insert ' at the end of word-final syllables for easier processing
         {"([^\'])([%.!%?])", "%1\'%2"},

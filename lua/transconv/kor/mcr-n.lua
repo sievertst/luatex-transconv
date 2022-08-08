@@ -16,8 +16,12 @@ local MCRN = Converter:new{
     raw = require(transconv.path_of(...)..".raw"),
 
     rep_strings = {
-        -- level out unsupported vowel length and arae-a
-        {"=", ""}, {"v", "a"},
+        -- level out unsupported features: vowel length, arae-a and following
+        -- consonant strengthening
+        {"=", ""}, {"v", "a"}, {"q", ""},
+
+        -- use the North Korean form of consonants which have weakened in Seoul
+        {"xln", "r"}, {"xrn", "r"}, {"xl", "r"}, {"xr", "r"}, {"xn", "n"},
 
         -- insert ' at the end of word-final syllables for easier processing
         {"([^\'])([%.!%?])", "%1\'%2"},

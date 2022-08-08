@@ -84,7 +84,7 @@ local __match_case_against_rep_string = function(needle, replacement, match)
         elseif __is_title_case(match) then
             -- get the first lowercase character in the replacement but exclude
             -- command names from search
-            local true_first_char_i = __find_non_command("%w", replacement)
+            local true_first_char_i = __find_non_command("%w", replacement) or 1
 
             local head = replacement:sub(0, true_first_char_i-1)
             local capitalised = replacement:sub(true_first_char_i, true_first_char_i):upper()
