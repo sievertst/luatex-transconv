@@ -19,16 +19,18 @@ local WadeGiles = Converter:new{
         {"nk", "ng"}, -- repair "ng"
         {"ong", "ung"}, {"ej", "erh"},
         {"uo", "o"},
-        {"k(\'?)o([^u])", "k%1uo%2"}, {"ho([^u])", "huo%1"},
-        {"ke", "ko"}, {"k\'e", "k\'o"}, {"he", "ho"},
-        {"([^{iyü])e", "%1\\^{e}"},
-        {"cho([^u])", "ch\\^{e}"},
+        {"ko([^u])", "kuo%1"}, {"k\'o([^u])", "k\'uo%1"}, {"ho([^u])", "huo%1"},
+        {"sho([^u])", "shuo"},
+        {"ke$", "ko"}, {"k\'e$", "k\'o"}, {"he$", "ho"},
+        {"k(\'?)en", "k%1\\^{e}n"}, {"hen", "h\\^{e}n"},
+        {"([^{iyü])e([n])", "%1\\^{e}%2"}, {"([^{iyü])e$", "%1\\^{e}"},
+        -- {"cho([^u])", "ch\\^{e}"},
         {"([iyü])e$", "%1eh"},
-        {"ian", "ien"}, {"ieng", "iang"},
+        {"ian([^g])", "ien"},
         {"k(\'?)ui", "k%1uei"},
     },
     second_rep_strings = {
-        {"(%p)(%d)", "%1"}, -- no tones after non-word characters
+        {"(%p)%d", "%1"},
         {"([^{])(%d)", "%1\\textsuperscript{%2}"},
     },
 

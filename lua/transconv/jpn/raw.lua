@@ -50,7 +50,7 @@ local function split_sbs(self, instring)
 end
 
 local jpnraw = Raw:new{
-    cutting_markers = {}, -- used for splitting
+    cutting_markers = {" "}, -- used for splitting
 
     -- functions
     is_valid_sb = is_valid_sb,

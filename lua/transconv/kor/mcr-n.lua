@@ -16,13 +16,15 @@ local MCRN = Converter:new{
     raw = require(transconv.path_of(...)..".raw"),
 
     rep_strings = {
-        -- level out unsupported vowel length and arae-a
-        {"=", ""}, {"v", "a"},
+        -- level out unsupported features: vowel length, arae-a and following
+        -- consonant strengthening
+        {"=", ""}, {"v", "a"}, {"q", ""},
+
+        -- use the North Korean form of consonants which have weakened in Seoul
+        {"xln", "r"}, {"xrn", "r"}, {"xl", "r"}, {"xr", "r"}, {"xn", "n"},
 
         -- insert ' at the end of word-final syllables for easier processing
-        {"([^\']) ", "%1\' "}, {"([^\'])%.", "%1\'."}, {"([^\'])%?", "%1\'?"},
-        {"([^\'])!", "%1\'!"},
-        {"([^\'])%)", "%1\')"},
+        {"([^\'])([%.!%?])", "%1\'%2"},
 
         -- always use r for initial rieul
         {"l([aeiouw])", "r%1"},
@@ -45,27 +47,35 @@ local MCRN = Converter:new{
         -- when we handle final g
         {"ng", "ŋ"},
 
-        -- ensure distinguishing n-g from double ieung
+        -- ensure distinguishing n'g from double ieung
         {"n\'vg", "n-vg"},
         {"ŋv\'", "ŋv-"}, {"ŋv%-y", "ŋv\'y"}, {"ŋv%-w", "ŋv\'w"},
 
-        -- insert marker after aspiratae (later we'll use ', but that is
+        -- hieut-assimilations (including nh and lh)
+        {"g\'h", "kh\'h"}, {"h\'[gk]", "\'kh"},
+        {"d\'h", "th\'h"}, {"h\'[dt]", "\'th"},
+        {"b\'h", "ph\'h"}, {"h\'[bp]", "\'ph"},
+        {"j\'h", "tsh\'h"}, {"h\'j", "\'tsh"}, {"h\'ch", "\'tsh"},
+        {"g%-h", "kh-h"}, {"h%-[gk]", "-kh"},
+        {"d%-h", "th-h"}, {"h%-[dt]", "-th"},
+        {"b%-h", "ph-h"}, {"h%-[bp]", "-ph"},
+        {"j%-h", "tsh-"}, {"h%-j", "-tsh"}, {"h%-ch", "-tsh"},
+
+        -- insert marker after aspiratae (later we'll use h, but that is
         -- currently still used as a syllable separator)
-        {"([ptk])([^x])", "%1x%2"}, {"pxpx", "pp"}, {"txtx", "tt"}, {"kxkx", "kk"},
+        {"([ptk])([^h])", "%1h%2"}, {"phph", "pp"}, {"thth", "tt"}, {"khkh", "kk"},
 
         -- write tenuis consonants as voiceless, except between sonorants
-        {"g", "k"}, {"kv", "gv"}, {"vk", "vg"},
-        {"d", "t"}, {"tv", "dv"}, {"vt", "vd"},
-        {"b", "p"}, {"pv", "bv"}, {"vp", "vb"},
-        -- repair aspiratae
-        {"gx", "kx"}, {"dx", "tx"}, {"bx", "px"},
+        {"g", "k"}, {"d", "t"}, {"b", "p"},
 
-        -- hieut-assimilations (including nh and lh)
-        {"g([\'%-])h", "k%1h"}, {"h([\'%-])[gk]", "%1k"},
-        {"d([\'%-])h", "t%1h"}, {"h([\'%-])[dt]", "%1t"},
-        {"b([\'%-])h", "p%1h"}, {"h([\'%-])[bp]", "%1p"},
-        {"j([\'%-])h", "ch%1"}, {"h([\'%-])j", "%1ch"}, {"h([\'%-])ch", "%1ch"},
+        -- j → ts
+        {"jj", "tss"}, {"j", "ts"}, {"ch", "tsh"},
 
+        -- double consonants
+        {"ks([\'%-])", "k%1"}, {"[lr]g([\'%-])", "k%1"},
+        {"nts([\'%-])", "n%1"},
+        {"l[ps]([\'%-])", "l%1"}, {"lth([\'%-])", "l%1"},
+        {"ps([\'%-])", "p%1"}, {"lm([\'%-])", "m%2"}, {"lph([\'%-])", "p%2"},
         -- syllable-final (not before vowel)
         {"gg?([\'%-])", "k%1"}, {"kk([\'%-])", "k%1"},
         {"dd([\'%-])", "t%1"}, {"ss([\'%-])", "t%1"}, {"jj([\'%-])", "t%1"}, {"tt([\'%-])", "t%1"},
@@ -73,18 +83,13 @@ local MCRN = Converter:new{
         {"ch([\'%-])", "t%1"},
         {"r([\'%-])", "l%1"},
         {"bb?([\'%-])", "p%1"}, {"pp([\'%-])", "p%1"},
-        -- double consonants
-        {"gs([\'%-])", "k%1"}, {"[lr]g([\'%-])", "k%1"},
-        {"nj([\'%-])", "n%1"},
-        {"l[bst]([\'%-])", "l%1"},
-        {"bs([\'%-])", "p%1"}, {"l([pm])([\'%-])", "%1%2"},
 
         -- syllable-finals (before vowel)
-        {"gsv", "ksv"}, {"rg", "lgv"}, {"nhv", "nv"},
+        {"ksv", "ksv"}, {"rk", "lkv"}, {"nhv", "nv"},
         {"[lr]hv", "rv"},
 
         -- palatalisation of digeut and ti-eut
-        {"dv([\'%-])i", "jv\'i"}, {"txv([\'%-])i", "chv\'i"},
+        {"tv([\'%-])i", "tsv\'i"}, {"thv([\'%-])i", "tshv\'i"},
 
         -- get rid of helping characters
         {"ŋ", "ng"},
@@ -98,13 +103,15 @@ local MCRN = Converter:new{
         {"v", ""}, {"\'", ""}, {"x", "h"},
 
         -- assimilations
-        {"k[nr]", "ngn"}, {"t[nr]", "nn"}, {"p[nr]", "mn"},
-        {"km", "ngm"}, {"tm", "nm"}, {"pm", "mm"},
-        {"ln", "ll"}, {"nl", "ll"},
+        {"k\'?[nr]", "ngn"}, {"t\'?[nr]", "nn"}, {"p\'?[nr]", "mn"},
+        {"k\'?m", "ngm"}, {"t\'?m", "nm"}, {"p\'?m", "mm"},
+        {"l[nr]", "ll"}, {"nl", "ll"},
 
         -- special
         {"swi", "shwi"},
     },
+
+    sb_sep = " ",
 
     -- -- functions
     to_target_scheme = to_target_scheme,
