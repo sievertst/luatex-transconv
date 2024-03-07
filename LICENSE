@@ -49,3 +49,5 @@ This work consists of the following files:
     lua/transconv/nan/tlpa.lua
     lua/transconv/san/raw.lua
     lua/transconv/san/iast.lua
+    lua/transconv/yue/raw.lua
+    lua/transconv/yue/jyutping.lua

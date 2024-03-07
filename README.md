@@ -116,6 +116,12 @@ Transconv will output the correct Bbánlám pìngyīm version instead: zápggoô
     <td rowspan="1">modified Velthuis</td>
     <td rowspan="1">IAST (<code>san.iast</code>)</td>
   </tr>
+  <tr>
+    <td rowspan="1"><code>yue</code></td>
+    <td rowspan="1">Cantonese</td>
+    <td rowspan="1">modified jyutping</td>
+    <td rowspan="1">Jyutping (<code>yue.jyutping</code>)</td>
+  </tr>
 </table>
 
 It is also possible to add more languages and schemes with just a limited amount
