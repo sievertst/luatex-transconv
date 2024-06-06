@@ -1,4 +1,4 @@
-TEXDIR := $$HOME/texmf/
+TEXDIR := $$HOME/texmf
 TEXPKG := $(TEXDIR)/tex/latex/local/transconv.sty
 LUAMOD := $(TEXDIR)/scripts/kpsewhich/lua
 
