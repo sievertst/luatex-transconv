@@ -40,6 +40,33 @@ What's more, if I suddenly find myself having to use the Bbánlám pìngyīm tra
 scheme instead, all I have to do is change a package option and recompile, and
 Transconv will output the correct Bbánlám pìngyīm version instead: zápggoô.
 
+## Usage
+
+Assuming you have all the files in a location where LuaTex can find them
+(see [Installation](#installation)), you can set up Transconv for use in your
+document like so:
+
+```latex
+\usepackage[scheme = cmn.pinyin]{transconv}
+```
+
+Or alternatively:
+
+```latex
+\usepackage{transconv}
+\TransconvUseScheme{cmn.pinyin}
+```
+
+This sets your default output scheme for Standard Chinese (`cmn`) to Hanyu Pinyin:
+
+```latex
+\tocmn{Ni3 hao3.} % output: Nǐ hǎo.
+```
+
+You can also set up multiple languages, secondary schemes for the same language
+(for example to compare them with each other in your text), and configure how
+the output is typeset. Confer the documentation for this.
+
 ## Currently Supported Languages
 
 <table>
@@ -131,11 +158,54 @@ of work.
 
 Transconv uses Lua code for the conversion, so it will only work with LuaTeX!
 
-In order to be able to use Transconv, you need to copy the `transconv.sty` file as
-well as the `transconv/` directory (found inside `lua/`) to a place where
-LuaTeX can find them. The suggested location for the `sty` file is within
-`tex/latex/local/` in your local `texmf/` directory (typically found within your
-home directory).
+Nix users can add Transconv to the package list in their document flake like so:
+
+```nix
+{
+  description = "My Transconv document";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    transconv-flake.url = "github:sievertst/luatex-transconv";
+  };
+  outputs = {self, nixpkgs, transconv-flake }:
+    let
+      # the name of your tex file without the extension      
+      sourceName = "mydocument"; 
+
+      system = "x86_64-linux"; # or whatever your system is
+      pkgs = nixpkgs.legacyPackages.${system};
+      transconv = transconv-flake.packages.${system}.default;
+      tex = pkgs.texliveBasic.withPackages (_: [ transconv ] );
+      buildInputs = [ pkgs.coreutils tex ];      
+    in
+    {
+      packages.${system}.default = pkgs.stdenvNoCC.mkDerivation {
+        pname = "transconv-document";
+        version = "1.0";
+        src = self;
+        phases = [ "unpackPhase" "buildPhase" "installPhase" ];
+        inherit buildInputs;
+        buildPhase = ''
+          export PATH="${pkgs.lib.makeBinPath buildInputs}";
+          mkdir -p .cache/texmf-var;
+          env TEXMFHOME=.cache TEXMFVAR=.cache/texmf-var \
+            lualatex --interaction=nonstopmode ${sourceName}.tex;
+        '';
+        installPhase = ''
+          mkdir -p $out
+          cp ${sourceName}.pdf $out/
+        '';
+      };
+    };
+}
+```
+
+Non-Nix users need to copy the `transconv.sty` file as well as the `transconv/
+` directory (found inside `lua/`) to a place where LuaTeX can find them. This
+can simply be your document's root directory. If you want to install Transconv
+system-wide, the suggested location for the `sty` file is within `tex/latex/
+local/` in your local `texmf/` directory (typically found within your home
+directory).
 
 The `transconv/` folder can be placed in any directory in your kpathsea path.
 You can check that path with the following console command:
@@ -145,26 +215,14 @@ kpsewhich --show-path=lua
 ```
 
 The suggested location is within `scripts/kpsewhich/lua` inside your local `texmf/`
-directory. Assuming your local `texmf/` directory is located under that name in
-your home directory, you can simply execute the following command from the
-repository’s top directory (the one containing `transconv.sty`).
+directory.
 
-```bash
-make install
-```
-
-If for some reason, you cannot get LuaTeX to find the module, you can consider
-using the <a
-href="https://www.ctan.org/pkg/luapackageloader">luapackageloader</a> package to
+If for some reason, you cannot get LuaTeX to find the lua module,
+you can consider using the
+[luapackageloader](https://www.ctan.org/pkg/luapackageloader) package to
 manually modify the path.
 
 ## Uninstallation
 
 To uninstall Transconv, locate the `transconv.sty` file as well as the
-`transconv/` lua package folder and delete them. Assuming they are located in
-the recommended locations, you can simply run the following command from the top
-directory (the one containing `transconv.sty`).
-
-```bash
-make uninstall
-```
+`transconv/` lua package folder and delete them.
