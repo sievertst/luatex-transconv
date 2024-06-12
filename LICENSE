@@ -14,8 +14,8 @@ The Current Maintainer of this work is Sievert von Stülpnagel.
 This work consists of the following files:
     README.md
     LICENSE
-	flake.nix
-	flake.lock
+    flake.nix
+    flake.lock
     transconv.sty
     doc/master.tex
     doc/transconv.pdf

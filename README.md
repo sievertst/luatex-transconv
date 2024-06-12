@@ -26,7 +26,7 @@ For instance, if I had to transcribe the Southern Min word for “fifteen”
 in the Tâi-lô scheme (tsa&#x030D;p-gōo), I would normally have to write:
 
 ```latex
-ts\textvbaraccent{a}p-g\={o}o
+tsa\symbol{"030D}p-g\={o}o
 ```
 
 But Transconv allows me to simply use numbers instead of the tone
@@ -162,39 +162,38 @@ Nix users can add Transconv to the package list in their document flake like so:
 
 ```nix
 {
-  description = "My Transconv document";
+  description = "Transconv example document";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     transconv-flake.url = "github:sievertst/luatex-transconv";
   };
   outputs = {self, nixpkgs, transconv-flake }:
     let
-      # the name of your tex file without the extension      
-      sourceName = "mydocument"; 
-
       system = "x86_64-linux"; # or whatever your system is
       pkgs = nixpkgs.legacyPackages.${system};
       transconv = transconv-flake.packages.${system}.default;
-      tex = pkgs.texliveBasic.withPackages (_: [ transconv ] );
-      buildInputs = [ pkgs.coreutils tex ];      
+
+      tex = pkgs.texliveBasic.withPackages (tl:
+      [ 
+        transconv 
+        # tl.otherPackage
+      ]);
+      # or alternatively using the old texlive.combine interface:
+      # tex = pkgs.texlive.combine
+      # {
+      #   inherit (pkgs.texlive) scheme-basic
+      #   transconv
+      #   # otherPackage
+      #   ;
+      # };
+
     in
     {
       packages.${system}.default = pkgs.stdenvNoCC.mkDerivation {
-        pname = "transconv-document";
+        pname = "some-document";
         version = "1.0";
-        src = self;
-        phases = [ "unpackPhase" "buildPhase" "installPhase" ];
-        inherit buildInputs;
-        buildPhase = ''
-          export PATH="${pkgs.lib.makeBinPath buildInputs}";
-          mkdir -p .cache/texmf-var;
-          env TEXMFHOME=.cache TEXMFVAR=.cache/texmf-var \
-            lualatex --interaction=nonstopmode ${sourceName}.tex;
-        '';
-        installPhase = ''
-          mkdir -p $out
-          cp ${sourceName}.pdf $out/
-        '';
+        buildInputs = [ pkgs.coreutils tex ];      
+        # rest of your document derivation
       };
     };
 }
@@ -207,8 +206,8 @@ system-wide, the suggested location for the `sty` file is within `tex/latex/
 local/` in your local `texmf/` directory (typically found within your home
 directory).
 
-The `transconv/` folder can be placed in any directory in your kpathsea path.
-You can check that path with the following console command:
+The `transconv/` folder can be placed in any directory in your kpathsea lua
+path. You can check that path with the following console command:
 
 ```bash
 kpsewhich --show-path=lua

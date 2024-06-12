@@ -1,11 +1,22 @@
+PKGNAME := transconv
 TEXDIR := $$HOME/texmf
-TEXPKG := $(TEXDIR)/tex/latex/local/transconv.sty
-LUAMOD := $(TEXDIR)/scripts/kpsewhich/lua
+TEXPKGDIR := $(TEXDIR)/tex/latex/local/
+TEXPKG := $(TEXPKGDIR)/$(PKGNAME).sty
+LUATARGETDIR := $(TEXDIR)/scripts/kpsewhich/lua
 
-install :
-	cp ./transconv.sty $(TEXPKG)
-	cp -R ./lua/transconv/ $(LUAMOD)/transconv/
+.PHONY: install uninstall
+
+install : $(TEXPKG) $(LUATARGETDIR)/$(PKGNAME)/init.lua
+
+$(TEXPKGDIR)/$(PKGNAME): $(TEXPKGDIR)
+    cp ./$(PKGNAME).sty $(TEXPKGDIR)
+
+$(LUATARGETDIR)/$(PKGNAME)/init.lua:
+    cp -R ./lua/$(PKGNAME)/ $(LUATARGETDIR)/$(PKGNAME)/
+	
+$(TEXPKGDIR):
+    mkdir -p $(TEXPKGDIR)
 
 uninstall :
-	rm $(TEXPKG)
-	rm -R $(LUAMOD)
+    rm $(TEXPKG)
+    rm -R $(LUATARGETDIR)
