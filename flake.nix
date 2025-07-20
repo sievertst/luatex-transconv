@@ -2,7 +2,7 @@
   description = "LaTeX package simplifying the use of romanisations";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05";
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixfmt.url = "github:NixOS/nixfmt";
   };
