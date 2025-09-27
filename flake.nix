@@ -65,7 +65,7 @@
             default = outPack;
           };
 
-          formatter = inputs.nixfmt.packages.${system}.default;
+          formatter = pkgs.nixfmt-tree;
         };
     };
 }
