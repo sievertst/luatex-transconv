@@ -31,35 +31,35 @@
     pronounced, otherwise H
   - always explicitly indicate waslah with an '
   - nunation is indicated with _n
---]]
+]]
 
 local function is_valid_sb(self, sb)
-    return true
+	return true
 end
 
 local function reorder(self, syllable)
-    --[[
-        Arabic doesn't have tones, so no reordering is necessary.
-    --]]
-    return syllable
+	--[[
+    Arabic doesn't have tones, so no reordering is necessary.
+  ]]
+	return syllable
 end
 
 local function split_sbs(self, instring)
-    --[[
-        Split input string into syllables.
-    --]]
-    local sbs = {instring}
+	--[[
+    Split input string into syllables.
+  ]]
+	local sbs = { instring }
 
-    return sbs
+	return sbs
 end
 
-local sanraw = Raw:new{
-    cutting_markers = {" "}, -- used for splitting
+local sanraw = Raw:new({
+	cutting_markers = { " " }, -- used for splitting
 
-    -- functions
-    is_valid_sb = is_valid_sb,
-    reorder = reorder,
-    split_sbs = split_sbs,
-}
+	-- functions
+	is_valid_sb = is_valid_sb,
+	reorder = reorder,
+	split_sbs = split_sbs,
+})
 
 return sanraw

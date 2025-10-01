@@ -41,7 +41,8 @@ a \hologo{LaTeX} user:
 \begin{enumerate}
   \item They use non-ASCII characters which may be annoying to input, e.g.
     diacritics, super- or subscripts etc. Obviously it is possible to do this
-    manually with \hologo{LaTeX} commands but it can be extremely obnoxious if you
+    manually with \hologo{LaTeX} commands but it can be extremely
+    obnoxious if you
     have to use those macros very frequently.
   \item There are often multiple competing transcription schemes for each
     language and the author may not always be free in their choice of scheme.
@@ -54,16 +55,17 @@ a \hologo{LaTeX} user:
 
 The \transconv{} package for \hologo{LuaTeX} aims to solve these problems by
 \begin{enumerate*}[label=\alph*)]
-  \item letting the user write in a transcription scheme which is easier to
-    input and have the package handle the conversion to the actual output scheme
-    with diacritics etc., and
-  \item abstracting the actual scheme itself away from the text, so the user can
-    switch schemes by simply changing an option, not every instance of them
-    using the scheme.
+\item letting the user write in a transcription scheme which is easier to
+input and have the package handle the conversion to the actual output scheme
+with diacritics etc., and
+\item abstracting the actual scheme itself away from the text, so the user can
+switch schemes by simply changing an option, not every instance of them
+using the scheme.
 \end{enumerate*}
 
 For instance, if I had to transcribe the Southern Min word for \enquote{fifteen}
-in the T\^{a}i-l\^{o} scheme (\totailo{tsap8-goo7}), I would normally have to write:
+in the T\^{a}i-l\^{o} scheme (\totailo{tsap8-goo7}), I would normally
+have to write:
 
 \begin{lstlisting}[language={[latex]tex}]
 ts\textvbaraccent{a}p-g\={o}o
@@ -107,7 +109,8 @@ suggested location for the \sty{sty} file is within \sty{tex/latex/local/} in
 your local \sty{texmf/} directory (typically found within your \sty{home}
 directory).
 
-The \sty{transconv/} folder can be placed in any directory in your kpathsea path.
+The \sty{transconv/} folder can be placed in any directory in your
+kpathsea path.
 You can check that path with the following console command:
 
 \begin{lstlisting}[language=bash]
@@ -144,50 +147,50 @@ simply run \sty{make install} from the top directory (the one containing
 \section{Package Options}
 
 \begin{optionlist}
-  \optitem{scheme}{\prm{lang}.\prm{scheme}}
+\optitem{scheme}{\prm{lang}.\prm{scheme}}
 
-  This option enables support for the transliteration scheme \prm{scheme} for
-  the language \prm{lang} by setting up the matching converter in Lua and
-  defines the commands \sty{\textbackslash{}\prm{scheme}convert},
-  \sty{\textbackslash{}\prm{scheme}font} and
-  \sty{\textbackslash{}to\prm{scheme}}. It will also ensure that the
-  \sty{\textbackslash{}to\prm{lang}} and \sty{\textbackslash\prm{lang}font}
-  commands exist by defining them the first time you define a scheme for a new
-  language. Loading more schemes for the same language after that will not
-  change that default; if you want to change it, use the \sty{defaultscheme}
-  option or the \sty{\textbackslash{}TransconvMakeDefaultScheme} command.
+This option enables support for the transliteration scheme \prm{scheme} for
+the language \prm{lang} by setting up the matching converter in Lua and
+defines the commands \sty{\textbackslash{}\prm{scheme}convert},
+\sty{\textbackslash{}\prm{scheme}font} and
+\sty{\textbackslash{}to\prm{scheme}}. It will also ensure that the
+\sty{\textbackslash{}to\prm{lang}} and \sty{\textbackslash\prm{lang}font}
+commands exist by defining them the first time you define a scheme for a new
+language. Loading more schemes for the same language after that will not
+change that default; if you want to change it, use the \sty{defaultscheme}
+option or the \sty{\textbackslash{}TransconvMakeDefaultScheme} command.
 
-  In order to successfully load a scheme, \transconv{} has to be able to find
-  a file \prm{lang}/\prm{scheme}.lua in its lua folder which returns the
-  converter. The option can be used more than once to import multiple schemes.
+In order to successfully load a scheme, \transconv{} has to be able to find
+a file \prm{lang}/\prm{scheme}.lua in its lua folder which returns the
+converter. The option can be used more than once to import multiple schemes.
 
-  \optitem{scheme}{\{\prm{lang1}.\prm{scheme1},
-  \prm{lang2}.\prm{scheme2},\dots\}}
+\optitem{scheme}{\{\prm{lang1}.\prm{scheme1},
+\prm{lang2}.\prm{scheme2},\dots\}}
 
-  Imports multiple schemes at once. Equivalent to a repeated use of
-  \opt{scheme}.
+Imports multiple schemes at once. Equivalent to a repeated use of
+\opt{scheme}.
 
-  \optitem{defaultscheme}{\prm{lang}.\prm{scheme}}
+\optitem{defaultscheme}{\prm{lang}.\prm{scheme}}
 
-  Changes the default scheme for language \prm{lang} to \prm{scheme}.
-  \prm{scheme} needs to have been imported using the \opt{scheme} option,
-  otherwise \opt{defaultscheme} will have no effect at all.
+Changes the default scheme for language \prm{lang} to \prm{scheme}.
+\prm{scheme} needs to have been imported using the \opt{scheme} option,
+otherwise \opt{defaultscheme} will have no effect at all.
 
-  If you don't use this option, the default setting is the first scheme you
-  imported for \prm{lang} (for instance, if you import both Pinyin and
+If you don't use this option, the default setting is the first scheme you
+imported for \prm{lang} (for instance, if you import both Pinyin and
   Wade-Giles for Standard Mandarin in that order and don't use
-  \opt{defaultscheme}, \transconv{} will use Pinyin as the default scheme).
+\opt{defaultscheme}, \transconv{} will use Pinyin as the default scheme).
 
- \opt{defaultscheme} can be used more than once to define defaults for multiple
- languages. In case of repeated use for the same language, later default scheme
- assignments override earlier ones.
+\opt{defaultscheme} can be used more than once to define defaults for multiple
+languages. In case of repeated use for the same language, later default scheme
+assignments override earlier ones.
 
-  \optitem{defaultscheme}{\{\prm{lang1}.\prm{scheme1},
-  \prm{lang2}.\prm{scheme2},\dots\}}
+\optitem{defaultscheme}{\{\prm{lang1}.\prm{scheme1},
+\prm{lang2}.\prm{scheme2},\dots\}}
 
-  Defines default schemes for multiple languages at once. Equivalent to a
-  repeated use of \opt{defaultscheme}. If the same language appears more than
-  once, later default scheme assignments override earlier ones.
+Defines default schemes for multiple languages at once. Equivalent to a
+repeated use of \opt{defaultscheme}. If the same language appears more than
+once, later default scheme assignments override earlier ones.
 
 \end{optionlist}
 
@@ -204,8 +207,8 @@ As a rule of thumb, if your command is a simple macro which expand to nothing
 but text like in the following example, it should be fine:
 
 \begin{ltxcode}
-  \newcommand\mystring{Zhe4 mei2you3 wen4ti2.}
-  \topinyin{\mystring}
+\newcommand\mystring{Zhe4 mei2you3 wen4ti2.}
+\topinyin{\mystring}
 \end{ltxcode}
 
 But commands which change some settings (e.\,g.\ the font) will likely
@@ -213,8 +216,8 @@ cause an error, regardless of the environment in which they are used. For
 example both of the following will not compile:
 
 \begin{ltxcode}
-  \topinyin{\emph{Zhe3} wu2fa3 bian1yi4.}
-  \topinyin{{\itshape Zhe3} ye3 bu4 xing2.}
+\topinyin{\emph{Zhe3} wu2fa3 bian1yi4.}
+\topinyin{{\itshape Zhe3} ye3 bu4 xing2.}
 \end{ltxcode}
 
 \noindent
@@ -222,112 +225,113 @@ example both of the following will not compile:
 \subsection{Formatted Conversion Commands}
 
 \begin{ltxsyntax}
-  \cmditem{tolang}{text}
+\cmditem{tolang}{text}
 
-  where \sty{lang} is a language declared via
-  \sty{\textbackslash{}TransconvUseScheme} or the package option \opt{scheme}.
-  This command will convert \prm{text} to the default scheme for \sty{lang}
-  (either the one defined by \opt{defaultscheme} or else the first scheme
-  defined for \sty{lang}), using the formatting defined in
-  \sty{\textbackslash{}langfont}.
+where \sty{lang} is a language declared via
+\sty{\textbackslash{}TransconvUseScheme} or the package option \opt{scheme}.
+This command will convert \prm{text} to the default scheme for \sty{lang}
+(either the one defined by \opt{defaultscheme} or else the first scheme
+defined for \sty{lang}), using the formatting defined in
+\sty{\textbackslash{}langfont}.
 
-  In most cases, this should be the go-to conversion command to use in your text
-  as it abstracts both the scheme itself as well as its formatting away from the
-  content.
+In most cases, this should be the go-to conversion command to use in your text
+as it abstracts both the scheme itself as well as its formatting away from the
+content.
 
-  \cmditem{toscheme}{text}
+\cmditem{toscheme}{text}
 
-  where \sty{scheme} is a scheme declared via
-  \sty{\textbackslash{}TransconvUseScheme} or the package option \opt{scheme}.
-  This command will convert \prm{text} to the \sty{scheme} using the formatting
-  defined in \sty{\textbackslash{}schemefont}.
+where \sty{scheme} is a scheme declared via
+\sty{\textbackslash{}TransconvUseScheme} or the package option \opt{scheme}.
+This command will convert \prm{text} to the \sty{scheme} using the formatting
+defined in \sty{\textbackslash{}schemefont}.
 
-  Use this command to access specific schemes if you need to import multiple
-  ones for a single language (for example if you are discussing differences
-  between different schemes). Note that \sty{\textbackslash{}toscheme} is
-  provided for all imported languages, including the default one. If you only
-  intend to use a single theme for a given language, use
-  \sty{\textbackslash{}tolang} instead to avoid hardcoding the scheme into your
-  text.
+Use this command to access specific schemes if you need to import multiple
+ones for a single language (for example if you are discussing differences
+between different schemes). Note that \sty{\textbackslash{}toscheme} is
+provided for all imported languages, including the default one. If you only
+intend to use a single theme for a given language, use
+\sty{\textbackslash{}tolang} instead to avoid hardcoding the scheme into your
+text.
 
 \end{ltxsyntax}
 
 \subsection{Unformatted Conversion Commands}
 
 \begin{ltxsyntax}
-  \cmditem{langconvert}{text}
+\cmditem{langconvert}{text}
 
-  where \sty{lang} is a language declared via
-  \sty{\textbackslash{}TransconvUseScheme} or the option \opt{scheme}. This
-  command will convert \prm{text} to the default scheme for \sty{lang} (either
+where \sty{lang} is a language declared via
+\sty{\textbackslash{}TransconvUseScheme} or the option \opt{scheme}. This
+command will convert \prm{text} to the default scheme for \sty{lang} (either
   the one defined by \opt{defaultscheme} or else the first scheme defined for
-  \sty{lang}), but without any formatting. In other words,
-  \sty{\textbackslash{}langconvert} abstracts away the transcription scheme but
-  not the formatting.
+\sty{lang}), but without any formatting. In other words,
+\sty{\textbackslash{}langconvert} abstracts away the transcription scheme but
+not the formatting.
 
-  It is recommended that you use this command only if the formatting hooks
-  provided by \transconv{} are insufficient for your purposes, and only to
-  define a custom macro rather than in the actual text in order to maintain the
-  separation of content and presentation.
+It is recommended that you use this command only if the formatting hooks
+provided by \transconv{} are insufficient for your purposes, and only to
+define a custom macro rather than in the actual text in order to maintain the
+separation of content and presentation.
 
-  \cmditem{schemeconvert}{text}
+\cmditem{schemeconvert}{text}
 
-  where \sty{scheme} is again a scheme declared via
-  \sty{\textbackslash{}TransconvUseScheme} or the option \opt{scheme}.
+where \sty{scheme} is again a scheme declared via
+\sty{\textbackslash{}TransconvUseScheme} or the option \opt{scheme}.
 
-  This command merely constitutes a wrapper around the Lua converter without any
-  \hologo{TeX} formatting. Therefore, using this command means you hard-code both the
-  transcription scheme and the way it is formatted.  For this reason, it is
-  highly recommended that you use this command only if the formatting hooks
-  provided by \transconv{} are insufficient for your purposes, and even then
-  only to define a custom macro rather than in the actual text in order to
-  maintain the separation of content and presentation.
+This command merely constitutes a wrapper around the Lua converter without any
+\hologo{TeX} formatting. Therefore, using this command means you
+hard-code both the
+transcription scheme and the way it is formatted.  For this reason, it is
+highly recommended that you use this command only if the formatting hooks
+provided by \transconv{} are insufficient for your purposes, and even then
+only to define a custom macro rather than in the actual text in order to
+maintain the separation of content and presentation.
 
 \end{ltxsyntax}
 
 \subsection{Output Formatting}
 
 \begin{ltxsyntax}
-  \cmditem{langfont}
+\cmditem{langfont}
 
-  where \sty{lang} is a language declared via
-  \sty{\textbackslash{}TransconvUseScheme} or the option \opt{scheme}.
+where \sty{lang} is a language declared via
+\sty{\textbackslash{}TransconvUseScheme} or the option \opt{scheme}.
 
-  This command sets the font formatting for the output of
-  \sty{\textbackslash{}tolang}. By default it expands to
-  \sty{\textbackslash{}itshape}.
+This command sets the font formatting for the output of
+\sty{\textbackslash{}tolang}. By default it expands to
+\sty{\textbackslash{}itshape}.
 
-  \cmditem{schemefont}
+\cmditem{schemefont}
 
-  where \sty{scheme} is a transcription scheme declared via
-  \sty{\textbackslash{}TransconvUseScheme} or the option \opt{scheme}.
+where \sty{scheme} is a transcription scheme declared via
+\sty{\textbackslash{}TransconvUseScheme} or the option \opt{scheme}.
 
-  This command sets the font formatting for the output of
-  \sty{\textbackslash{}tolang}. By default it expands to nothing.
+This command sets the font formatting for the output of
+\sty{\textbackslash{}tolang}. By default it expands to nothing.
 
 \end{ltxsyntax}
-
 
 \section{Configuration}
 
 \begin{ltxsyntax}
-  \cmditem{TransconvUseScheme}{schemes}
+\cmditem{TransconvUseScheme}{schemes}
 
-  Sets one or more new scheme(s) up for later usage. Equivalent to using the
-  \sty{scheme} package option. As with the option, each scheme should be specified as
-  \sty{\prm{lang}.\prm{scheme}} and multiple schemes can be set up at once by
-  stringing them together with commas.
+Sets one or more new scheme(s) up for later usage. Equivalent to using the
+\sty{scheme} package option. As with the option, each scheme should
+be specified as
+\sty{\prm{lang}.\prm{scheme}} and multiple schemes can be set up at once by
+stringing them together with commas.
 
-  \cmditem{TransconvMakeDefaultScheme}{schemes}
+\cmditem{TransconvMakeDefaultScheme}{schemes}
 
-  Sets up an existing scheme as the default scheme for a language used in
-  \sty{\textbackslash{}tolang} or \sty{\textbackslash{}langconvert}. Equivalent
-  to using the \sty{defaultscheme} package option. As with the option, each
-  scheme shoult be specified as \sty{\prm{lang}.\prm{scheme}} and multiple
-  default schemes can be set up at once by stringing them together with commas.
-  The scheme(s) has (have) to already be initialised with either the
-  \sty{scheme} option or the \sty{\textbackslash{}TransconvUseScheme} command,
-  otherwise this command will have no effect.
+Sets up an existing scheme as the default scheme for a language used in
+\sty{\textbackslash{}tolang} or \sty{\textbackslash{}langconvert}. Equivalent
+to using the \sty{defaultscheme} package option. As with the option, each
+scheme shoult be specified as \sty{\prm{lang}.\prm{scheme}} and multiple
+default schemes can be set up at once by stringing them together with commas.
+The scheme(s) has (have) to already be initialised with either the
+\sty{scheme} option or the \sty{\textbackslash{}TransconvUseScheme} command,
+otherwise this command will have no effect.
 \end{ltxsyntax}
 
 \section{Currently Supported Languages and Schemes}
@@ -336,41 +340,43 @@ The list of currently supported languages and transcription schemes can be found
 in \autoref{tab:langs}.
 
 \begin{table}[h!]
-  \centering
-  \begin{tabular}{lll}
-    \toprule
-    Abbreviation  & Language              & Supported Schemes \\
-    \midrule
+\centering
+\begin{tabular}{lll}
+  \toprule
+  Abbreviation  & Language              & Supported Schemes \\
+  \midrule
 
-    \sty{ara} & Arabic                & \makecell[tl]{DIN 31635 (\sty{ara.din}, WIP)} \\
-    \sty{cmn} & Standard Chinese      & \makecell[tl]{%
-                                          Hanyu Pinyin (\sty{cmn.pinyin}) \\
-                                          Wade-Giles (\sty{cmn.wadegiles})
-                                        } \\
-    \sty{jpn} & Standard Japanese     & \makecell[tl]{%
-                                          Hepburn (\sty{jap.hepburn}) \\
-                                          Kunrei-shiki (\sty{jap.kunrei}) \\
-                                          Nihon-shiki (\sty{jap.nihon}) \\
-                                        } \\
-    \sty{kor} & Standard Korean       & \makecell[tl]{%
-                                          McCune-Reischauer (original version) (\sty{kor.mcr}) \\
-                                          McCune-Reischauer (DPRK version) (\sty{kor.mcr-n}) \\
-                                          McCune-Reischauer (ROK version) (\sty{kor.mcr-s}) \\
-                                          Revised Romanisation (\sty{kor.revised})
-                                        } \\
-    \sty{nan} & Hokkien/Southern Min  & \makecell[tl]{%
-                                          Bbánlám pìngyīm (\sty{nan.bp}) \\
-                                          POJ/Church Romanisation (\sty{nan.poj}) \\
-                                          Tâi-lô (\sty{nan.tailo}) \\
-                                          TLPA (\sty{nan.tlpa}) \\
-                                        } \\
-    \sty{san} & Sanskrit              & \makecell[tl]{IAST (\sty{nan.iast})} \\
-    \sty{yue} & Cantonese             & \makecell[tl]{Jyutping (\sty{yue.jyutping})} \\
+  \sty{ara} & Arabic                & \makecell[tl]{DIN 31635
+  (\sty{ara.din}, WIP)} \\
+  \sty{cmn} & Standard Chinese      & \makecell[tl]{%
+    Hanyu Pinyin (\sty{cmn.pinyin}) \\
+    Wade-Giles (\sty{cmn.wadegiles})
+  } \\
+  \sty{jpn} & Standard Japanese     & \makecell[tl]{%
+    Hepburn (\sty{jap.hepburn}) \\
+    Kunrei-shiki (\sty{jap.kunrei}) \\
+    Nihon-shiki (\sty{jap.nihon}) \\
+  } \\
+  \sty{kor} & Standard Korean       & \makecell[tl]{%
+    McCune-Reischauer (original version) (\sty{kor.mcr}) \\
+    McCune-Reischauer (DPRK version) (\sty{kor.mcr-n}) \\
+    McCune-Reischauer (ROK version) (\sty{kor.mcr-s}) \\
+    Revised Romanisation (\sty{kor.revised})
+  } \\
+  \sty{nan} & Hokkien/Southern Min  & \makecell[tl]{%
+    Bbánlám pìngyīm (\sty{nan.bp}) \\
+    POJ/Church Romanisation (\sty{nan.poj}) \\
+    Tâi-lô (\sty{nan.tailo}) \\
+    TLPA (\sty{nan.tlpa}) \\
+  } \\
+  \sty{san} & Sanskrit              & \makecell[tl]{IAST (\sty{nan.iast})} \\
+  \sty{yue} & Cantonese             & \makecell[tl]{Jyutping
+  (\sty{yue.jyutping})} \\
 
-    \bottomrule
-  \end{tabular}
-  \caption{Supported languages}
-  \label{tab:langs}
+  \bottomrule
+\end{tabular}
+\caption{Supported languages}
+\label{tab:langs}
 \end{table}
 
 \section{Custom Schemes and Languages}
@@ -456,7 +462,7 @@ During conversion, your scheme will look at each of the pairs, find all
 instances of the first item in your input and replace it with the second item.
 For example, the above settings will cause it to replace every \enquote{c} with
 \enquote{k} and every \enquote{ts} with \enquote{ch} (note that by
-default, the search is case-insensitive, so \enquote{C}, \enquote{Ts},
+  default, the search is case-insensitive, so \enquote{C}, \enquote{Ts},
 \enquote{TS} and \enquote{tS} will also be replaced).
 
 Be aware that the replacements are executed in the order in which you defined
@@ -484,7 +490,7 @@ values, you have to escape them. You can find the full list in
   \centering
   \begin{tabular}{>{\ttfamily}c >{\ttfamily}c}
     \multicolumn{1}{c}{\textbf{literal character}}
-      & \multicolumn{1}{c}{\textbf{escape sequence}} \\
+    & \multicolumn{1}{c}{\textbf{escape sequence}} \\
     \textbackslash    & \textbackslash\textbackslash \\
     \textquotesingle  & \textbackslash\textquotesingle \\
     "                 & \textbackslash" \\
@@ -527,8 +533,8 @@ integer keys with the macro name for the marker as a value (without the
 leading backslash). Tones which do not have such a marker should be marked as
 \sty{false}. For example the correct setting for Hanyu Pinyin would
 be:\footnote{The elements 0 and 5 are both set false so the user can use either
-integer to mark the neutral tone. The single quote for the second tone macro
-name has to be escaped because Lua would otherwise take it as a special
+  integer to mark the neutral tone. The single quote for the second tone macro
+  name has to be escaped because Lua would otherwise take it as a special
 character (cf. \autoref{tab:luaescape}).}
 
 \begin{lstlisting}
@@ -560,10 +566,14 @@ Use this variable for this purpose. It works the same way as
 
 Sometimes it is necessary to make some final adjustments to the ouput string as
 a very last step. For example, LuaTeX -- at least on some systems -- complains
-if diacritics are added directly to certain non-ASCII characters, so a string like
-\sty{\textbackslash{}v\{{ü}\}} for instance causes problems and we need to convert
-it to \sty{\textbackslash{}v\{\textbackslash{}"\{u\}\}}. For such cases, you can use
-the variable \sty{final\textunderscore{}rep\textunderscore{}strings} which also works the same way as
+if diacritics are added directly to certain non-ASCII characters, so
+a string like
+\sty{\textbackslash{}v\{{ü}\}} for instance causes problems and we
+need to convert
+it to \sty{\textbackslash{}v\{\textbackslash{}"\{u\}\}}. For such
+cases, you can use
+the variable \sty{final\textunderscore{}rep\textunderscore{}strings}
+which also works the same way as
 \sty{rep\textunderscore{}strings}.
 
 \paragraph{no\textunderscore{}tones}
@@ -713,7 +723,8 @@ To add a new language for which transcription schemes can be implemented, first
 add a new folder where \transconv{} can find it. The folder name will be the
 language name you will have to use when loading schemes from your document
 later, so make sure you choose something unique and easy to memorise. The
-default languages use the ISO 693-3 abbreviations and it is strongly suggested you
+default languages use the ISO 693-3 abbreviations and it is strongly
+suggested you
 stick to the same convention. If you need to specify a certain subgrouping
 within a bigger language variety for which no ISO abbreviation has been coined,
 specify the location after a dash, for example \sty{jpn-kyoto} for
@@ -733,11 +744,12 @@ fulfil the following criteria:
     difference in Kana spelling. Therefore, the raw scheme has to make the
     distinction as well to allow for accurate conversion to those
     schemes.\footnote{In this case, I decided to follow Nihon-shiki and spell
-    them according to their original phonetic series: \sty{zi} for じ and
+      them according to their original phonetic series: \sty{zi} for じ and
     \sty{di} for ぢ.}
   \item It is strongly suggested that the raw scheme should not make use of
     non-ascii characters. The reason for this is that Lua makes use of your
-    computer's locale for certain aspects of string handling. As a result, if you
+    computer's locale for certain aspects of string handling. As a
+    result, if you
     use non-ascii characters, the code may or may not work as you expect it on
     your machine. But even if it does work for you, it might not do so on
     a machine in a different locale.
@@ -745,12 +757,12 @@ fulfil the following criteria:
 
 Once you have decided on your raw scheme, add a file called \sty{raw.lua} to
 your language folder.\footnote{You don't have to use this name but I suggest
-you follow the convention. If you don't, any authors of new target schemes
-will have to use your different name when importing the raw scheme to their
+  you follow the convention. If you don't, any authors of new target schemes
+  will have to use your different name when importing the raw scheme to their
 file, which could confuse especially unexperienced Lua users.} Document your raw
 scheme in a comment section at the top.\footnote{If you are using an existing
-scheme or a slightly modified version of it, you can make this very brief by
-referencing it, e.\,g.: \enquote{Pinyin, just with tone numbers at the end of
+  scheme or a slightly modified version of it, you can make this very brief by
+  referencing it, e.\,g.: \enquote{Pinyin, just with tone numbers at the end of
 each syllable instead of diacritics}.}
 
 Below that, add a table for the raw scheme and return it:
@@ -785,7 +797,8 @@ separating marker (e.g. the space character) that would be appropriate.
 
 \subsection{Default Raw Scheme Methods}
 
-\paragraph{get\textunderscore{}sb\textunderscore{}and\textunderscore{}tone(self, input)}
+\paragraph{get\textunderscore{}sb\textunderscore{}and\textunderscore{}tone(self,
+input)}
 
 Expects a single syllable with information on the tone in it. Returns the raw
 syllable (without tone information) and an integer representing the tone. By
@@ -838,7 +851,8 @@ By default it will:
 
 \lstinputlisting[language={[5.3]lua},firstline=3]{../lua/transconv/cmn/pinyin.lua}
 
-\subsubsection{An Example Raw Scheme: Standard Chinese (\sty{transconv/cmn/raw.lua})}
+\subsubsection{An Example Raw Scheme: Standard Chinese
+(\sty{transconv/cmn/raw.lua})}
 
 \lstinputlisting[language={[5.3]lua},firstline=3]{../lua/transconv/cmn/raw.lua}
 

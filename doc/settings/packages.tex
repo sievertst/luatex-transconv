@@ -1,10 +1,10 @@
 \usepackage{luapackageloader} % for using custom search paths
-  \newcommand{\LuaDir}{../lua}
-  \directlua{package.path = "\LuaDir/?.lua;\LuaDir/?/init.lua;" .. package.path}
+\newcommand{\LuaDir}{../lua}
+\directlua{package.path = "\LuaDir/?.lua;\LuaDir/?/init.lua;" .. package.path}
 
 \usepackage{luatexja-fontspec}
 \usepackage{polyglossia}
-  \setmainlanguage[variant=uk]{english}
+\setmainlanguage[variant=uk]{english}
 
 \usepackage{booktabs}
 \usepackage{makecell}
@@ -14,10 +14,10 @@
 \usepackage{hologo}
 
 \usepackage[%
-    scheme={nan.tailo},
-    scheme={nan.poj},
-    scheme={nan.bp},
-  ]{../transconv}
+  scheme={nan.tailo},
+  scheme={nan.poj},
+  scheme={nan.bp},
+]{../transconv}
 
 \usepackage{listings}
 
@@ -28,35 +28,35 @@
 \usepackage{csquotes}
 
 \hypersetup{
-    unicode         = true,
-    breaklinks      = true,
-    hidelinks       = true,
-    colorlinks      = true,
-    citecolor       = blue,
-    urlcolor        = blue,
-    linkcolor       = blue,
-    % pdf meta data
-    pdfauthor       = {Sievert von Stülpnagel},
-    pdftitle        = {The transconv Package},
-    pdfsubject      = {transconv},
-    pdflang         = english,
-    % pdf reader settings
-    pdffitwindow    = true,
-    pdfstartview    = FitH,
-    pdfnewwindow    = true,
-  }
+  unicode         = true,
+  breaklinks      = true,
+  hidelinks       = true,
+  colorlinks      = true,
+  citecolor       = blue,
+  urlcolor        = blue,
+  linkcolor       = blue,
+  % pdf meta data
+  pdfauthor       = {Sievert von Stülpnagel},
+  pdftitle        = {The transconv Package},
+  pdfsubject      = {transconv},
+  pdflang         = english,
+  % pdf reader settings
+  pdffitwindow    = true,
+  pdfstartview    = FitH,
+  pdfnewwindow    = true,
+}
 
 \usepackage[%
-    xindy,
-    record,
-    abbreviations,
-    style = super,
-  ]{glossaries-extra}
+  xindy,
+  record,
+  abbreviations,
+  style = super,
+]{glossaries-extra}
 
 \usepackage{silence}
-  % \WarningFilter[fontfilter]{latexfont}{Font shape}
-  % \WarningFilter[fontfilter]{latexfont}{Some font shapes}
-  \WarningFilter{todonotes}{The length marginparwidth is less than}
-  \WarningFilter{glossaries-extra}{No entries defined}
-  \WarningFilter{forest}{Baseline node}
-  \ActivateWarningFilters[fontfilter]
+% \WarningFilter[fontfilter]{latexfont}{Font shape}
+% \WarningFilter[fontfilter]{latexfont}{Some font shapes}
+\WarningFilter{todonotes}{The length marginparwidth is less than}
+\WarningFilter{glossaries-extra}{No entries defined}
+\WarningFilter{forest}{Baseline node}
+\ActivateWarningFilters[fontfilter]

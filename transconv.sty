@@ -119,58 +119,61 @@ package}
 % defining a new scheme for a language
 \cs_new:Npn \__transconv_usescheme:n #1
 {
-    % retrieve language and scheme names
-    \regex_extract_all:nnN {[\w-]+} {#1} \l__transconv_langscheme_seq
-    \seq_pop_left:NN \l__transconv_langscheme_seq \l__transconv_lang_tl
-    \seq_pop_left:NN \l__transconv_langscheme_seq \l__transconv_scheme_tl
+  % retrieve language and scheme names
+  \regex_extract_all:nnN {[\w-]+} {#1} \l__transconv_langscheme_seq
+  \seq_pop_left:NN \l__transconv_langscheme_seq \l__transconv_lang_tl
+  \seq_pop_left:NN \l__transconv_langscheme_seq \l__transconv_scheme_tl
 
-    % set up the converter.
-    % For example importing "cmn.pinyin" would result in the following Lua command:
-    % transconv:new_converter("cmn", "pinyin")
-    % Converter does not need to be stored in variable because conversion
-    % commands will retrieve it from dictionaries/arrays of the transconv table
-    \directlua{%
-      transconv:new_converter(%
-        "\tl_use:N \l__transconv_lang_tl",%
-        "\tl_use:N \l__transconv_scheme_tl"%
-      )%
-    }
+  % set up the converter.
+  % For example importing "cmn.pinyin" would result in the following
+  % Lua command:
+  % transconv:new_converter("cmn", "pinyin")
+  % Converter does not need to be stored in variable because conversion
+  % commands will retrieve it from dictionaries/arrays of the transconv table
+  \directlua{%
+    transconv:new_converter(%
+      "\tl_use:N \l__transconv_lang_tl",%
+      "\tl_use:N \l__transconv_scheme_tl"%
+    )%
+  }
 
-    % define font switches, but only if if they don't exist already in case the
-    % user is redefining an existing scheme but wants to keep font settings
-    \if_cs_exist:w \tl_use:N \l__transconv_scheme_tl font\cs_end:
-    \else:
-      \__transconv_define_font_switch:nn {\tl_use:N \l__transconv_scheme_tl}{}
-    \fi:
-    \if_cs_exist:w \tl_use:N \l__transconv_lang_tl font\cs_end:
-    \else:
-      \__transconv_define_font_switch:nn {\tl_use:N \l__transconv_lang_tl} {\itshape}
-    \fi:
+  % define font switches, but only if if they don't exist already in case the
+  % user is redefining an existing scheme but wants to keep font settings
+  \if_cs_exist:w \tl_use:N \l__transconv_scheme_tl font\cs_end:
+  \else:
+  \__transconv_define_font_switch:nn {\tl_use:N \l__transconv_scheme_tl}{}
+  \fi:
+  \if_cs_exist:w \tl_use:N \l__transconv_lang_tl font\cs_end:
+  \else:
+  \__transconv_define_font_switch:nn {\tl_use:N
+  \l__transconv_lang_tl} {\itshape}
+  \fi:
 
-    % (re)define \langconvert and \schemeconvert commands
-    \__transconv_define_scheme_convert_command:n {\tl_use:N \l__transconv_scheme_tl}
-    \__transconv_define_lang_convert_command:n {\tl_use:N \l__transconv_lang_tl}
+  % (re)define \langconvert and \schemeconvert commands
+  \__transconv_define_scheme_convert_command:n {\tl_use:N
+  \l__transconv_scheme_tl}
+  \__transconv_define_lang_convert_command:n {\tl_use:N \l__transconv_lang_tl}
 
-    % (re)define \tolang and \toscheme commands
-    \__transconv_define_document_command:n {\tl_use:N \l__transconv_scheme_tl}
-    \__transconv_define_document_command:n {\tl_use:N \l__transconv_lang_tl}
+  % (re)define \tolang and \toscheme commands
+  \__transconv_define_document_command:n {\tl_use:N \l__transconv_scheme_tl}
+  \__transconv_define_document_command:n {\tl_use:N \l__transconv_lang_tl}
 
-    % TODO: (re)define environment?
+  % TODO: (re)define environment?
 }
 
 \cs_new:Npn \__transconv_make_default:n #1
 {
-    % retrieve language and scheme names
-    \regex_extract_all:nnN {[\w-]+} {#1} \l__transconv_langscheme_seq
-    \seq_pop_left:NN \l__transconv_langscheme_seq \l__transconv_lang_tl
-    \seq_pop_left:NN \l__transconv_langscheme_seq \l__transconv_scheme_tl
+  % retrieve language and scheme names
+  \regex_extract_all:nnN {[\w-]+} {#1} \l__transconv_langscheme_seq
+  \seq_pop_left:NN \l__transconv_langscheme_seq \l__transconv_lang_tl
+  \seq_pop_left:NN \l__transconv_langscheme_seq \l__transconv_scheme_tl
 
-    \directlua{%
-      transconv:make_default_scheme(%
-        "\tl_use:N \l__transconv_lang_tl",
-        "\tl_use:N \l__transconv_scheme_tl"%
-      )%
-    }
+  \directlua{%
+    transconv:make_default_scheme(%
+      "\tl_use:N \l__transconv_lang_tl",
+      "\tl_use:N \l__transconv_scheme_tl"%
+    )%
+  }
 }
 
 %%%%%%%%%%%%%%%%%%%%%

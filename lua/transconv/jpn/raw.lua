@@ -12,50 +12,48 @@
     vowels which should not be contracted), separate them with an apostrophe.
     E.g. 湖(みずうみ): mizu'umi
   - separate affixes with hyphens: 日本(にほん)は: nihon-ha
---]]
+]]
 
 local function is_valid_sb(self, sb)
-    return true
+	return true
 end
 
 local function reorder(self, syllable)
-    --[[
-        Takes a syllable with the tone number somewhere in the middle and
-        moves it to the correct place.
-    --]]
-    return syllable
+	--[[
+    Takes a syllable with the tone number somewhere in the middle and
+    moves it to the correct place.
+    ]]
+	return syllable
 end
 
 local function split_sbs(self, instring)
-    --[[
-        Split input string into syllables.
-    --]]
-    local sbs = {}
+	--[[
+    Split input string into syllables.
+    ]]
+	local sbs = {}
 
-    -- TODO: how accurate is this pattern?
-    for sb in instring:gmatch("%W*[%w=%-]*") do
+	-- TODO: how accurate is this pattern?
+	for sb in instring:gmatch("%W*[%w=%-]*") do
+		-- Test if a) this raw scheme has a (sensible) syllable separator
+		-- set, b) that separator is non-empty, and c) the current syllable
+		-- starts with it. If so, remove it
+		if type(self.sb_sep) == "string" and self.sb_sep:len() > 0 and sb:match("^" .. self.sb_sep) then
+			sb = sb:sub(self.sb_sep:len() + 1)
+		end
 
-        -- Test if a) this raw scheme has a (sensible) syllable separator
-        -- set, b) that separator is non-empty, and c) the current syllable
-        -- starts with it. If so, remove it
-        if type(self.sb_sep) == "string" and self.sb_sep:len() > 0 and
-            sb:match("^"..self.sb_sep) then
-                sb = sb:sub(self.sb_sep:len() + 1)
-        end
+		table.insert(sbs, sb)
+	end
 
-        table.insert(sbs, sb)
-    end
-
-    return sbs
+	return sbs
 end
 
-local jpnraw = Raw:new{
-    cutting_markers = {" "}, -- used for splitting
+local jpnraw = Raw:new({
+	cutting_markers = { " " }, -- used for splitting
 
-    -- functions
-    is_valid_sb = is_valid_sb,
-    reorder = reorder,
-    split_sbs = split_sbs,
-}
+	-- functions
+	is_valid_sb = is_valid_sb,
+	reorder = reorder,
+	split_sbs = split_sbs,
+})
 
 return jpnraw
